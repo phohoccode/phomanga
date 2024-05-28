@@ -1,14 +1,38 @@
 @import "normalize.css";
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,100..700;1,100..700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&family=Roboto+Mono:ital,wght@0,100..700;1,100..700&display=swap');
 
 :root {
-    --font-family: "Montserrat", sans-serif;
+//   --font-family: "Montserrat", sans-serif;
+//   --font-family: "Montserrat", sans-serif;
+  --font-family: "Quicksand", sans-serif;
+  --primary-color: #10b981;
+  --yellow-color: #fbbf24;
+  --blue-color: #3b82f6;
+  --white-color: #fff;
+  --black-color: #000;
+  --border-radius: 999px;
 }
 
 * {
   box-sizing: border-box;
   padding: 0;
   margin: 0;
+}
+
+::-webkit-scrollbar {
+  width: 4px;
+  height: 4px;
+}
+
+::-webkit-scrollbar-track {
+  background-color: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  border-radius: var(--border-radius);
+  background-color: #ccc;
 }
 
 html {
@@ -23,4 +47,17 @@ body {
   font-weight: 400;
   font-style: normal;
   text-rendering: optimizeSpeed;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+ul {
+  list-style: none;
+}
+
+button {
+    border: none;
 }
