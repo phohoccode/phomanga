@@ -1,20 +1,29 @@
+.wrapper.fadeOut {
+  animation: fadeOut 0.5s ease;
+}
+
 .wrapper {
   position: fixed;
   inset: 0;
-  height: 100vh;
-  background-color: rgba(0, 0, 0, 0.8);
-  transition: all 0.3s ease;
+  min-height: 100%;
+  background-color: rgba(0, 0, 0, 0.3);
+  animation: fadeIn 0.5s ease;
+
+  .modal.slideOut {
+    animation: slideOut 0.5s ease;
+  }
 
   .modal {
     overflow-y: auto;
     overscroll-behavior-y: none;
     position: absolute;
-    right: -100%;
-    width: 300px;
+    left: 0;
+    width: 80%;
     height: 100%;
     padding: 16px;
     background-color: var(--white-color);
-    transition: all 0.3s ease;
+    animation: slideIn 0.5s ease;
+    border-radius: 0 16px 16px 0;
 
     .modal-close {
       display: block;
@@ -69,5 +78,45 @@
         }
       }
     }
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes slideIn {
+  0% {
+    opacity: 0;
+    transform: translateX(-100%);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideOut {
+  0% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  100% {
+    opacity: 0;
+    transform: translateX(-100%);
   }
 }

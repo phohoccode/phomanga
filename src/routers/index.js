@@ -1,7 +1,7 @@
 import Home from "../pages/Home"
 import Detail from "../pages/Detail"
 import Info from "../pages/Info"
-import Watch from "../pages/Watch"
+import Read from "../pages/Read"
 import Search from "../pages/Search"
 import History from "../pages/History"
 import Save from "../pages/Save"
@@ -14,7 +14,7 @@ const publicRoutes = [
     { path: '/save', component: Save },
     { path: '/history', component: History },
     { path: '/search/:keyword', component: Search },
-    { path: '/watch/:slug', component: Watch },
+    { path: '/read/:slug', component: Read },
     { path: '*', component: NotFound },
 ]
 

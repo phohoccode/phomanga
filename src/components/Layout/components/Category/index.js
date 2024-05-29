@@ -4,14 +4,15 @@ import styles from './Category.module.scss'
 
 const cx = classNames.bind(styles)
 
-function Category({ categorys, showCategory, setShowCategory }) {
+function Category({ categorys, showCategory, handleCloseModal }) {
 
     return (
         <ul
-            style={showCategory ? { height: '100vh' } : {}}
+            style={showCategory ? { height: '50vh' } : {}}
             className={cx('wrapper')}>
             {categorys.map((category, index) => (
                 <li
+                    onClick={handleCloseModal}
                     className={cx('item')}
                     key={index}>
                     <NavLink

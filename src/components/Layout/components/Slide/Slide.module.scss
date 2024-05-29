@@ -1,0 +1,135 @@
+.wrapper {
+  flex-shrink: 0;
+  width: 100%;
+  height: 320px;
+  display: flex;
+  align-items: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  color: var(--white-color);
+  background-color: rgba(0, 0, 0, 0.6);
+  position: relative;
+
+  &::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    background-image: inherit;
+    background-size: cover;
+    background-position: center;
+    z-index: 1;
+    filter: blur(8px);
+  }
+
+  .inner {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 32px;
+    position: absolute;
+    z-index: 2;
+    left: 64px;
+
+    @media (max-width: 768px) {
+        left: 16px;
+        top: 24px;
+    }
+
+    figure {
+      width: 180px;
+      height: 250px;
+      border-radius: var(--border-radius);
+      overflow: hidden;
+      border: 2px solid var(--primary-color);
+
+      @media (max-width: 768px) {
+        display: none;
+      }
+    }
+
+    .info {
+      width: 80%;
+
+      h4 {
+        font-size: 3rem;
+        text-shadow: 2px 2px rgba(0, 0, 0, 0.502);
+
+        @media (max-width: 768px) {
+            font-size: 2rem;
+        }
+      }
+
+      h2 {
+        text-shadow: 2px 2px rgba(0, 0, 0, 0.502);
+        color: var(--primary-color);
+        font-size: 4rem;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+
+        @media (max-width: 768px) {
+            font-size: 2.6rem;
+        }
+      }
+
+      .categorys {
+        display: flex;
+        gap: 12px;
+        margin-top: 12px;
+
+        @media (max-width: 768px) {
+            flex-wrap: wrap;
+        }
+
+        li {
+          font-size: 1.6rem;
+          font-weight: 600;
+          padding: 2px 4px;
+          border-radius: var(--border-radius);
+          border: 1px solid var(--white-color);
+          background-color: transparent;
+        }
+      }
+
+      .actions {
+        display: flex;
+        gap: 12px;
+        margin-top: 24px;
+
+        button {
+          box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+          background-color: var(--white-color);
+          font-size: 2rem;
+          padding: 8px 16px;
+          font-weight: 600;
+          border-radius: var(--border-radius);
+          outline-offset: 3px;
+          outline: 3px solid transparent;
+          transition: .3s;
+
+          @media (max-width: 768px) {
+            font-size: 1.6rem;
+          }
+
+          &:first-child {
+            color: var(--white-color);
+            background-color: var(--primary-color);
+
+            &:hover {
+                outline-color: var(--primary-color);
+            }
+          }
+
+          &:last-child {
+            &:hover {
+                outline-color: var(--white-color);
+            }
+          }
+        }
+      }
+    }
+  }
+}

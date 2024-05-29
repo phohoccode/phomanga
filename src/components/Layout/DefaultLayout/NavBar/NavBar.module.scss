@@ -23,7 +23,7 @@
 
     .wrapper-left {
         display: flex;
-        gap: 12px;
+        gap: 32px;
         align-items: center;
 
         .bars {
@@ -83,13 +83,13 @@
 
     .wrapper-right {
         display: flex;
-        gap: 32px;
         align-items: center;
         
         .history, .save {
             font-size: 2.2rem;
             font-weight: 600;
             transition: .3s;
+            padding: 16px;
 
             &:hover {
                 color: var(--primary-color);
@@ -108,6 +108,7 @@
             border: 2px solid #e7e7e7;
             border-radius: var(--border-radius);
             transition: .3s;
+            margin-left: 12px;
 
             input {
                 border: none;

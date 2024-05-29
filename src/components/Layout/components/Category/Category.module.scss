@@ -10,7 +10,7 @@
   height: 60vh;
   overflow-y: auto;
   padding: 16px;
-  border-radius: 16px;
+  border-radius: var(--border-radius);
   opacity: 0;
   pointer-events: none;
   transition: 0.3s;
@@ -25,6 +25,7 @@
     opacity: unset;
     pointer-events: unset;
     box-shadow: unset;
+    border-radius: unset;
   }
 
   .item {

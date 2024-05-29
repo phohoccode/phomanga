@@ -15,29 +15,30 @@ function NavBar() {
     const [width, setWidth] = useState(window.innerWidth)
     const { pathname } = useLocation()
 
+    const isMobile = width < 768
+
     useEffect(() => {
         const handleResize = () => {
-            console.log(window.innerWidth);
             setWidth(window.innerWidth)
         }
         window.addEventListener('resize', handleResize)
         return () => window.removeEventListener('resize', handleResize)
-    }, [width])
+    }, [])
 
     return (
         <div className={cx('wrapper')}>
-            <div
-                style={width < 768 ? { flex: 1, justifyContent: 'space-between' } : {}}
+            <div style={isMobile ? wrapperLeft : {}}
                 className={cx('wrapper-left')}>
-                {width < 768 &&
+                {isMobile &&
                     <button
                         className={cx('bars')}
                         onClick={() => setShowModal(!showModal)}
                     >
                         <i className="fa-solid fa-bars"></i>
-                    </button>}
+                    </button>
+                }
                 <NavLink to='/' className={cx('logo')}>PHOMANGA</NavLink>
-                {width > 768 &&
+                {!isMobile &&
                     <ul className={cx('list')}>
                         <li className={cx('item', { 'active': pathname === '/' })}>
                             <NavLink to='/'>
@@ -58,9 +59,10 @@ function NavBar() {
                                 <Category categorys={data?.data?.items} />
                             }
                         </li>
-                    </ul>}
+                    </ul>
+                }
             </div>
-            {width > 768 &&
+            {!isMobile &&
                 <div className={cx('wrapper-right')}>
                     <NavLink
                         to='/history'
@@ -93,9 +95,13 @@ function NavBar() {
                     setShowModal={setShowModal}
                 />
             }
-
         </div>
     )
 }
 
-export default NavBar;
+export default NavBar
+
+const wrapperLeft = {
+    flex: 1, 
+    justifyContent: 'space-between'
+}
