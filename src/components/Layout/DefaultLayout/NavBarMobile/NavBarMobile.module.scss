@@ -70,12 +70,22 @@
       margin-top: 12px;
       display: flex;
       flex-direction: column;
-      gap: 8px;
 
       .item {
+        a {
+            padding: 4px 0;
+            display: block;
+            width: 100%;
+        }
+
         i {
           margin-left: 8px;
         }
+      }
+
+      .item.active {
+        color: var(--primary-color);
+        font-weight: 600;
       }
     }
   }

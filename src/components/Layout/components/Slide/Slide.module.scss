@@ -34,8 +34,8 @@
     left: 64px;
 
     @media (max-width: 768px) {
-        left: 16px;
-        top: 24px;
+      left: 16px;
+      top: 24px;
     }
 
     figure {
@@ -58,7 +58,7 @@
         text-shadow: 2px 2px rgba(0, 0, 0, 0.502);
 
         @media (max-width: 768px) {
-            font-size: 2rem;
+          font-size: 2rem;
         }
       }
 
@@ -71,7 +71,7 @@
         text-overflow: ellipsis;
 
         @media (max-width: 768px) {
-            font-size: 2.6rem;
+          font-size: 2.6rem;
         }
       }
 
@@ -81,10 +81,11 @@
         margin-top: 12px;
 
         @media (max-width: 768px) {
-            flex-wrap: wrap;
+          flex-wrap: wrap;
         }
 
-        li {
+        a {
+          display: block;
           font-size: 1.6rem;
           font-weight: 600;
           padding: 2px 4px;
@@ -99,35 +100,35 @@
         gap: 12px;
         margin-top: 24px;
 
-        button {
-          box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
-          background-color: var(--white-color);
-          font-size: 2rem;
-          padding: 8px 16px;
-          font-weight: 600;
-          border-radius: var(--border-radius);
-          outline-offset: 3px;
-          outline: 3px solid transparent;
-          transition: .3s;
-
-          @media (max-width: 768px) {
-            font-size: 1.6rem;
-          }
-
-          &:first-child {
-            color: var(--white-color);
+        .read-now, .detail {
+            box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+            font-size: 2rem;
+            padding: 4px 12px;
+            border-radius: var(--border-radius);
+            outline-offset: 3px;
+            outline: 3px solid transparent;
+            transition: 0.3s;
+    
+            @media (max-width: 768px) {
+              font-size: 1.6rem;
+            }
+        }
+        
+        .read-now {
             background-color: var(--primary-color);
-
+            
             &:hover {
                 outline-color: var(--primary-color);
             }
-          }
+        }
 
-          &:last-child {
+        .detail {
+            color: var(--black-color);
+            background-color: var(--white-color);
+
             &:hover {
                 outline-color: var(--white-color);
             }
-          }
         }
       }
     }

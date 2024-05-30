@@ -6,7 +6,7 @@ import Category from '../../components/Category'
 
 const cx = classNames.bind(styles)
 
-function NavBarMovie({ categorys, showModal, setShowModal }) {
+function NavBarMovie({ categorys, showModal, setShowModal, handleKeyDownSearch }) {
     const { pathname } = useLocation()
     const [valueSearch, setValueSearch] = useState('')
     const [showCategory, setShowCategory] = useState(false)
@@ -14,14 +14,15 @@ function NavBarMovie({ categorys, showModal, setShowModal }) {
     const modalRef = useRef()
 
     const handleCloseModal = () => {
-        if (modalRef.current && wrapperRef.current) {
+        if (modalRef.current && wrapperRef.current || showCategory) {
+            setShowCategory(false)
             modalRef.current.classList.add(cx('slideOut'));
             wrapperRef.current.classList.add(cx('fadeOut'));
             setTimeout(() => {
                 setShowModal(false);
             }, 400)
         }
-    };
+    }
 
     return (
         <>
@@ -42,6 +43,7 @@ function NavBarMovie({ categorys, showModal, setShowModal }) {
                                 value={valueSearch}
                                 placeholder='Tìm kiếm...'
                                 onChange={e => setValueSearch(e.target.value)}
+                                onKeyDown={e => handleKeyDownSearch(e, valueSearch)}
                             />
                             <NavLink 
                                 onClick={handleCloseModal}

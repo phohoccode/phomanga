@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import classNames from 'classnames/bind'
-import { NavLink, useLocation } from 'react-router-dom'
+import { NavLink, useLocation, useNavigate } from 'react-router-dom'
 import styles from './NavBar.module.scss'
 import useFetch from '../../../../hooks/useFetch'
 import Category from '../../components/Category'
@@ -14,6 +14,7 @@ function NavBar() {
     const [showModal, setShowModal] = useState(false)
     const [width, setWidth] = useState(window.innerWidth)
     const { pathname } = useLocation()
+    const navigate = useNavigate()
 
     const isMobile = width < 768
 
@@ -24,6 +25,12 @@ function NavBar() {
         window.addEventListener('resize', handleResize)
         return () => window.removeEventListener('resize', handleResize)
     }, [])
+
+    const handleKeyDownSearch = (e, value) => {
+        if (e.key.startsWith('Enter')) {
+            navigate(`/search/${value}`)
+        }
+    }
 
     return (
         <div className={cx('wrapper')}>
@@ -81,6 +88,7 @@ function NavBar() {
                             value={valueSearch}
                             placeholder='Tìm kiếm...'
                             onChange={e => setValueSearch(e.target.value)}
+                            onKeyDown={(e) => handleKeyDownSearch(e, valueSearch)}
                         />
                         <NavLink to={`/search/${valueSearch}`}>
                             <i className="fa-solid fa-magnifying-glass"></i>
@@ -93,6 +101,7 @@ function NavBar() {
                     categorys={data?.data?.items}
                     showModal={showModal}
                     setShowModal={setShowModal}
+                    handleKeyDownSearch={handleKeyDownSearch}
                 />
             }
         </div>

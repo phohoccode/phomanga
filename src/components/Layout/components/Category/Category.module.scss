@@ -35,6 +35,7 @@
     justify-content: center;
     text-align: center;
     width: calc(33.33333% - 8px);
+    border-radius: var(--border-radius);
 
     @media (max-width: 768px) {
       width: 100%;
@@ -52,6 +53,17 @@
       background-color: var(--primary-color);
       color: var(--white-color);
       border-radius: var(--border-radius);
+    }
+  }
+
+  .item.active {
+    color: var(--white-color);
+    background-color: var(--primary-color);
+
+    @media (max-width: 768px) {
+        color: var(--primary-color);
+        font-weight: 600;
+        background-color: unset;
     }
   }
 }

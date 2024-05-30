@@ -23,11 +23,9 @@ function Comics({ api }) {
             {data &&
                 <div className={cx('title')}>
                     <h4>{data?.data?.titlePage}</h4>
-                    <button>
-                        <Link to={`/detail${data?.data?.breadCrumb[0]?.slug}`}>
-                            Xem thêm
-                        </Link>
-                    </button>
+                    <Link className={cx('see-more')} to={`/detail${data?.data?.breadCrumb[0]?.slug}`}>
+                        Xem thêm
+                    </Link>
                 </div>
             }
             <div className={cx('list')}>

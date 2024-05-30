@@ -1,0 +1,20 @@
+.wrapper {
+    
+    h4 {
+        font-size: 3rem;
+        margin-bottom: 32px;
+    }
+
+    .list {
+        display: flex;
+        margin: 0 -8px;
+        flex-wrap: wrap;
+        gap: 24px 0;
+    
+        @media (max-width: 768px) {
+            flex-wrap: unset;
+            padding-bottom: 12px;
+            overflow-x: auto;
+        }
+      }
+}
