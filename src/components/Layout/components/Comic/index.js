@@ -5,8 +5,6 @@ import styles from './Comic.module.scss'
 const cx = classNames.bind(styles)
 
 function Comic({ data }) {
-
-
     return (
         <div className={cx('wrapper')}>
             <Link to={`/info/${data?.slug}`}>

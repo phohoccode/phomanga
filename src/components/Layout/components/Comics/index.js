@@ -17,7 +17,6 @@ function Comics({ api }) {
         setComics(data?.data?.items || [])
     }, [data])
 
-
     return (
         <div className={cx('wrapper')}>
             {data &&

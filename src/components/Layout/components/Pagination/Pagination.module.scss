@@ -5,6 +5,10 @@
   gap: 12px;
   margin-top: 32px;
 
+  @media (max-width: 768px) {
+      flex-wrap: wrap;
+  }
+
   button {
     background-color: var(--primary-color);
     padding: 8px 16px;
@@ -15,14 +19,27 @@
     outline-offset: 3px;
     font-size: 2rem;
 
-    &:hover {
+    @media (max-width: 768px) {
+        font-size: 1.4rem;
+        padding: 12px;
+    }
+
+
+    &:not(.disabled):hover {
       outline-color: var(--primary-color);
     }
+  }
+
+  button.disabled {
+    opacity: 0.5;
+    cursor: no-drop;
+    pointer-events: none;
   }
 
   .pagination {
     display: flex;
     gap: 12px;
+
 
     li {
       border-radius: var(--border-radius);
@@ -39,7 +56,13 @@
       display: flex;
       align-items: center;
       justify-content: center;
+      cursor: pointer;
+      user-select: none;
 
+      @media (max-width: 768px) {
+        font-size: 1.6rem;
+        padding: 4px 8px;
+    }
 
       &:hover {
         color: var(--white-color);
@@ -49,9 +72,9 @@
     }
 
     li.active {
-        color: var(--white-color);
-        background-color: var(--primary-color);
-        outline-color: var(--primary-color);
+      color: var(--white-color);
+      background-color: var(--primary-color);
+      outline-color: var(--primary-color);
     }
   }
 }

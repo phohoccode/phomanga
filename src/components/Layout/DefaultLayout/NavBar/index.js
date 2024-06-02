@@ -27,7 +27,7 @@ function NavBar() {
     }, [])
 
     const handleKeyDownSearch = (e, value) => {
-        if (e.key.startsWith('Enter')) {
+        if (e.key.startsWith('Enter') && value !== '') {
             navigate(`/search/${value}`)
         }
     }

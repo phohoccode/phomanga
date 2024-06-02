@@ -12,7 +12,7 @@ function DefaultLayout({ children }) {
             <div className={cx('wrapper')}>
                 {children}
             </div>
-            <Footer />
+            {/* <Footer /> */}
         </>
     )
 }

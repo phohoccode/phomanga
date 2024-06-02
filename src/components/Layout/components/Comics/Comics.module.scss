@@ -53,10 +53,10 @@
     flex-wrap: wrap;
     gap: 24px 0;
 
-    @media (max-width: 768px) {
-        flex-wrap: unset;
-        padding-bottom: 12px;
-        overflow-x: auto;
-    }
+    // @media (max-width: 768px) {
+    //     flex-wrap: unset;
+    //     padding-bottom: 12px;
+    //     overflow-x: auto;
+    // }
   }
 }
