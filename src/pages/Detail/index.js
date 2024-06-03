@@ -18,8 +18,12 @@ function Detail() {
     const [totalPage, setTotalPage] = useState(0)
 
     useEffect(() => {
+        setCurrentPage(1)
+    }, [params.slug])
+
+    useEffect(() => {
         if (data) {
-            console.log(data);
+            // console.log(data);
             const totalItems =
                 data?.data?.params?.pagination?.totalItems
             const totalItemsPerPage =
@@ -30,11 +34,6 @@ function Detail() {
                 setTotalPage(1)
         }
     }, [data])
-
-    useEffect(() => {
-        setCurrentPage(1)
-    }, [params])
-
 
     return (
         <div className={cx('wrapper')}>

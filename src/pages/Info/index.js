@@ -86,7 +86,7 @@ function Info() {
                 <ul className={cx('chapters')}>
                     {chapters.map((chapter, index) => (
                         <li key={index}>
-                            <Link to={`/read/${chapter?.chapter_api_data.split('/').pop()}`}>
+                            <Link to={`/read/${params.slug}/${chapter?.chapter_api_data.split('/').pop()}`}>
                                 Chương {chapter?.chapter_name}
                             </Link>
                         </li>

@@ -14,7 +14,7 @@ const publicRoutes = [
     { path: '/save', component: Save },
     { path: '/history', component: History },
     { path: '/search/:keyword', component: Search },
-    { path: '/read/:slug', component: Read },
+    { path: '/read/:slug/:id', component: Read },
     { path: '*', component: NotFound },
 ]
 

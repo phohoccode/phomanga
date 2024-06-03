@@ -13,7 +13,6 @@ function Comics({ api }) {
     const [comics, setComics] = useState([])
 
     useEffect(() => {
-        console.log(data);
         setComics(data?.data?.items || [])
     }, [data])
 

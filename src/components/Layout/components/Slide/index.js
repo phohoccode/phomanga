@@ -27,7 +27,7 @@ function Slide({ data }) {
                         ))}
                     </ul>
                     <div className={cx('actions')}>
-                        <Link className={cx('read-now')} to={`/read/${data?._id}`}>Đọc ngay</Link>
+                        <Link className={cx('read-now')} to={`/read/${data?.slug}/${data?._id}`}>Đọc ngay</Link>
                         <Link className={cx('detail')} to={`/info/${data?.slug}`}>Chi tiết</Link>
                     </div>
                 </div>

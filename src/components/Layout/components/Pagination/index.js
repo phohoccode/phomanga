@@ -9,7 +9,6 @@ function Pagination({ currentPage, totalPage, itemsPerPage, setCurrentPage }) {
     const start = useRef(0)
     const end = useRef(0)
 
-
     useEffect(() => {
         start.current = currentPage === 1 ? 1 : currentPage
 
