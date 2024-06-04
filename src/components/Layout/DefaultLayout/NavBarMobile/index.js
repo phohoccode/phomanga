@@ -24,6 +24,13 @@ function NavBarMovie({ categorys, showModal, setShowModal, handleKeyDownSearch }
         }
     }
 
+    const handleSearch = (e, valueSearch) => {
+        handleKeyDownSearch(e, valueSearch)
+        if (e.key.startsWith('Enter')) {
+            handleCloseModal()
+        }
+    }
+
     return (
         <>
             {showModal &&
@@ -43,9 +50,9 @@ function NavBarMovie({ categorys, showModal, setShowModal, handleKeyDownSearch }
                                 value={valueSearch}
                                 placeholder='Tìm kiếm...'
                                 onChange={e => setValueSearch(e.target.value)}
-                                onKeyDown={e => handleKeyDownSearch(e, valueSearch)}
+                                onKeyDown={(e) => handleSearch(e, valueSearch)}
                             />
-                            <NavLink 
+                            <NavLink
                                 onClick={handleCloseModal}
                                 to={`/search/${valueSearch}`}>
                                 <i className="fa-solid fa-magnifying-glass"></i>
@@ -69,14 +76,14 @@ function NavBarMovie({ categorys, showModal, setShowModal, handleKeyDownSearch }
                             <li
                                 onClick={handleCloseModal}
                                 className={cx('item', { 'active': pathname === '/save' })}>
-                                <NavLink to='/'>
+                                <NavLink to='/save'>
                                     Truyện đã lưu
                                 </NavLink>
                             </li>
                             <li
                                 onClick={handleCloseModal}
                                 className={cx('item', { 'active': pathname === '/history' })}>
-                                <NavLink to='/'>
+                                <NavLink to='/history'>
                                     Lịch sử đọc truyện
                                 </NavLink>
                             </li>

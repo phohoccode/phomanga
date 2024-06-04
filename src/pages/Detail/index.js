@@ -1,6 +1,6 @@
 
 import classNames from 'classnames/bind'
-import styles from './Detail.module.scss'
+import styles from '../../components/Layout/components/Comics/Comics.module.scss'
 import { useParams } from 'react-router-dom'
 import useFetch from '../../hooks/useFetch'
 import Comic from '../../components/Layout/components/Comic'
@@ -23,7 +23,6 @@ function Detail() {
 
     useEffect(() => {
         if (data) {
-            // console.log(data);
             const totalItems =
                 data?.data?.params?.pagination?.totalItems
             const totalItemsPerPage =
@@ -36,7 +35,7 @@ function Detail() {
     }, [data])
 
     return (
-        <div className={cx('wrapper')}>
+        <div style={{margin: 'unset'}} className={cx('wrapper')}>
             {data &&
                 <>
                     <div className={cx('title')}>

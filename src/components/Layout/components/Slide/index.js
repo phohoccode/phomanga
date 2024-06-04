@@ -5,6 +5,12 @@ import styles from './Slide.module.scss'
 const cx = classNames.bind(styles)
 
 function Slide({ data }) {
+    const [chapterApi, setChapterApi] = useState('')
+
+    useEffect(() => {
+        setChapterApi(data?.chaptersLatest[0].chapter_api_data.split('/').pop())
+    }, [data])
+
     return (
         <div
             style={{
@@ -27,8 +33,12 @@ function Slide({ data }) {
                         ))}
                     </ul>
                     <div className={cx('actions')}>
-                        <Link className={cx('read-now')} to={`/read/${data?.slug}/${data?._id}`}>Đọc ngay</Link>
-                        <Link className={cx('detail')} to={`/info/${data?.slug}`}>Chi tiết</Link>
+                        <Link className={cx('read-now')} to={`/read/${data?.slug}/${chapterApi}`}>
+                            Đọc ngay
+                        </Link>
+                        <Link className={cx('detail')} to={`/info/${data?.slug}`}>
+                            Chi tiết
+                        </Link>
                     </div>
                 </div>
             </div>

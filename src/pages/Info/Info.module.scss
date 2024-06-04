@@ -1,7 +1,6 @@
 .wrapper {
   .top {
     display: flex;
-    gap: 32px;
 
     @media (max-width: 768px) {
       flex-direction: column;
@@ -25,12 +24,62 @@
       display: flex;
       flex-direction: column;
       gap: 4px;
+      padding-left: 32px;
+
+      @media (max-width: 768px) {
+        padding-left: unset;
+        overflow: unset;
+      }
 
       h4 {
         font-size: 3rem;
         overflow: hidden;
         white-space: nowrap;
         text-overflow: ellipsis;
+
+        @media (max-width: 768px) {
+            font-size: 2.4rem;
+            overflow: unset;
+            white-space: unset;
+            text-overflow: unset;
+        }
+      }
+
+      .actions {
+        margin: 8px 0;
+
+        button {
+          padding: 4px 12px;
+          font-size: 1.8rem;
+          border-radius: var(--border-radius);
+          transition: 0.3s;
+          outline: 3px solid transparent;
+          outline-offset: 3px;
+          background-color: transparent;
+
+          i {
+            margin-right: 8px;
+          }
+        }
+        .save {
+          border: 3px solid var(--primary-color);
+          color: var(--primary-color);
+          &:hover {
+            outline-color: var(--primary-color);
+            color: var(--white-color);
+            background-color: var(--primary-color);
+          }
+        }
+
+        .delete {
+          border: 3px solid var(--detele-comic);
+          color: var(--detele-comic);
+          &:hover {
+            outline-color: var(--detele-comic);
+            color: var(--white-color);
+            background-color: var(--detele-comic);
+          }
+        }
       }
 
       .author,
@@ -131,7 +180,7 @@
         width: calc(10% - 11px);
 
         @media (max-width: 768px) {
-            width: calc(25% - 9px);
+          width: calc(25% - 9px);
         }
 
         a {

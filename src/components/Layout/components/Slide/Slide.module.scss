@@ -35,7 +35,7 @@
 
     @media (max-width: 768px) {
       left: 16px;
-      top: 24px;
+      top: 16px;
     }
 
     figure {
@@ -51,6 +51,10 @@
 
     .info {
       width: 80%;
+
+      @media (max-width: 768px) {
+        width: calc(100% - 32px);
+      }
 
       h4 {
         font-size: 3rem;
@@ -70,7 +74,7 @@
         text-overflow: ellipsis;
 
         @media (max-width: 768px) {
-          font-size: 2.6rem;
+          font-size: 2.2rem;
         }
       }
 
@@ -89,8 +93,18 @@
           font-weight: 600;
           padding: 2px 4px;
           border-radius: var(--border-radius);
-          border: 1px solid var(--white-color);
+          border: 2px solid var(--white-color);
           background-color: transparent;
+          transition: .3s;
+
+          &:hover {
+            color: var(--primary-color);
+            border-color: var(--primary-color);
+          }
+
+          @media (max-width: 768px) {
+            font-size: 1.4rem;
+          }
         }
       }
 
@@ -98,6 +112,10 @@
         display: flex;
         gap: 12px;
         margin-top: 24px;
+
+        @media (max-width: 768px) {
+            margin-top: 12px;
+        }
 
         .read-now, .detail {
             box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
@@ -110,6 +128,7 @@
     
             @media (max-width: 768px) {
               font-size: 1.6rem;
+              padding: 4px 8px;
             }
         }
         

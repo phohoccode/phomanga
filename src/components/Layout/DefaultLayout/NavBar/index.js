@@ -5,6 +5,7 @@ import styles from './NavBar.module.scss'
 import useFetch from '../../../../hooks/useFetch'
 import Category from '../../components/Category'
 import NavBarMobile from '../NavBarMobile'
+import logo from './logo.png'
 
 const cx = classNames.bind(styles)
 
@@ -16,7 +17,7 @@ function NavBar() {
     const { pathname } = useLocation()
     const navigate = useNavigate()
 
-    const isMobile = width < 768
+    const isMobile = width < 1024
 
     useEffect(() => {
         const handleResize = () => {
@@ -44,7 +45,12 @@ function NavBar() {
                         <i className="fa-solid fa-bars"></i>
                     </button>
                 }
-                <NavLink to='/' className={cx('logo')}>PHOMANGA</NavLink>
+                <div className={cx('logo')}>
+                    <NavLink to='/'>
+                        <img src={logo}/>
+                    </NavLink>
+                    <h4>Thế giới truyện tranh</h4>
+                </div>
                 {!isMobile &&
                     <ul className={cx('list')}>
                         <li className={cx('item', { 'active': pathname === '/' })}>

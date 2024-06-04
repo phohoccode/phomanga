@@ -11,7 +11,6 @@ function ComicsSuggestions({ data }) {
     const [currentIndex, setCurrentIndex] = useState(0)
 
     useEffect(() => {
-        console.log('sugg', data);
         setCategorys(data?.item?.category || [])
         setCurrentApi(
             `https://otruyenapi.com/v1/api/the-loai/${data?.item?.category[0].slug}` || '')
