@@ -1,0 +1,40 @@
+@mixin borderBtn($color: var(--primary-color)) {
+    border: 3px solid $color;
+    background-color: var(--white-color);
+    color: $color;
+    transition: .3s;
+    outline: 3px solid transparent;
+    outline-offset: 3px;
+    border-radius: var(--border-radius);
+    user-select: none;
+
+    @if $color != 'var(--primary-color)' {
+
+    }
+    
+    &:hover {
+        background-color: $color;
+        color: var(--white-color);
+        outline-color: $color;
+    }
+}
+
+@mixin outlineBtn($color: var(--primary-color)) {
+    outline: 3px solid transparent;
+    outline-offset: 3px;
+    transition: .3s;
+    user-select: none;
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+    color: var(--white-color);
+    background-color: $color;
+
+    @if $color == 'var(--white-color)' {
+        color: var(--black-color);
+        background-color: $color;
+    }
+
+    &:hover {
+        outline-color: $color;
+    }
+}

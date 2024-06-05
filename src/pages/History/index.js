@@ -15,7 +15,6 @@ function History() {
     const [slugs, setSlugs] = useState([])
 
     useEffect(() => {
-        console.log(storage.get('history-storage', {}));
         const historyStorage = storage.get('history-storage', {})
         const slugs = Object.keys(historyStorage)
         setComics(historyStorage)
@@ -42,7 +41,7 @@ function History() {
             </div>
             {slugs.map(slug => (
                 <div key={slug} className={cx('wrapper')}>
-                    <h4>{slug}</h4>
+                    <h4>{`${slug} (${comics[slug].length} chap đã xem)`}</h4>
                     <ul key={slug} className={cxComics('list')}>
                         {comics[slug].map((comic, index) => (
                             <li key={index} className={cxComic('wrapper')}>

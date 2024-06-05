@@ -1,3 +1,5 @@
+@import "../../components/GlobalStyles/mixin";
+
 .wrapper {
   display: flex;
   flex-direction: column;
@@ -11,30 +13,29 @@
     justify-content: center;
     align-items: center;
     flex-direction: column;
+    gap: 24px;
 
     h4 {
       font-size: 3rem;
+    }
+
+    p {
+        text-align: center;
+        i {
+            margin: 0 8px;
+        }
     }
 
     .actions {
       display: flex;
       justify-content: center;
       gap: 8px;
-      margin-top: 24px;
 
       button {
         padding: 8px 16px;
-        background-color: var(--primary-color);
-        outline-offset: 3px;
-        outline: 3px solid transparent;
-        transition: 0.3s;
+        @include outlineBtn(var(--primary-color));
         font-size: 1.8rem;
-        color: var(--white-color);
         min-width: 120px;
-
-        &:hover {
-          outline-color: var(--primary-color);
-        }
       }
 
       button.disabled {
@@ -73,6 +74,71 @@
       @media (max-width: 768px) {
         width: 100%;
       }
+    }
+  }
+
+  .tools {
+    position: fixed;
+    height: 100px;
+    min-width: 145px;
+    right: var(--pos-desktops);
+    top: 100px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+
+    @media (max-width: 768px) {
+        top: unset;
+        bottom: var(--pos-mobile);
+        right: var(--pos-mobile);
+    }
+
+    button {
+      padding: 8px;
+      font-size: 1.8rem;
+      @include borderBtn(var(--primary-color));
+
+      i {
+        margin-right: 8px;
+      }      
+
+      @media (max-width: 768px) {
+        font-size: 1.6rem;
+      }
+    }
+
+    .auto-scroll {
+      position: relative;
+      transition: 0.3s;
+
+      &:hover::after {
+        opacity: 1;
+      }
+
+      &::after {
+        content: "Tự động cuộn sau 6 giây";
+        opacity: 0;
+        pointer-events: none;
+        position: absolute;
+        top: calc(100% + 12px);
+        white-space: nowrap;
+        left: 0;
+        background-color: #3f3f3f;
+        border-radius: var(--border-radius);
+        color: var(--white-color);
+        padding: 4px 8px;
+        transition: 0.3s;
+        font-size: 1.6rem;
+
+        @media (max-width: 768px) {
+            display: none;
+        }
+      }
+    }
+
+    button.active {
+      color: var(--white-color);
+      background-color: var(--primary-color);
     }
   }
 }

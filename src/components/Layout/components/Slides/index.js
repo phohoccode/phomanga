@@ -9,7 +9,7 @@ const cx = classNames.bind(styles)
 function Slides({ api }) {
     const [data] = useFetch(api)
     const [slides, setSlides] = useState([])
-    const [index, setIndex] = useState(0)
+    const [currentIndex, setCurrentIndex] = useState(0)
     const slideInnerRef = useRef()
     const idInterval = useRef()
     const isGrabbing = useRef(false)
@@ -17,17 +17,19 @@ function Slides({ api }) {
     const currentTranslate = useRef(0)
 
     useEffect(() => {
-        setSlides(data?.data?.items || [])
+        if (data) {
+            setSlides(data?.data?.items || [])
+        }
     }, [data])
 
     useEffect(() => {
         slideInnerRef.current.style.transform =
-            `translateX(-${index * slideInnerRef.current.clientWidth}px)`
-    }, [index])
+            `translateX(-${currentIndex * slideInnerRef.current.clientWidth}px)`
+    }, [currentIndex])
 
     useEffect(() => {
         startAutoSlides()
-    }, [index])
+    }, [currentIndex])
 
     const startAutoSlides = () => {
         clearInterval(idInterval.current)
@@ -39,12 +41,12 @@ function Slides({ api }) {
     }
 
     const handlePrev = () => {
-        setIndex(prevIndex =>
+        setCurrentIndex(prevIndex =>
             (prevIndex === 0 ? slides.slice(0, 10).length - 1 : prevIndex - 1))
     }
 
     const handleNext = () => {
-        setIndex(prevIndex =>
+        setCurrentIndex(prevIndex =>
             (prevIndex === slides.slice(0, 10).length - 1 ? 0 : prevIndex + 1))
     }
 
@@ -72,7 +74,7 @@ function Slides({ api }) {
             currentTranslate.current = clientX - startPos.current
             slideInnerRef.current.style.transform =
                 `translateX(${currentTranslate.current -
-                (index * slideInnerRef.current.clientWidth)}px)`
+                (currentIndex * slideInnerRef.current.clientWidth)}px)`
         }
     }
 
@@ -81,7 +83,7 @@ function Slides({ api }) {
             currentTranslate.current > 0 ? handlePrev() : handleNext()
         } else {
             slideInnerRef.current.style.transform =
-                `translateX(-${index * slideInnerRef.current.clientWidth}px)`
+                `translateX(-${currentIndex * slideInnerRef.current.clientWidth}px)`
         }
         isGrabbing.current = false
         startPos.current = null
@@ -92,30 +94,41 @@ function Slides({ api }) {
 
     return (
         <div className={cx('wrapper')}>
-            <div
-                onMouseDown={handleDragStart}
-                onMouseMove={handleDragMove}
-                onMouseLeave={handleDragEnd}
-                onMouseUp={handleDragEnd}
-                onTouchStart={handleDragStart}
-                onTouchMove={handleDragMove}
-                onTouchEnd={handleDragEnd}
-                style={{ cursor: isGrabbing.current ? 'grabbing' : 'grab' }}
-                ref={slideInnerRef}
-                className={cx('inner')}
-            >
-                {slides.slice(0, 10).map((slide, index) => (
-                    <Slide key={index} data={slide} />
+            <div className={cx('wrapper-inner')}>
+                <div
+                    onMouseDown={handleDragStart}
+                    onMouseMove={handleDragMove}
+                    onMouseLeave={handleDragEnd}
+                    onMouseUp={handleDragEnd}
+                    onTouchStart={handleDragStart}
+                    onTouchMove={handleDragMove}
+                    onTouchEnd={handleDragEnd}
+                    style={{ cursor: isGrabbing.current ? 'grabbing' : 'grab' }}
+                    ref={slideInnerRef}
+                    className={cx('inner')}
+                >
+                    {slides.slice(0, 10).map((slide, index) => (
+                        <Slide key={index} data={slide} />
+                    ))}
+                </div>
+                <div className={cx('actions')}>
+                    <button onClick={handlePrev} className={cx('left')}>
+                        <i className="fa-solid fa-chevron-left"></i>
+                    </button>
+                    <button onClick={handleNext} className={cx('right')}>
+                        <i className="fa-solid fa-chevron-right"></i>
+                    </button>
+                </div>
+            </div>
+            <ul className={cx('slick-dots')}>
+                {slides.slice(0, 10).map((_, index) => (
+                    <li
+                        onClick={() => setCurrentIndex(index)}
+                        className={cx({ 'active': index === currentIndex })}
+                        key={index}
+                    ></li>
                 ))}
-            </div>
-            <div className={cx('actions')}>
-                <button onClick={handlePrev} className={cx('left')}>
-                    <i className="fa-solid fa-chevron-left"></i>
-                </button>
-                <button onClick={handleNext} className={cx('right')}>
-                    <i className="fa-solid fa-chevron-right"></i>
-                </button>
-            </div>
+            </ul>
         </div>
     );
 }

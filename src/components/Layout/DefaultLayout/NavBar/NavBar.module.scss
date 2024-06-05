@@ -11,14 +11,18 @@
   top: 0;
   left: 0;
   right: 0;
-  padding: 0 64px;
+  padding: 0 var(--padding-desktops);
   height: 60px;
   box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px -1px rgba(0, 0, 0, 0.1);
   background-color: var(--white-color);
   z-index: 9999;
 
+  @media (max-width: 1023px) {
+    padding: 0 var(--padding-table);
+  }
+
   @media (max-width: 768px) {
-    padding: 0 16px;
+    padding: 0 var(--padding-mobile);
   }
 
   .wrapper-left {
@@ -38,27 +42,36 @@
       gap: 12px;
       align-items: center;
 
-        a {
-        width: 46px;
-        height: 46px;
+      a {
+        width: 40px;
+        height: 40px;
         border-radius: var(--border-radius);
         overflow: hidden;
       }
 
       h4 {
-        font-size: 3rem;
+        font-size: 2.6rem;
         font-weight: 900;
         color: var(--primary-color);
 
+        @media (max-width: 1399px) {
+          display: none;
+        }
+
+        @media (max-width: 1023px) {
+          display: block;
+          font-size: 2.2rem;
+        }
+
         @media (max-width: 768px) {
-            font-size: 2rem;
+          font-size: 2rem;
         }
       }
     }
 
     .list {
       display: flex;
-      gap: 8px;
+      gap: 12px;
 
       .item {
         color: var(--black-color);
@@ -70,17 +83,18 @@
         > a {
           border-radius: var(--border-radius);
           display: inline-block;
-          padding: 4px 16px;
+          padding: 4px 8px;
           transition: 0.3s;
+          user-select: none;
+
+          i {
+            margin-right: 6px;
+          }
 
           &:hover {
             color: var(--white-color);
             background-color: var(--primary-color);
           }
-        }
-
-        i {
-          margin-left: 8px;
         }
 
         &:hover ul {
@@ -105,10 +119,42 @@
       font-size: 2.2rem;
       font-weight: 600;
       transition: 0.3s;
-      padding: 16px;
+      padding: 12px 16px;
+      position: relative;
+
+      &::after {
+        opacity: 0;
+        pointer-events: none;
+        position: absolute;
+        top: 100%;
+        white-space: nowrap;
+        left: 0;
+        background-color: #3f3f3f;
+        border-radius: var(--border-radius);
+        color: var(--white-color);
+        padding: 4px 8px;
+        transition: .3s;
+        font-size: 1.6rem;
+      }
 
       &:hover {
         color: var(--primary-color);
+      }
+
+      &:hover::after {
+        opacity: 1;
+      }
+    }
+
+    .history {
+      &::after {
+        content: "Lịch sử đã xem";
+      }
+    }
+
+    .save {
+      &::after {
+        content: "Truyện đã lưu";
       }
     }
 

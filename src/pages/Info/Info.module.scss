@@ -1,3 +1,5 @@
+@import "../../components/GlobalStyles/mixin";
+
 .wrapper {
   .top {
     display: flex;
@@ -38,10 +40,10 @@
         text-overflow: ellipsis;
 
         @media (max-width: 768px) {
-            font-size: 2.4rem;
-            overflow: unset;
-            white-space: unset;
-            text-overflow: unset;
+          font-size: 2.4rem;
+          overflow: unset;
+          white-space: unset;
+          text-overflow: unset;
         }
       }
 
@@ -51,34 +53,18 @@
         button {
           padding: 4px 12px;
           font-size: 1.8rem;
-          border-radius: var(--border-radius);
-          transition: 0.3s;
-          outline: 3px solid transparent;
-          outline-offset: 3px;
-          background-color: transparent;
 
           i {
             margin-right: 8px;
           }
         }
+
         .save {
-          border: 3px solid var(--primary-color);
-          color: var(--primary-color);
-          &:hover {
-            outline-color: var(--primary-color);
-            color: var(--white-color);
-            background-color: var(--primary-color);
-          }
+          @include borderBtn(var(--primary-color));
         }
 
         .delete {
-          border: 3px solid var(--detele-comic);
-          color: var(--detele-comic);
-          &:hover {
-            outline-color: var(--detele-comic);
-            color: var(--white-color);
-            background-color: var(--detele-comic);
-          }
+          @include borderBtn(var(--red-color));
         }
       }
 
@@ -124,18 +110,9 @@
 
       .categorys li {
         padding: 2px 4px;
-        background-color: var(--primary-color);
-        color: var(--white-color);
-        border-radius: var(--border-radius);
-        cursor: pointer;
-        outline-offset: 3px;
-        outline: 3px solid transparent;
-        transition: outline-color 0.3s;
         font-size: 1.6rem;
-
-        &:hover {
-          outline-color: var(--primary-color);
-        }
+        cursor: pointer;
+        @include outlineBtn(var(--primary-color));
       }
     }
   }
@@ -177,30 +154,24 @@
       gap: 12px;
 
       li {
-        width: calc(10% - 11px);
+        width: var(--width-chapter-desktops);
 
+        @media (max-width: 1023px) {
+          width: var(--width-chapter-table);
+        }
         @media (max-width: 768px) {
-          width: calc(25% - 9px);
+          width: var(--width-chapter-mobile);
         }
 
         a {
           text-align: center;
           display: block;
           font-size: 1.6rem;
-          outline: 3px solid transparent;
-          outline-offset: 3px;
-          background-color: var(--primary-color);
           padding: 8px;
-          color: var(--white-color);
-          border-radius: var(--border-radius);
-          transition: 0.3s;
+          @include outlineBtn(var(--primary-color));
 
           @media (max-width: 768px) {
             font-size: 1.4rem;
-          }
-
-          &:hover {
-            outline-color: var(--primary-color);
           }
         }
       }

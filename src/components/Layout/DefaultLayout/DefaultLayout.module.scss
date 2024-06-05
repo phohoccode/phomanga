@@ -1,7 +1,11 @@
 .wrapper {
-    padding: 24px 64px;
+    padding: 24px var(--padding-desktops);
+
+    @media (max-width: 1023px) {
+        padding: var(--padding-table);
+    }
 
     @media (max-width: 768px) {
-        padding: 16px;
+        padding: var(--padding-mobile);
     }
 }

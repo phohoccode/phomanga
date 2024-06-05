@@ -13,15 +13,23 @@ function Comics({ api }) {
     const [comics, setComics] = useState([])
 
     useEffect(() => {
-        setComics(data?.data?.items || [])
+        if (data) {
+            console.log(data);
+            setComics(data?.data?.items || [])
+        }
     }, [data])
 
     return (
         <div className={cx('wrapper')}>
             {data &&
                 <div className={cx('title')}>
-                    <h4>{data?.data?.titlePage}</h4>
-                    <Link className={cx('see-more')} to={`/detail${data?.data?.breadCrumb[0]?.slug}`}>
+                    <h4>
+                        {data?.data?.titlePage}
+                    </h4>
+                    <Link
+                        className={cx('see-more')}
+                        to={`/detail${data?.data?.breadCrumb[0]?.slug}`}
+                    >
                         Xem thêm
                     </Link>
                 </div>

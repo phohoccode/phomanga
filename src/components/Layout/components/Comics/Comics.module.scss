@@ -1,5 +1,7 @@
+@import "../../../GlobalStyles/mixin";
+
 .wrapper {
-  margin-top: 32px;
+  margin-top: 64px;
 
   .title {
     display: flex;
@@ -16,18 +18,11 @@
     }
 
     .see-more, button {
-      border: none;
-      border-radius: var(--border-radius);
+      @include borderBtn(var(--primary-color));
       padding: 8px 16px;
-      outline-offset: 3px;
-      outline: 3px solid transparent;
       height: 40px;
       font-weight: 600;
-      transition: 0.3s;
       font-size: 1.8rem;
-      border: 3px solid var(--primary-color);
-      background-color: var(--white-color);
-      color: var(--primary-color);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -38,12 +33,6 @@
         margin-left: 12px;
         flex-shrink: 0;
       }
-
-      &:hover {
-        color: var(--white-color);
-        background-color: var(--primary-color);
-        outline-color: var(--primary-color);
-      }
     }
   }
 
@@ -52,7 +41,5 @@
     margin: 0 -8px;
     flex-wrap: wrap;
     gap: 24px 0;
-
-
   }
 }

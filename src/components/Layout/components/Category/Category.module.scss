@@ -26,6 +26,7 @@
     pointer-events: unset;
     box-shadow: unset;
     border-radius: unset;
+    margin-left: 12px;
   }
 
   .item {
@@ -37,9 +38,19 @@
     width: calc(33.33333% - 8px);
     border-radius: var(--border-radius);
 
+    &:hover {
+      background-color: var(--primary-color);
+      color: var(--white-color);
+      border-radius: var(--border-radius);
+    }
     @media (max-width: 768px) {
       width: 100%;
       text-align: left;
+
+      &:hover {
+        color: var(--primary-color);
+        background-color: unset;
+      }
     }
 
     a {
@@ -48,12 +59,6 @@
       font-size: 1.6rem;
       padding: 6px 8px;
     }
-
-    &:hover {
-      background-color: var(--primary-color);
-      color: var(--white-color);
-      border-radius: var(--border-radius);
-    }
   }
 
   .item.active {
@@ -61,9 +66,9 @@
     background-color: var(--primary-color);
 
     @media (max-width: 768px) {
-        color: var(--primary-color);
-        font-weight: 600;
-        background-color: unset;
+      color: var(--primary-color);
+      font-weight: 600;
+      background-color: unset;
     }
   }
 }

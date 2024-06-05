@@ -1,3 +1,5 @@
+@import "../../../GlobalStyles/mixin";
+
 .wrapper {
   display: flex;
   align-items: center;
@@ -6,27 +8,17 @@
   margin-top: 32px;
 
   @media (max-width: 768px) {
-      flex-wrap: wrap;
+    flex-wrap: wrap;
   }
 
   button {
-    background-color: var(--primary-color);
     padding: 8px 16px;
-    border-radius: var(--border-radius);
-    color: var(--white-color);
-    transition: 0.3s;
-    outline: 3px solid transparent;
-    outline-offset: 3px;
     font-size: 2rem;
+    @include outlineBtn(var(--primary-color));
 
     @media (max-width: 768px) {
-        font-size: 1.4rem;
-        padding: 12px;
-    }
-
-
-    &:not(.disabled):hover {
-      outline-color: var(--primary-color);
+      font-size: 1.4rem;
+      padding: 12px;
     }
   }
 
@@ -40,19 +32,12 @@
     display: flex;
     gap: 12px;
 
-
     li {
-      border-radius: var(--border-radius);
+      @include borderBtn(var(--primary-color));
       padding: 8px 16px;
-      outline-offset: 3px;
-      outline: 3px solid transparent;
       height: 40px;
       font-weight: 600;
-      transition: 0.3s;
       font-size: 1.8rem;
-      border: 3px solid var(--primary-color);
-      background-color: var(--white-color);
-      color: var(--primary-color);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -62,12 +47,6 @@
       @media (max-width: 768px) {
         font-size: 1.6rem;
         padding: 4px 8px;
-    }
-
-      &:hover {
-        color: var(--white-color);
-        background-color: var(--primary-color);
-        outline-color: var(--primary-color);
       }
     }
 

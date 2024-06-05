@@ -34,9 +34,11 @@ function Slide({ data }) {
                     </ul>
                     <div className={cx('actions')}>
                         <Link className={cx('read-now')} to={`/read/${data?.slug}/${chapterApi}`}>
+                            <i className="fa-regular fa-eye"></i>
                             Đọc ngay
                         </Link>
                         <Link className={cx('detail')} to={`/info/${data?.slug}`}>
+                            <i className="fa-solid fa-circle-info"></i>
                             Chi tiết
                         </Link>
                     </div>

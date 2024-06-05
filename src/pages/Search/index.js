@@ -1,5 +1,5 @@
 import classNames from 'classnames/bind'
-import styles from './Search.module.scss'
+import styles from '../../components/Layout/components/Comics/Comics.module.scss'
 import { useParams } from 'react-router-dom'
 import { useEffect, useState } from 'react'
 import useFetch from '../../hooks/useFetch'
@@ -29,10 +29,10 @@ function Search() {
     }, [data])
 
     return (
-        <div className={cx('wrapper')}>
+        <div style={{ margin: 'unset' }} className={cx('wrapper')}>
             {data &&
                 <>
-                    <h4>
+                    <h4 className={cx('title')}>
                         {result.length > 0 ?
                             `Tìm kiếm được ${data?.data?.params?.pagination?.totalItems} truyện phù hợp cho từ khoá ''${params.keyword}''` :
                             `Không tìm kiếm được truyện phù hợp!`

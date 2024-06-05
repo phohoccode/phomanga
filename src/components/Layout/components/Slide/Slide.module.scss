@@ -1,3 +1,5 @@
+@import '../../../GlobalStyles/mixin';
+
 .wrapper {
   flex-shrink: 0;
   width: 100%;
@@ -31,11 +33,16 @@
     gap: 32px;
     position: absolute;
     z-index: 2;
-    left: 64px;
+    left: var(--pos-desktops);
+
+    @media (max-width: 1023px) {
+        left: var(--pos-table);
+        top: var(--pos-table);
+    }
 
     @media (max-width: 768px) {
-      left: 16px;
-      top: 16px;
+        left: var(--pos-mobile);
+        top: var(--pos-mobile);
     }
 
     figure {
@@ -58,7 +65,7 @@
 
       h4 {
         font-size: 3rem;
-        text-shadow: 2px 2px rgba(0, 0, 0, 0.502);
+        text-shadow: var(--text-shadow);
 
         @media (max-width: 768px) {
           font-size: 2rem;
@@ -66,7 +73,7 @@
       }
 
       h2 {
-        text-shadow: 2px 2px rgba(0, 0, 0, 0.502);
+        text-shadow: var(--text-shadow);
         color: var(--primary-color);
         font-size: 4rem;
         overflow: hidden;
@@ -83,7 +90,7 @@
         gap: 12px;
         margin-top: 12px;
 
-        @media (max-width: 768px) {
+        @media (max-width: 1023px) {
           flex-wrap: wrap;
         }
 
@@ -117,14 +124,13 @@
             margin-top: 12px;
         }
 
+        i {
+            margin-right: 8px;
+        }
+
         .read-now, .detail {
-            box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
             font-size: 2rem;
             padding: 4px 12px;
-            border-radius: var(--border-radius);
-            outline-offset: 3px;
-            outline: 3px solid transparent;
-            transition: 0.3s;
     
             @media (max-width: 768px) {
               font-size: 1.6rem;
@@ -133,20 +139,11 @@
         }
         
         .read-now {
-            background-color: var(--primary-color);
-            
-            &:hover {
-                outline-color: var(--primary-color);
-            }
+            @include outlineBtn(var(--primary-color))
         }
 
         .detail {
-            color: var(--black-color);
-            background-color: var(--white-color);
-
-            &:hover {
-                outline-color: var(--white-color);
-            }
+            @include outlineBtn(var(--white-color))
         }
       }
     }
