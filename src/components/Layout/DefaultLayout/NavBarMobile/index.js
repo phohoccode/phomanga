@@ -24,6 +24,12 @@ function NavBarMovie({ categorys, showModal, setShowModal, handleKeyDownSearch }
         }
     }
 
+    const handleWrapperClick = (event) => {
+        if (modalRef.current && !modalRef.current.contains(event.target)) {
+            handleCloseModal();
+        }
+    };
+
     const handleSearch = (e, valueSearch) => {
         handleKeyDownSearch(e, valueSearch)
         if (e.key.startsWith('Enter')) {
@@ -35,6 +41,7 @@ function NavBarMovie({ categorys, showModal, setShowModal, handleKeyDownSearch }
         <>
             {showModal &&
                 <div
+                    onClick={handleWrapperClick}
                     ref={wrapperRef}
                     className={cx('wrapper')}>
                     <div

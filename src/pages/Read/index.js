@@ -4,6 +4,7 @@ import styles from './Read.module.scss'
 import { useEffect, useRef, useState } from 'react'
 import useFetch from '../../hooks/useFetch'
 import storage from '../../utils'
+import Comment from '../../components/Layout/components/Comment'
 
 const cx = classNames.bind(styles)
 
@@ -17,10 +18,12 @@ function Read() {
     const [chapterPath, setChapterPath] = useState('')
     const [currentIndex, setCurrentIndex] = useState(0)
     const [isScroll, setIsScroll] = useState(false)
+    const [isShowMessage, setIsShowMessage] = useState(false)
     const idScrollRef = useRef()
 
     useEffect(() => {
         if (data) {
+            console.log(data);
             const chaptersId =
                 data?.data?.item?.chapters[0]?.server_data.map(
                     chapter => chapter?.chapter_api_data.split('/').pop()) || []
@@ -49,9 +52,9 @@ function Read() {
             if (isScroll && window.innerHeight + window.scrollY < document.body.offsetHeight) {
                 idScrollRef.current = setInterval(() => {
                     window.scrollBy({
-                        top: window.innerHeight / 2, behavior: 'smooth'
+                        top: window.innerHeight, behavior: 'smooth'
                     })
-                }, 7000)
+                }, 6000)
             } else if (window.innerHeight + window.scrollY >= document.body.offsetHeight) {
                 clearInterval(idScrollRef.current)
             }
@@ -109,56 +112,70 @@ function Read() {
         }
     }
 
+    const handleOpenModal = () => {
+        document.body.style.overflowY = 'hidden'
+        setIsShowMessage(!isShowMessage)
+    }
+
     return (
-        <div className={cx('wrapper')}>
-            {data && dataImages &&
-                <div className={cx('title')}>
-                    <h4>
-                        {`${data?.data?.item?.name} - Chương ${dataImages?.data?.item?.chapter_name}`}
-                    </h4>
-                    <div className={cx('actions')}>
-                        <button
-                            onClick={handlePrevChapter}
-                            className={cx('prev', { 'disabled': currentIndex === 0 })}
-                        >
-                            <i className="fa-solid fa-angle-left"></i>
-                            Chương trước
-                        </button>
-                        <button
-                            onClick={handleNextChapter}
-                            className={cx('next', { 'disabled': currentIndex === chapter.length - 1 })}
-                        >
-                            Chương sau
-                            <i className="fa-solid fa-angle-right"></i>
-                        </button>
+        <>
+            <div className={cx('wrapper')}>
+                {data && dataImages &&
+                    <div className={cx('title')}>
+                        <h4>
+                            {`${data?.data?.item?.name} - Chương ${dataImages?.data?.item?.chapter_name}`}
+                        </h4>
+                        <div className={cx('actions')}>
+                            <button
+                                onClick={handlePrevChapter}
+                                className={cx('prev', { 'disabled': currentIndex === 0 })}
+                            >
+                                <i className="fa-solid fa-angle-left"></i>
+                                Chương trước
+                            </button>
+                            <button
+                                onClick={handleNextChapter}
+                                className={cx('next', { 'disabled': currentIndex === chapter.length - 1 })}
+                            >
+                                Chương sau
+                                <i className="fa-solid fa-angle-right"></i>
+                            </button>
+                        </div>
+                        <p>
+                            Gợi ý: bạn có thể sử dụng nút
+                            <i className="fa-solid fa-arrow-left"></i> hoặc
+                            <i className="fa-solid fa-arrow-right"></i> từ bàn phím để chuyển chương
+                        </p>
                     </div>
-                    <p>
-                        Gợi ý: bạn có thể sử dụng nút 
-                        <i className="fa-solid fa-arrow-left"></i> hoặc 
-                        <i className="fa-solid fa-arrow-right"></i> từ bàn phím để chuyển chương
-                    </p>
+                }
+                <ul className={cx('images')}>
+                    {images.map((image, index) => (
+                        <li key={index}>
+                            <img src={`https://sv1.otruyencdn.com/${chapterPath}/${image.image_file}`} />
+                        </li>
+                    ))}
+                </ul>
+                <div className={cx('tools')}>
+                    <button onClick={handleOpenModal}>
+                        <i className="fa-regular fa-comment-dots"></i>
+                        Bình luận
+                    </button>
+                    <button
+                        className={cx('auto-scroll', { 'active': isScroll })}
+                        onClick={() => setIsScroll(!isScroll)}>
+                        <i className="fa-solid fa-arrow-down"></i>
+                        {!isScroll ? 'Tự động cuộn' : 'Đang cuộn'}
+                    </button>
                 </div>
-            }
-            <ul className={cx('images')}>
-                {images.map((image, index) => (
-                    <li key={index}>
-                        <img src={`https://sv1.otruyencdn.com/${chapterPath}/${image.image_file}`} />
-                    </li>
-                ))}
-            </ul>
-            <div className={cx('tools')}>
-                <button>
-                    <i className="fa-regular fa-comment-dots"></i>
-                    Bình luận
-                </button>
-                <button
-                    className={cx('auto-scroll', { 'active': isScroll })}
-                    onClick={() => setIsScroll(!isScroll)}>
-                    <i className="fa-solid fa-arrow-down"></i>
-                    {!isScroll ? 'Tự động cuộn' : 'Đang cuộn'}
-                </button>
             </div>
-        </div>
+            {isShowMessage && 
+                <Comment 
+                    id={params.id}
+                    slug={params.slug}
+                    setIsShowMessage={setIsShowMessage}
+                /> 
+            }
+        </>
     )
 }
 

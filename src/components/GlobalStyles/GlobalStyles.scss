@@ -1,6 +1,6 @@
 @import "normalize.css";
-@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&family=Roboto+Mono:ital,wght@0,100..700;1,100..700&display=swap');
-@import './mixin';
+@import url("https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&family=Roboto+Mono:ital,wght@0,100..700;1,100..700&display=swap");
+@import "./mixin";
 
 :root {
   --font-family: "Quicksand", sans-serif;
@@ -10,11 +10,12 @@
   --white-color: #fff;
   --black-color: #000;
   --red-color: #d90429;
-  --border-radius: .75rem;
+  --border-radius: 0.75rem;
   --border-image: 2px solid #e7e7e7;
   --width-table: 102.3rem;
   --width-mobile: 76.8rem;
-  --box-shadow-nav: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px -1px rgba(0, 0, 0, 0.1);
+  --box-shadow-nav: 0 1px 3px 0 rgba(0, 0, 0, 0.1),
+    0 1px 2px -1px rgba(0, 0, 0, 0.1);
   --box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
   --text-shadow: 2px 2px rgba(0, 0, 0, 0.502);
   --padding-desktops: 64px;
@@ -79,19 +80,34 @@ ul {
 }
 
 button {
-    border: none;
-    user-select: none;
-    cursor: pointer;
+  border: none;
+  user-select: none;
+  cursor: pointer;
 }
 
 img {
-    display: block;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: .3s;
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: 0.3s;
 }
 
 figure {
-    border: var(--border-image)
+  border: var(--border-image);
+}
+
+textarea {
+  font-size: 1.8rem;
+  line-height: 1.6;
+  font-family: var(--font-family);
+  outline: none;
+  resize: none;
+}
+
+.seperate {
+    background-color: #dfdfdf;
+    height: .1px;
+    margin: 12px 0;
+    width: 100%;
 }
