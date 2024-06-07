@@ -158,13 +158,13 @@ function Read() {
                 <div className={cx('tools')}>
                     <button onClick={handleOpenModal}>
                         <i className="fa-regular fa-comment-dots"></i>
-                        Bình luận
+                        <span>Bình luận</span>
                     </button>
                     <button
                         className={cx('auto-scroll', { 'active': isScroll })}
                         onClick={() => setIsScroll(!isScroll)}>
-                        <i className="fa-solid fa-arrow-down"></i>
-                        {!isScroll ? 'Tự động cuộn' : 'Đang cuộn'}
+                        <i className="fa-solid fa-arrows-up-down"></i>
+                        {!isScroll ? (<span>Tự động cuộn</span>) : (<span>Đang cuộn</span>)}
                     </button>
                 </div>
             </div>

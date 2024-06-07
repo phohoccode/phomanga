@@ -79,10 +79,11 @@
 
   .tools {
     position: fixed;
-    height: 100px;
-    min-width: 145px;
+    max-height: 100px;
+    max-width: 200px;
+    min-width: 50px;
     right: var(--pos-desktops);
-    bottom: 100px;
+    bottom: var(--pos-desktops);
     display: flex;
     flex-direction: column;
     gap: 12px;
@@ -96,10 +97,23 @@
     button {
       padding: 8px;
       font-size: 1.8rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       @include borderBtn(var(--primary-color));
+
+      span {
+        @media (max-width: 768px) {
+            display: none;
+          }
+      }
 
       i {
         margin-right: 8px;
+
+        @media (max-width: 768px) {
+            margin: unset;
+          }
       }      
 
       @media (max-width: 768px) {

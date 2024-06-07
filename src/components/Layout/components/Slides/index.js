@@ -33,7 +33,7 @@ function Slides({ api }) {
 
     const startAutoSlides = () => {
         clearInterval(idInterval.current)
-        idInterval.current = setInterval(handleNext, 6000)
+        // idInterval.current = setInterval(handleNext, 6000)
     }
 
     const stopAutoSlides = () => {

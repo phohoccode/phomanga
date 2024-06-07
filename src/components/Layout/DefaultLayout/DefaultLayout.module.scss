@@ -1,11 +1,27 @@
+@import "../../GlobalStyles/mixin";
+
 .wrapper {
-    padding: 24px var(--padding-desktops);
+  padding: 24px var(--padding-desktops);
 
-    @media (max-width: 1023px) {
-        padding: var(--padding-table);
-    }
+  @media (max-width: 1023px) {
+    padding: var(--padding-table);
+  }
 
-    @media (max-width: 768px) {
-        padding: var(--padding-mobile);
-    }
+  @media (max-width: 768px) {
+    padding: var(--padding-mobile);
+  }
+}
+.scroll-to-top {
+  cursor: pointer;
+  position: fixed;
+  bottom: var(--pos-desktops);
+  left: var(--pos-desktops);
+  padding: 8px 16px;
+  font-size: 1.8rem;
+  @include outlineBtn(var(--primary-color));
+
+  @media (max-width: 768px) {
+    bottom: var(--pos-mobile);
+    left: var(--padding-mobile);
+  }
 }

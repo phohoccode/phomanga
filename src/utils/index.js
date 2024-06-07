@@ -41,4 +41,7 @@ export function handleSelectedFocus(ref) {
         ref.setSelectionRange(length, length)
     }
 }
- 
+
+export function scrollToTop() {
+    window.scrollTo({ top: 0, behavior: 'smooth' })
+}

@@ -17,15 +17,27 @@ function Info() {
     const [chapters, setChapters] = useState([])
     const [valueSearch, setValueSearch] = useState('')
     const [isSave, setIsSave] = useState(false)
+    const [idStorage, setIdStorage] = useState({})
 
     useEffect(() => {
         if (data) {
+            const chaptersId =
+                data?.data?.item?.chapters[0]?.server_data.reverse().map(chapter => {
+                    const newChapter = { ...chapter }
+                    newChapter.chapter_api_data = newChapter?.chapter_api_data.split('/').pop();
+                    return newChapter;
+                })
+
             setItem(data?.data?.item || [])
             setAuthor(data?.data?.item?.author || [])
             setCategory(data?.data?.item?.category || [])
-            setChapters(data?.data?.item?.chapters[0]?.server_data || [])
+            setChapters(chaptersId)
+            setIdStorage(() => {
+                const historyStorage = storage.get('history-storage', {})
+                console.log(historyStorage?.[params.slug].map(chapter => chapter?.data?.item?._id));
+                return historyStorage?.[params.slug].map(chapter => chapter?.data?.item?._id) || []
+            })
         }
-        console.log(data);
     }, [data])
 
     useEffect(() => {
@@ -65,9 +77,9 @@ function Info() {
         <div className={cx('wrapper')}>
             <div className={cx('top')}>
                 <figure>
-                    <img 
-                        src={`https://otruyenapi.com/uploads/comics/${item?.thumb_url}`} 
-                        alt={item?.name} 
+                    <img
+                        src={`https://otruyenapi.com/uploads/comics/${item?.thumb_url}`}
+                        alt={item?.name}
                     />
                 </figure>
                 <div className={cx('info')}>
@@ -122,9 +134,16 @@ function Info() {
                     />
                 </div>
                 <ul className={cx('chapters')}>
+                    <li>
+                        <Link
+                            to={`/read/${params.slug}/${chapters[chapters.length - 1]?.chapter_api_data}`}
+                        >Đọc từ đầu</Link>
+                    </li>
                     {chapters.map((chapter, index) => (
                         <li key={index}>
-                            <Link to={`/read/${params.slug}/${chapter?.chapter_api_data.split('/').pop()}`}>
+                            <Link
+                                to={`/read/${params.slug}/${chapter?.chapter_api_data}`}
+                            >
                                 Chương {chapter?.chapter_name}
                             </Link>
                         </li>
