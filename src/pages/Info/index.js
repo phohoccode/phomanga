@@ -1,8 +1,8 @@
 import { Link, useParams } from 'react-router-dom'
+import { useEffect, useState } from 'react'
 import classNames from 'classnames/bind'
 import styles from './Info.module.scss'
 import useFetch from '../../hooks/useFetch'
-import { useEffect, useState } from 'react'
 import storage, { formatDate } from '../../utils'
 import ComicsSuggestions from '../../components/Layout/components/ComicsSuggestions'
 
@@ -17,25 +17,21 @@ function Info() {
     const [chapters, setChapters] = useState([])
     const [valueSearch, setValueSearch] = useState('')
     const [isSave, setIsSave] = useState(false)
-    const [idStorage, setIdStorage] = useState({})
+    const [idStorage, setIdStorage] = useState([])
 
     useEffect(() => {
         if (data) {
-            const chaptersId =
-                data?.data?.item?.chapters[0]?.server_data.reverse().map(chapter => {
-                    const newChapter = { ...chapter }
-                    newChapter.chapter_api_data = newChapter?.chapter_api_data.split('/').pop();
-                    return newChapter;
-                })
-
+            console.log(data);
             setItem(data?.data?.item || [])
             setAuthor(data?.data?.item?.author || [])
             setCategory(data?.data?.item?.category || [])
-            setChapters(chaptersId)
+            setChapters(data?.data?.item?.chapters[0]?.server_data.reverse() || [])
             setIdStorage(() => {
                 const historyStorage = storage.get('history-storage', {})
-                console.log(historyStorage?.[params.slug].map(chapter => chapter?.data?.item?._id));
-                return historyStorage?.[params.slug].map(chapter => chapter?.data?.item?._id) || []
+                const chapterIds =
+                    historyStorage[params.slug]?.map(
+                        chapter => chapter?.data?.item?._id) || []
+                return chapterIds
             })
         }
     }, [data])
@@ -52,9 +48,10 @@ function Info() {
         const filterChapters =
             dataChapter.filter(
                 chapter =>
-                    chapter?.chapter_name.toLowerCase().includes(e.target.value.toLowerCase())
+                    chapter?.chapter_name
+                        .toLowerCase()
+                        .includes(e.target.value.toLowerCase())
             )
-
         setChapters(filterChapters)
     }
 
@@ -101,7 +98,7 @@ function Info() {
                     <ul className={cx('author')}>
                         <span>Tác giả: </span>
                         {author.map((author, index) => (
-                            <li key={index}>{author}</li>
+                            <li key={index}>{author || 'Chưa cập nhật'}</li>
                         ))}
                     </ul>
                     <div className={cx('updated-at')}>
@@ -112,7 +109,9 @@ function Info() {
                         <span>Thể loại: </span>
                         {category.map((category, index) => (
                             <li key={index}>
-                                <Link to={`/detail/the-loai/${category?.slug}`}>{category?.name}</Link>
+                                <Link to={`/detail/the-loai/${category?.slug}`}>
+                                    {category?.name}
+                                </Link>
                             </li>
                         ))}
                     </ul>
@@ -134,26 +133,39 @@ function Info() {
                     />
                 </div>
                 <ul className={cx('chapters')}>
-                    <li>
-                        <Link
-                            to={`/read/${params.slug}/${chapters[chapters.length - 1]?.chapter_api_data}`}
-                        >Đọc từ đầu</Link>
-                    </li>
-                    {chapters.map((chapter, index) => (
-                        <li key={index}>
-                            <Link
-                                to={`/read/${params.slug}/${chapter?.chapter_api_data}`}
-                            >
-                                Chương {chapter?.chapter_name}
-                            </Link>
-                        </li>
-                    ))}
+                    {chapters.length > 0 ?
+                        <>
+                            <li>
+                                <Link
+                                    to={`/read/${params.slug}/${chapters[chapters.length - 1]
+                                        ?.chapter_api_data
+                                        .split('/').pop()}`}
+                                >Đọc từ đầu</Link>
+                            </li>
+                            {chapters.map((chapter, index) => (
+                                <li
+                                    className={cx({
+                                        active:
+                                            idStorage.includes(chapter?.chapter_api_data.split('/').pop())
+                                    })}
+                                    key={index}>
+                                    <Link
+                                        to={`/read/${params.slug}/${chapter
+                                            ?.chapter_api_data
+                                            .split('/').pop()}`}
+                                    >
+                                        Chương {chapter?.chapter_name}
+                                    </Link>
+                                </li>
+                            ))}
+                        </> :
+                        <span>Không có dữ liệu!</span>
+                    }
                 </ul>
             </div>
-
             {data?.data && <ComicsSuggestions data={data?.data} />}
         </div>
-    );
+    )
 }
 
-export default Info;
+export default Info

@@ -32,7 +32,7 @@ function History() {
             <div className={cxComics('title')}>
                 <h4>
                     {slugs.length > 0 ?
-                        `Có ${slugs.length} truyện đã xem` :
+                        `Lịch sử đã xem (${slugs.length})` :
                         'Lịch sử xem trống'}
                 </h4>
                 {slugs.length > 0 &&
@@ -41,7 +41,7 @@ function History() {
             </div>
             {slugs.map(slug => (
                 <div key={slug} className={cx('wrapper')}>
-                    <h4>{`${slug} (${comics[slug].length} chap đã xem)`}</h4>
+                    <h4>{`${slug} (${comics[slug].length} chương đã xem)`}</h4>
                     <ul key={slug} className={cxComics('list')}>
                         {comics[slug].map((comic, index) => (
                             <li key={index} className={cxComic('wrapper')}>
@@ -53,7 +53,7 @@ function History() {
                                         />
                                     </figure>
                                     <div className={cxComic('info')}>
-                                        <h4>{`${slug} - Chap ${comic?.data?.item?.chapter_name}`}</h4>
+                                        <h4>{`Chương ${comic?.data?.item?.chapter_name}`}</h4>
                                     </div>
                                 </Link>
                             </li>

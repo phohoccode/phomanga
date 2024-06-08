@@ -1,4 +1,4 @@
-@import '../../../GlobalStyles/mixin';
+@import "../../../GlobalStyles/mixin";
 
 .wrapper {
   margin-top: 32px;
@@ -6,10 +6,12 @@
   .title {
     display: flex;
     justify-content: space-between;
+    margin-bottom: -32px;
 
     h4 {
+      flex-shrink: 0;
       font-size: 3rem;
-      margin-right: 12px;
+      margin-right: 24px;
 
       @media (max-width: 768px) {
         font-size: 1.8rem;
@@ -26,6 +28,7 @@
       }
 
       li {
+        flex: auto;
         @include borderBtn(var(--primary-color));
         padding: 2px 4px;
         height: 30px;
@@ -37,7 +40,7 @@
         cursor: pointer;
 
         @media (max-width: 768px) {
-            font-size: 1.4rem;
+          font-size: 1.4rem;
         }
       }
 

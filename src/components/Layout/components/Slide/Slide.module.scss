@@ -24,6 +24,10 @@
     background-position: center;
     z-index: 1;
     filter: blur(8px);
+
+    @media (max-width: 768px) {
+        content: unset;
+    }
   }
 
   .inner {

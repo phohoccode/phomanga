@@ -11,10 +11,16 @@
 
     h4 {
       font-size: 3rem;
+      text-transform: uppercase;
 
       @media (max-width: 768px) {
         font-size: 2rem;
       }
+    }
+
+    span {
+        font-size: 2rem;
+        font-weight: 600;
     }
 
     .see-more, button {

@@ -23,8 +23,18 @@
       .right {
         padding: 8px 12px;
         font-size: 2rem;
-
         @include outlineBtn(rgb(63, 63, 63));
+        i {
+          transition: 0.3s;
+        }
+      }
+
+      .left:hover i {
+        transform: translateX(-2px);
+      }
+
+      .right:hover i{
+        transform: translateX(2px);
       }
     }
 
@@ -40,13 +50,13 @@
     position: absolute;
     bottom: -30px;
     left: 0;
-    
+
     li {
       width: 32px;
       height: 8px;
       border-radius: var(--border-radius);
       background-color: #dce0e3;
-      transition: .3s;
+      transition: 0.3s;
       cursor: pointer;
 
       @media (max-width: 768px) {
@@ -55,12 +65,12 @@
     }
 
     li.active {
-        width: 50px;
-        background-color: #9aa6af;
+      width: 50px;
+      background-color: #9aa6af;
 
-        @media (max-width: 768px) {
-            width: 32px;
-        }
+      @media (max-width: 768px) {
+        width: 32px;
+      }
     }
   }
 }

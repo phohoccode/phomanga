@@ -5,5 +5,9 @@
         font-size: 2rem;
         text-transform: uppercase;
         margin-bottom: 12px;
+
+        @media (max-width: 768px) {
+            font-size: 1.6rem;
+        }
     }
 }

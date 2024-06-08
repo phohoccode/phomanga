@@ -51,3 +51,32 @@
   cursor: no-drop;
   pointer-events: none;
 }
+
+@mixin label($content, $top) {
+  &:hover ::after {
+    opacity: 1;
+  }
+
+  ::after {
+    opacity: 0;
+    content: $content;
+    pointer-events: none;
+    position: absolute;
+    top: $top;
+    white-space: nowrap;
+    left: 0;
+    background-color: #3f3f3f;
+    border-radius: var(--border-radius);
+    color: var(--white-color);
+    padding: 4px 8px;
+    transition: 0.3s;
+    font-size: 1.6rem;
+    font-weight: 400;
+    box-shadow: var(--box-shadow);
+    font-family: var(--font-family);
+    
+    @media (max-width: 768px) {
+      display: none;
+    }
+  }
+}

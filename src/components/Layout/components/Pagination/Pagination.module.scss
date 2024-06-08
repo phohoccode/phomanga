@@ -46,7 +46,7 @@
 
       @media (max-width: 768px) {
         font-size: 1.6rem;
-        padding: 4px 8px;
+        padding: 4px 12px;
       }
     }
 
@@ -54,6 +54,10 @@
       color: var(--white-color);
       background-color: var(--primary-color);
       outline-color: var(--primary-color);
+
+      @media (max-width: 768px) {
+        outline: unset;
+      }
     }
   }
 }

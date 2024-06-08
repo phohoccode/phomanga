@@ -153,8 +153,14 @@
       flex-wrap: wrap;
       gap: 12px;
 
+      span {
+        color: var(--red-color);
+        font-weight: 600;
+      }
+
       li {
         width: var(--width-chapter-desktops);
+        @include outlineBtn(var(--primary-color));
 
         @media (max-width: 1023px) {
           width: var(--width-chapter-table);
@@ -168,16 +174,19 @@
           display: block;
           font-size: 1.6rem;
           padding: 8px;
-          @include outlineBtn(var(--primary-color));
 
           @media (max-width: 768px) {
             font-size: 1.4rem;
+            padding: 2px;
+            margin-bottom: 2px;
           }
         }
       }
 
-      li.read-through {
-        background-color: rgba(16, 185, 129, .7);;
+      li.active {
+        background-color: rgba(16, 185, 129, 0.7);
+        position: relative;
+        @include label('Đã đọc qua', -100%)
       }
     }
   }

@@ -19,6 +19,7 @@
   padding: 8px 16px;
   font-size: 1.8rem;
   @include outlineBtn(var(--primary-color));
+  @include label('Cuộn lên đầu trang', -100%);
 
   @media (max-width: 768px) {
     bottom: var(--pos-mobile);

@@ -14,7 +14,6 @@ function Comics({ api }) {
 
     useEffect(() => {
         if (data) {
-            console.log(data);
             setComics(data?.data?.items || [])
         }
     }, [data])

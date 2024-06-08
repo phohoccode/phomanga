@@ -23,7 +23,6 @@ function Read() {
 
     useEffect(() => {
         if (data) {
-            console.log(data);
             const chaptersId =
                 data?.data?.item?.chapters[0]?.server_data.map(
                     chapter => chapter?.chapter_api_data.split('/').pop()) || []
@@ -39,9 +38,12 @@ function Read() {
             setChapterPath(dataImages?.data?.item?.chapter_path)
             const historyStorage = storage.get('history-storage', {})
 
-            const isExist = params.slug in historyStorage
-            if (!isExist && dataImages?.status.startsWith('success')) {
-                historyStorage[params.slug] = [...(historyStorage[params.slug] || []), dataImages]
+            const isExistSlug = params.slug in historyStorage
+            const isExistComic = historyStorage[params.slug]?.some(
+                comic => comic?.data?.item?._id === params.id) || false
+            if ((!isExistSlug || !isExistComic) && dataImages?.status.startsWith('success')) {
+                historyStorage[params.slug] = 
+                    [...(historyStorage[params.slug] || []), dataImages]
                 storage.set('history-storage', historyStorage)
             }
         }
@@ -142,9 +144,10 @@ function Read() {
                             </button>
                         </div>
                         <p>
-                            Gợi ý: bạn có thể sử dụng nút
+                            Gợi ý: Bạn có thể sử dụng nút
                             <i className="fa-solid fa-arrow-left"></i> hoặc
-                            <i className="fa-solid fa-arrow-right"></i> từ bàn phím để chuyển chương
+                            <i className="fa-solid fa-arrow-right"></i> từ bàn phím để chuyển chương.
+                            <i className="fa-solid fa-arrows-up-down"></i> để tự động cuộn trang sau 6 giây.
                         </p>
                     </div>
                 }

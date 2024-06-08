@@ -24,7 +24,7 @@ function Save() {
             <div className={cx('title')}>
                 <h4>
                     {comics.length > 0 ?
-                        `Có ${comics.length} truyện đã lưu` :
+                        `Kho lưu trữ (${comics.length})` :
                         'Kho lưu trữ trống'}
                 </h4>
                 {comics.length > 0 &&
