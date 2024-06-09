@@ -16,7 +16,8 @@
   padding: 0 var(--padding-desktops);
   height: 60px;
   box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px -1px rgba(0, 0, 0, 0.1);
-  background-color: var(--white-color);
+  background-color: inherit;
+  color: inherit;
   z-index: 9999;
 
   @media (max-width: 1023px) {
@@ -92,7 +93,7 @@
 
           i {
             margin-right: 6px;
-            transition: transform .3s ease;
+            transition: transform 0.3s ease;
           }
 
           &:hover {
@@ -106,7 +107,7 @@
           pointer-events: auto;
         }
       }
-      
+
       .item:last-child:hover i {
         transform: rotate(-90deg);
       }
@@ -123,13 +124,15 @@
     align-items: center;
 
     .history,
-    .save {
+    .save,
+    .theme {
       display: block;
       font-size: 2.2rem;
       font-weight: 600;
       transition: 0.3s;
       padding: 12px 16px;
       position: relative;
+      cursor: pointer;
 
       &:hover {
         color: var(--primary-color);
@@ -137,7 +140,7 @@
     }
 
     .history {
-      @include label('Lịch sử đã xem', 100%); 
+      @include label("Lịch sử đã xem", 100%);
     }
 
     .save {

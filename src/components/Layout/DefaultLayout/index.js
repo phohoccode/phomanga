@@ -37,7 +37,6 @@ function DefaultLayout({ children }) {
             <Footer />
             {isShowButtonScroll &&
                 <div 
-                    title='Cuộn lên đầu trang'
                     onClick={scrollToTop} className={cx('scroll-to-top')}>
                     <i className="fa-solid fa-arrow-up"></i>
                 </div>

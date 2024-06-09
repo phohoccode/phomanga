@@ -22,9 +22,10 @@
       display: flex;
       align-items: center;
       gap: 12px;
+      flex-wrap: wrap;
 
       @media (max-width: 768px) {
-        flex-wrap: wrap;
+        gap: 8px;
       }
 
       li {
@@ -48,6 +49,10 @@
         color: var(--white-color);
         outline-color: var(--primary-color);
         background-color: var(--primary-color);
+
+        @media (max-width: 768px) {
+          outline-color: unset;
+        }
       }
     }
   }

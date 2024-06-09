@@ -1,4 +1,4 @@
-@import '../../../GlobalStyles/mixin';
+@import "../../../GlobalStyles/mixin";
 
 .wrapper {
   flex-shrink: 0;
@@ -26,7 +26,7 @@
     filter: blur(8px);
 
     @media (max-width: 768px) {
-        content: unset;
+      content: unset;
     }
   }
 
@@ -40,13 +40,13 @@
     left: var(--pos-desktops);
 
     @media (max-width: 1023px) {
-        left: var(--pos-table);
-        top: var(--pos-table);
+      left: var(--pos-table);
+      top: var(--pos-table);
     }
 
     @media (max-width: 768px) {
-        left: var(--pos-mobile);
-        top: var(--pos-mobile);
+      left: var(--pos-mobile);
+      top: var(--pos-mobile);
     }
 
     figure {
@@ -61,10 +61,14 @@
     }
 
     .info {
-      width: 75%;
+      width: calc(100% - (var(--pos-desktops) * 2 + 180px + 32px));
+
+      @media (max-width: 1023px) {
+        width: calc(100% - (var(--pos-table) * 2 + 180px + 32px));
+      }
 
       @media (max-width: 768px) {
-        width: calc(100% - 32px);
+        width: calc(100% - var(--pos-mobile) * 2);
       }
 
       h4 {
@@ -106,7 +110,7 @@
           border-radius: var(--border-radius);
           border: 2px solid var(--white-color);
           background-color: transparent;
-          transition: .3s;
+          transition: 0.3s;
 
           &:hover {
             color: var(--primary-color);
@@ -125,29 +129,30 @@
         margin-top: 24px;
 
         @media (max-width: 768px) {
-            margin-top: 12px;
+          margin-top: 12px;
         }
 
         i {
-            margin-right: 8px;
+          margin-right: 8px;
         }
 
-        .read-now, .detail {
-            font-size: 2rem;
-            padding: 4px 12px;
-    
-            @media (max-width: 768px) {
-              font-size: 1.6rem;
-              padding: 4px 8px;
-            }
+        .read-now,
+        .detail {
+          font-size: 2rem;
+          padding: 4px 12px;
+
+          @media (max-width: 768px) {
+            font-size: 1.6rem;
+            padding: 4px 8px;
+          }
         }
-        
+
         .read-now {
-            @include outlineBtn(var(--primary-color))
+          @include outlineBtn(var(--primary-color));
         }
 
         .detail {
-            @include outlineBtn(var(--white-color))
+          @include outlineBtn(var(--white-color));
         }
       }
     }

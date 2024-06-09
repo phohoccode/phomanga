@@ -64,10 +64,17 @@ body {
   font-weight: 400;
   font-style: normal;
   text-rendering: optimizeSpeed;
+  background-color: var(--white-color);
+  color: var(--black-color);
 
   @media (max-width: 768px) {
     -webkit-tap-highlight-color: transparent;
   }
+}
+
+#root {
+    background-color: inherit;
+    color: inherit;
 }
 
 a {

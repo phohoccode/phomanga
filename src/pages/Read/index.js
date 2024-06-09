@@ -11,8 +11,8 @@ const cx = classNames.bind(styles)
 function Read() {
     const navigate = useNavigate()
     const params = useParams()
-    const [data] = useFetch(`https://otruyenapi.com/v1/api/truyen-tranh/${params.slug}`)
-    const [dataImages] = useFetch(`https://sv1.otruyencdn.com/v1/api/chapter/${params.id}`)
+    const [nameChapter, setNameChapter] = useState('')
+    const [dataChapter] = useFetch(`https://sv1.otruyencdn.com/v1/api/chapter/${params.id}`)
     const [images, setImages] = useState([])
     const [chapter, setChapter] = useState([])
     const [chapterPath, setChapterPath] = useState('')
@@ -22,6 +22,7 @@ function Read() {
     const idScrollRef = useRef()
 
     useEffect(() => {
+        const data = storage.get('data-comic', {})
         if (data) {
             const chaptersId =
                 data?.data?.item?.chapters[0]?.server_data.map(
@@ -29,35 +30,42 @@ function Read() {
             const index = chaptersId.findIndex(id => id === params.id)
             setChapter(chaptersId)
             setCurrentIndex(index)
+            setNameChapter(data?.data?.item?.name)
         }
-    }, [data])
+    }, [params.slug])
 
     useEffect(() => {
-        if (dataImages) {
-            setImages(dataImages?.data?.item?.chapter_image || [])
-            setChapterPath(dataImages?.data?.item?.chapter_path)
-            const historyStorage = storage.get('history-storage', {})
+        if (dataChapter) {
+            setImages(dataChapter?.data?.item?.chapter_image || [])
+            setChapterPath(dataChapter?.data?.item?.chapter_path)
 
-            const isExistSlug = params.slug in historyStorage
+            const historyStorage = storage.get('history-storage', {})
             const isExistComic = historyStorage[params.slug]?.some(
                 comic => comic?.data?.item?._id === params.id) || false
-            if ((!isExistSlug || !isExistComic) && dataImages?.status.startsWith('success')) {
-                historyStorage[params.slug] = 
-                    [...(historyStorage[params.slug] || []), dataImages]
+
+            if (!isExistComic && dataChapter?.status.startsWith('success')) {
+                historyStorage[params.slug] =
+                    [...(historyStorage[params.slug] || []), dataChapter]
                 storage.set('history-storage', historyStorage)
             }
         }
-    }, [dataImages])
+    }, [dataChapter])
 
     useEffect(() => {
         const handleAutoScroll = () => {
-            if (isScroll && window.innerHeight + window.scrollY < document.body.offsetHeight) {
+            if (isScroll) {
                 idScrollRef.current = setInterval(() => {
-                    window.scrollBy({
-                        top: window.innerHeight, behavior: 'smooth'
-                    })
+                    if (window.innerHeight + window.scrollY >= document.body.offsetHeight) {
+                        clearInterval(idScrollRef.current)
+                        setIsScroll(!isScroll)
+                    } else {
+                        window.scrollBy({
+                            top: window.innerHeight,
+                            behavior: 'smooth'
+                        })
+                    }
                 }, 6000)
-            } else if (window.innerHeight + window.scrollY >= document.body.offsetHeight) {
+            } else {
                 clearInterval(idScrollRef.current)
             }
         }
@@ -74,30 +82,12 @@ function Read() {
             }
         }
         window.addEventListener('keydown', handleKeyDown)
-
         return () => window.removeEventListener('keydown', handleKeyDown)
     }, [currentIndex])
-
-    const checkExistChapterInHistory = async (chapterId) => {
-        const historyStorage = storage.get('history-storage', {})
-        const isExist = historyStorage[params.slug].some(
-            comic => comic?.data?.item?._id === chapterId
-        )
-        if (!isExist) {
-            const res = await fetch(`https://sv1.otruyencdn.com/v1/api/chapter/${chapterId}`)
-            const dataImages = await res.json()
-
-            if (dataImages?.status.startsWith('success')) {
-                historyStorage[params.slug] = [...historyStorage[params.slug], dataImages]
-                storage.set('history-storage', historyStorage)
-            }
-        }
-    }
 
     const handleChangeChapter = (index) => {
         setCurrentIndex(index)
         navigate(`/read/${params.slug}/${chapter[index]}`)
-        checkExistChapterInHistory(chapter[index])
     }
 
     const handlePrevChapter = () => {
@@ -122,11 +112,19 @@ function Read() {
     return (
         <>
             <div className={cx('wrapper')}>
-                {data && dataImages &&
-                    <div className={cx('title')}>
-                        <h4>
-                            {`${data?.data?.item?.name} - Chương ${dataImages?.data?.item?.chapter_name}`}
-                        </h4>
+                {nameChapter && dataChapter &&
+                    <>
+                        <div className={cx('title')}>
+                            <h4>
+                                {`${nameChapter} - Chương ${dataChapter?.data?.item?.chapter_name}`}
+                            </h4>
+                            <p>
+                                Gợi ý: Bạn có thể sử dụng nút
+                                <i className="fa-solid fa-arrow-left"></i> hoặc
+                                <i className="fa-solid fa-arrow-right"></i> từ bàn phím để chuyển chương.
+                                <i className="fa-solid fa-arrow-down"></i> để tự động cuộn trang sau 6 giây.
+                            </p>
+                        </div>
                         <div className={cx('actions')}>
                             <button
                                 onClick={handlePrevChapter}
@@ -143,13 +141,7 @@ function Read() {
                                 <i className="fa-solid fa-angle-right"></i>
                             </button>
                         </div>
-                        <p>
-                            Gợi ý: Bạn có thể sử dụng nút
-                            <i className="fa-solid fa-arrow-left"></i> hoặc
-                            <i className="fa-solid fa-arrow-right"></i> từ bàn phím để chuyển chương.
-                            <i className="fa-solid fa-arrows-up-down"></i> để tự động cuộn trang sau 6 giây.
-                        </p>
-                    </div>
+                    </>
                 }
                 <ul className={cx('images')}>
                     {images.map((image, index) => (
@@ -166,17 +158,17 @@ function Read() {
                     <button
                         className={cx('auto-scroll', { 'active': isScroll })}
                         onClick={() => setIsScroll(!isScroll)}>
-                        <i className="fa-solid fa-arrows-up-down"></i>
+                        <i className="fa-solid fa-arrow-down"></i>
                         {!isScroll ? (<span>Tự động cuộn</span>) : (<span>Đang cuộn</span>)}
                     </button>
                 </div>
             </div>
-            {isShowMessage && 
-                <Comment 
+            {isShowMessage &&
+                <Comment
                     id={params.id}
                     slug={params.slug}
                     setIsShowMessage={setIsShowMessage}
-                /> 
+                />
             }
         </>
     )

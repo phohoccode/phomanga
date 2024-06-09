@@ -68,7 +68,7 @@ function NavBar() {
                         <li className={cx('item')}>
                             <NavLink>
                                 Thể loại
-                                <i style={{marginLeft: '6px'}} className="fa-solid fa-chevron-down"></i>
+                                <i style={{ marginLeft: '6px' }} className="fa-solid fa-chevron-down"></i>
                             </NavLink>
                             {data?.data?.items &&
                                 <Category categorys={data?.data?.items} />
@@ -79,6 +79,9 @@ function NavBar() {
             </div>
             {!isMobile &&
                 <div className={cx('wrapper-right')}>
+                    <div className={cx('theme')}>
+                        <i className="fa-solid fa-circle-half-stroke"></i>
+                    </div>
                     <NavLink
                         to='/history'
                         className={cx('history', { 'active': pathname === '/history' })}

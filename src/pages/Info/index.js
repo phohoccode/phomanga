@@ -21,7 +21,7 @@ function Info() {
 
     useEffect(() => {
         if (data) {
-            console.log(data);
+            storage.set('data-comic', data)
             setItem(data?.data?.item || [])
             setAuthor(data?.data?.item?.author || [])
             setCategory(data?.data?.item?.category || [])
@@ -124,14 +124,15 @@ function Info() {
 
             <div className={cx('chapter-wrapper')}>
                 <h4>Danh sách chương</h4>
-                <div className={cx('search-chapter')}>
-                    <i className="fa-solid fa-magnifying-glass"></i>
-                    <input
-                        value={valueSearch}
-                        placeholder='Tìm chương...'
-                        onChange={handleSearchChapter}
-                    />
-                </div>
+                {chapters.length > 0 &&
+                    <div className={cx('search-chapter')}>
+                        <i className="fa-solid fa-magnifying-glass"></i>
+                        <input
+                            value={valueSearch}
+                            placeholder='Tìm chương...'
+                            onChange={handleSearchChapter}
+                        />
+                    </div>}
                 <ul className={cx('chapters')}>
                     {chapters.length > 0 ?
                         <>

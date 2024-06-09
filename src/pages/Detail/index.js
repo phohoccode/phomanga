@@ -1,4 +1,3 @@
-
 import classNames from 'classnames/bind'
 import styles from '../../components/Layout/components/Comics/Comics.module.scss'
 import { useParams } from 'react-router-dom'
@@ -6,6 +5,7 @@ import useFetch from '../../hooks/useFetch'
 import Comic from '../../components/Layout/components/Comic'
 import { useEffect, useState } from 'react'
 import Pagination from '../../components/Layout/components/Pagination'
+import { scrollToTop } from '../../utils'
 
 const cx = classNames.bind(styles)
 
@@ -22,6 +22,10 @@ function Detail() {
     }, [params.slug])
 
     useEffect(() => {
+        scrollToTop()
+    }, [currentPage])
+
+    useEffect(() => {
         if (data) {
             const totalItems =
                 data?.data?.params?.pagination?.totalItems
@@ -35,7 +39,7 @@ function Detail() {
     }, [data])
 
     return (
-        <div style={{margin: 'unset'}} className={cx('wrapper')}>
+        <div style={{ margin: 'unset' }} className={cx('wrapper')}>
             {data &&
                 <>
                     <div className={cx('title')}>

@@ -3,61 +3,64 @@
 .wrapper {
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 24px;
   align-items: center;
   justify-content: center;
 
   .title {
-    margin-bottom: 64px;
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    gap: 24px;
+    gap: 16px;
 
     h4 {
       font-size: 3rem;
     }
 
     p {
+      color: var(--red-color);
+      font-weight: 600;
       text-align: center;
       i {
         margin: 0 8px;
       }
     }
+  }
+  .actions {
+    position: sticky;
+    top: 70px;
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin-bottom: 64px;
 
-    .actions {
-      display: flex;
-      justify-content: center;
-      gap: 8px;
+    button {
+      padding: 8px 16px;
+      @include outlineBtn(var(--primary-color));
+      font-size: 1.8rem;
+      min-width: 120px;
+    }
 
-      button {
-        padding: 8px 16px;
-        @include outlineBtn(var(--primary-color));
-        font-size: 1.8rem;
-        min-width: 120px;
+    button.disabled {
+      opacity: 0.5;
+      cursor: no-drop;
+      pointer-events: none;
+    }
+
+    .prev {
+      border-radius: 999px 0 0 999px;
+
+      i {
+        margin-right: 12px;
       }
+    }
 
-      button.disabled {
-        opacity: 0.5;
-        cursor: no-drop;
-        pointer-events: none;
-      }
+    .next {
+      border-radius: 0 999px 999px 0;
 
-      .prev {
-        border-radius: 999px 0 0 999px;
-
-        i {
-          margin-right: 12px;
-        }
-      }
-
-      .next {
-        border-radius: 0 999px 999px 0;
-
-        i {
-          margin-left: 12px;
-        }
+      i {
+        margin-left: 12px;
       }
     }
   }
@@ -69,7 +72,6 @@
     li {
       width: 800px;
       height: 100%;
-      border: 1px solid #ccc;
 
       @media (max-width: 768px) {
         width: 100%;
