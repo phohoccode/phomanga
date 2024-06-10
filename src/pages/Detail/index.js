@@ -1,9 +1,9 @@
+import { useEffect, useState } from 'react'
+import { useParams } from 'react-router-dom'
 import classNames from 'classnames/bind'
 import styles from '../../components/Layout/components/Comics/Comics.module.scss'
-import { useParams } from 'react-router-dom'
 import useFetch from '../../hooks/useFetch'
 import Comic from '../../components/Layout/components/Comic'
-import { useEffect, useState } from 'react'
 import Pagination from '../../components/Layout/components/Pagination'
 import { scrollToTop } from '../../utils'
 

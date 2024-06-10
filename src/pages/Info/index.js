@@ -124,15 +124,14 @@ function Info() {
 
             <div className={cx('chapter-wrapper')}>
                 <h4>Danh sách chương</h4>
-                {chapters.length > 0 &&
-                    <div className={cx('search-chapter')}>
-                        <i className="fa-solid fa-magnifying-glass"></i>
-                        <input
-                            value={valueSearch}
-                            placeholder='Tìm chương...'
-                            onChange={handleSearchChapter}
-                        />
-                    </div>}
+                <div className={cx('search-chapter')}>
+                    <i className="fa-solid fa-magnifying-glass"></i>
+                    <input
+                        value={valueSearch}
+                        placeholder='Tìm chương...'
+                        onChange={handleSearchChapter}
+                    />
+                </div>
                 <ul className={cx('chapters')}>
                     {chapters.length > 0 ?
                         <>
