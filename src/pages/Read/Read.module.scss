@@ -16,15 +16,27 @@
 
     h4 {
       font-size: 3rem;
+      text-align: center;
     }
 
     p {
-      color: var(--red-color);
+      color: inherit;
       font-weight: 600;
       text-align: center;
       i {
         margin: 0 8px;
       }
+    }
+
+    span {
+        text-align: center;
+        color: var(--red-color);
+        font-weight: 600;
+
+        a { 
+            margin-left: 12px;
+            text-decoration: underline;
+        }
     }
   }
   .actions {

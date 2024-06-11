@@ -51,7 +51,7 @@
         background-color: var(--primary-color);
 
         @media (max-width: 768px) {
-          outline-color: unset;
+          outline: unset;
         }
       }
     }

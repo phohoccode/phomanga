@@ -2,8 +2,7 @@
   width: var(--width-comic-desktops);
   flex-shrink: 0;
   padding: 0 8px;
-  transition: .3s;
-
+  transition: 0.3s;
 
   @media (max-width: 1023px) {
     width: var(--width-comic-table);
@@ -34,7 +33,8 @@
     h4 {
       -webkit-line-clamp: 2;
       -webkit-box-orient: vertical;
-      color: var(--black-color);
+      //   color: var(--black-color);
+      color: inherit;
       display: -webkit-box;
       font-size: 1.6rem;
       margin-top: 8px;

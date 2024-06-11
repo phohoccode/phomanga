@@ -1,6 +1,8 @@
 import { Link, useParams } from 'react-router-dom'
-import { useEffect, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import classNames from 'classnames/bind'
+import toast from 'react-hot-toast'
+
 import styles from './Info.module.scss'
 import useFetch from '../../hooks/useFetch'
 import storage, { formatDate } from '../../utils'
@@ -21,11 +23,10 @@ function Info() {
 
     useEffect(() => {
         if (data) {
-            storage.set('data-comic', data)
             setItem(data?.data?.item || [])
             setAuthor(data?.data?.item?.author || [])
             setCategory(data?.data?.item?.category || [])
-            setChapters(data?.data?.item?.chapters[0]?.server_data.reverse() || [])
+            setChapters(data?.data?.item?.chapters?.[0]?.server_data.reverse() || [])
             setIdStorage(() => {
                 const historyStorage = storage.get('history-storage', {})
                 const chapterIds =
@@ -44,7 +45,7 @@ function Info() {
 
     const handleSearchChapter = (e) => {
         setValueSearch(e.target.value)
-        const dataChapter = data?.data?.item?.chapters[0]?.server_data || []
+        const dataChapter = data?.data?.item?.chapters?.[0]?.server_data || []
         const filterChapters =
             dataChapter.filter(
                 chapter =>
@@ -61,6 +62,7 @@ function Info() {
             ...comicStorage, data?.data?.item
         ])
         setIsSave(!isSave)
+        toast.success('Lưu truyện thành công!')
     }
 
     const handleDeleteComic = () => {
@@ -68,103 +70,115 @@ function Info() {
         const newComic = comicStorage.filter(comic => comic?.slug !== params.slug)
         storage.set('comic-storage', newComic)
         setIsSave(!isSave)
+        toast.success('Xoá truyện thành công!')
     }
 
     return (
         <div className={cx('wrapper')}>
-            <div className={cx('top')}>
-                <figure>
-                    <img
-                        src={`https://otruyenapi.com/uploads/comics/${item?.thumb_url}`}
-                        alt={item?.name}
-                    />
-                </figure>
-                <div className={cx('info')}>
-                    <h4>{item?.name}</h4>
-                    <div className={cx('actions')}>
-                        {!isSave ? (
-                            <button onClick={handleSaveComic} className={cx('save')}>
-                                <i className="fa-solid fa-bookmark"></i>
-                                Lưu truyện
-                            </button>
-                        ) : (
-                            <button onClick={handleDeleteComic} className={cx('delete')}>
-                                <i className="fa-solid fa-trash"></i>
-                                Xoá truyện
-                            </button>
-                        )}
-                    </div>
-
-                    <ul className={cx('author')}>
-                        <span>Tác giả: </span>
-                        {author.map((author, index) => (
-                            <li key={index}>{author || 'Chưa cập nhật'}</li>
-                        ))}
-                    </ul>
-                    <div className={cx('updated-at')}>
-                        <p>Ngày cập nhật:</p>
-                        <span>{formatDate(item?.updatedAt)}</span>
-                    </div>
-                    <ul className={cx('categorys')}>
-                        <span>Thể loại: </span>
-                        {category.map((category, index) => (
-                            <li key={index}>
-                                <Link to={`/detail/the-loai/${category?.slug}`}>
-                                    {category?.name}
-                                </Link>
-                            </li>
-                        ))}
-                    </ul>
-                    <div className={cx('content')}>
-                        <span>Nội dung: </span>
-                        <p dangerouslySetInnerHTML={{ __html: item?.content }}></p>
-                    </div>
-                </div>
-            </div>
-
-            <div className={cx('chapter-wrapper')}>
-                <h4>Danh sách chương</h4>
-                <div className={cx('search-chapter')}>
-                    <i className="fa-solid fa-magnifying-glass"></i>
-                    <input
-                        value={valueSearch}
-                        placeholder='Tìm chương...'
-                        onChange={handleSearchChapter}
-                    />
-                </div>
-                <ul className={cx('chapters')}>
-                    {chapters.length > 0 ?
-                        <>
-                            <li>
-                                <Link
-                                    to={`/read/${params.slug}/${chapters[chapters.length - 1]
-                                        ?.chapter_api_data
-                                        .split('/').pop()}`}
-                                >Đọc từ đầu</Link>
-                            </li>
-                            {chapters.map((chapter, index) => (
-                                <li
-                                    className={cx({
-                                        active:
-                                            idStorage.includes(chapter?.chapter_api_data.split('/').pop())
-                                    })}
-                                    key={index}>
-                                    <Link
-                                        to={`/read/${params.slug}/${chapter
-                                            ?.chapter_api_data
-                                            .split('/').pop()}`}
+            {!data && <h4 className={cx('loading')}>Đang tải dữ liệu...</h4>}
+            {data &&
+                <>
+                    <div className={cx('top')}>
+                        <figure>
+                            <img
+                                src={`https://otruyenapi.com/uploads/comics/${item?.thumb_url}`}
+                                alt={item?.name}
+                            />
+                        </figure>
+                        <div className={cx('info')}>
+                            <h4>{item?.name}</h4>
+                            <div className={cx('actions')}>
+                                {!isSave ? (
+                                    <button onClick={handleSaveComic} className={cx('save')}>
+                                        <i className="fa-solid fa-bookmark"></i>
+                                        Lưu truyện
+                                    </button>
+                                ) : (
+                                    <button
+                                        onClick={handleDeleteComic}
+                                        className={cx('delete')}
                                     >
-                                        Chương {chapter?.chapter_name}
-                                    </Link>
-                                </li>
-                            ))}
-                        </> :
-                        <span>Không có dữ liệu!</span>
-                    }
-                </ul>
-            </div>
+                                        <i className="fa-solid fa-trash"></i>
+                                        Xoá truyện
+                                    </button>
+                                )}
+                            </div>
+
+                            <ul className={cx('author')}>
+                                <span>Tác giả: </span>
+                                {author.map((author, index) => (
+                                    <li className={cx('text')} key={index}>{author || 'Chưa cập nhật'}</li>
+                                ))}
+                            </ul>
+                            <div className={cx('updated-at')}>
+                                <p>Ngày cập nhật:</p>
+                                <span className={cx('text')}>{formatDate(item?.updatedAt)}</span>
+                            </div>
+                            <ul className={cx('categorys')}>
+                                <span>Thể loại: </span>
+                                {category.map((category, index) => (
+                                    <li key={index}>
+                                        <Link to={`/detail/the-loai/${category?.slug}`}>
+                                            {category?.name}
+                                        </Link>
+                                    </li>
+                                ))}
+                            </ul>
+                            <div className={cx('content')}>
+                                <span>Nội dung: </span>
+                                <p
+                                    className={cx('text')}
+                                    dangerouslySetInnerHTML={{ __html: item?.content }}>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div className={cx('chapter-wrapper')}>
+                        <h4>Danh sách chương</h4>
+                        <div className={cx('search-chapter')}>
+                            <i className="fa-solid fa-magnifying-glass"></i>
+                            <input
+                                value={valueSearch}
+                                placeholder='Tìm chương...'
+                                onChange={handleSearchChapter}
+                            />
+                        </div>
+                        <ul className={cx('chapters')}>
+                            {chapters.length > 0 ?
+                                <>
+                                    <li>
+                                        <Link
+                                            to={`/read/${params.slug}/${chapters[chapters.length - 1]
+                                                ?.chapter_api_data
+                                                .split('/').pop()}`}
+                                        >Đọc từ đầu</Link>
+                                    </li>
+                                    {chapters.map((chapter, index) => (
+                                        <li
+                                            className={cx({
+                                                active:
+                                                    idStorage.includes(chapter?.chapter_api_data.split('/').pop())
+                                            })}
+                                            key={index}>
+                                            <Link
+                                                to={`/read/${params.slug}/${chapter
+                                                    ?.chapter_api_data
+                                                    .split('/').pop()}`}
+                                            >
+                                                Chương {chapter?.chapter_name}
+                                            </Link>
+                                        </li>
+                                    ))}
+                                </> :
+                                <span>Không có dữ liệu!</span>
+                            }
+                        </ul>
+                    </div>
+                </>}
             {data?.data && <ComicsSuggestions data={data?.data} />}
         </div>
+
     )
 }
 

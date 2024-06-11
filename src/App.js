@@ -2,7 +2,6 @@ import { BrowserRouter as Router, Routes, Route, useParams } from 'react-router-
 import DefaultLayout from './components/Layout/DefaultLayout'
 import publicRoutes from './routers'
 
-
 function App() {
 
     return (

@@ -1,0 +1,76 @@
+@import '../../../GlobalStyles/mixin';
+
+.wrapper {
+    position: fixed;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 99999;
+
+    .overplay {
+        background-color: rgba(0, 0, 0, .3);
+        bottom: 0;
+        left: 0;
+        position: absolute;
+        right: 0;
+        top: 0;
+    }
+
+    .main {
+        background-color: #fff;
+        border-radius: 10px;
+        max-width: 80vw;
+        position: absolute;
+        width: 600px;
+        z-index: 1;
+
+        .header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 16px;
+            border-bottom: 1px solid rgba(0, 0, 0, .1);
+
+            h4 {
+                color: var(--black-color);
+                font-size: 2.4rem;
+            }
+
+            .close {
+                background-color: transparent;
+                font-size: 3rem;
+            }
+        }
+
+        .body {
+            padding: 16px;
+
+            p {
+                font-weight: 600;
+                color: var(--black-color);
+                margin-bottom: 24px;
+            }
+
+            .action {
+                display: flex;
+                justify-content: flex-end;
+                gap: 12px;
+
+
+                button {
+                    font-size: 1.6rem;
+                    padding: 8px 16px;
+                }
+
+                .cancel {
+                    @include borderBtn(var(--primary-color))
+                }
+
+                .ok {
+                    @include outlineBtn(var(--primary-color))
+                }
+            }
+        }
+    }
+}

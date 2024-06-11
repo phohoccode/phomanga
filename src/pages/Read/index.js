@@ -1,17 +1,19 @@
 import classNames from 'classnames/bind'
 import { useNavigate, useParams } from 'react-router-dom'
-import styles from './Read.module.scss'
 import { useEffect, useRef, useState } from 'react'
+
+import styles from './Read.module.scss'
 import useFetch from '../../hooks/useFetch'
 import storage from '../../utils'
 import Comment from '../../components/Layout/components/Comment'
+import toast from 'react-hot-toast'
 
 const cx = classNames.bind(styles)
 
 function Read() {
     const navigate = useNavigate()
     const params = useParams()
-    const [nameChapter, setNameChapter] = useState('')
+    const [data] = useFetch(`https://otruyenapi.com/v1/api/truyen-tranh/${params.slug}`)
     const [dataChapter] = useFetch(`https://sv1.otruyencdn.com/v1/api/chapter/${params.id}`)
     const [images, setImages] = useState([])
     const [chapter, setChapter] = useState([])
@@ -22,7 +24,6 @@ function Read() {
     const idScrollRef = useRef()
 
     useEffect(() => {
-        const data = storage.get('data-comic', {})
         if (data) {
             const chaptersId =
                 data?.data?.item?.chapters[0]?.server_data.map(
@@ -30,9 +31,8 @@ function Read() {
             const index = chaptersId.findIndex(id => id === params.id)
             setChapter(chaptersId)
             setCurrentIndex(index)
-            setNameChapter(data?.data?.item?.name)
         }
-    }, [params.slug])
+    }, [data])
 
     useEffect(() => {
         if (dataChapter) {
@@ -48,6 +48,7 @@ function Read() {
                     [...(historyStorage[params.slug] || []), dataChapter]
                 storage.set('history-storage', historyStorage)
             }
+            toast(`Bạn đang ở chương ${dataChapter?.data?.item?.chapter_name}`, { duration: 2000 })
         }
     }, [dataChapter])
 
@@ -112,11 +113,13 @@ function Read() {
     return (
         <>
             <div className={cx('wrapper')}>
-                {nameChapter && dataChapter &&
+                {!data && !dataChapter &&
+                    <h4 className={cx('loading')}>Đang tải dữ liệu...</h4>}
+                {data && dataChapter &&
                     <>
                         <div className={cx('title')}>
                             <h4>
-                                {`${nameChapter} - Chương ${dataChapter?.data?.item?.chapter_name}`}
+                                {`${data?.data?.item?.name} - Chương ${dataChapter?.data?.item?.chapter_name}`}
                             </h4>
                             <p>
                                 Gợi ý: Bạn có thể sử dụng nút
@@ -124,6 +127,9 @@ function Read() {
                                 <i className="fa-solid fa-arrow-right"></i> từ bàn phím để chuyển chương.
                                 <i className="fa-solid fa-arrow-down"></i> để tự động cuộn trang sau 6 giây.
                             </p>
+                            <span>Nếu truyện bị lỗi vui lòng liên hệ qua Telegram:
+                                <a href="https://t.me/phohoccode_04" target="_blank">phohoccode</a>
+                            </span>
                         </div>
                         <div className={cx('actions')}>
                             <button

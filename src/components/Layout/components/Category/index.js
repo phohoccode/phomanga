@@ -1,5 +1,6 @@
 import classNames from "classnames/bind"
-import { NavLink, useLocation } from "react-router-dom";
+import { NavLink, useLocation } from "react-router-dom"
+
 import styles from './Category.module.scss'
 
 const cx = classNames.bind(styles)
@@ -25,7 +26,7 @@ function Category({ categorys, showCategory, handleCloseModal }) {
                 </li>
             ))}
         </ul>
-    );
+    )
 }
 
-export default Category;
+export default Category

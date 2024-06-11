@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import toast from 'react-hot-toast'
 
 function useFetch(url) {
     const [data, setData] = useState(null)
@@ -14,6 +15,7 @@ function useFetch(url) {
             .then(data => setData(data))
             .catch(error => {
                 console.error(error)
+                toast.error('Đã xảy ra lỗi khi lấy dữ liệu!')
             })
     }, [url])
 

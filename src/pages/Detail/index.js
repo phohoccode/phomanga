@@ -1,6 +1,7 @@
-import { useEffect, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import classNames from 'classnames/bind'
+
 import styles from '../../components/Layout/components/Comics/Comics.module.scss'
 import useFetch from '../../hooks/useFetch'
 import Comic from '../../components/Layout/components/Comic'
@@ -40,6 +41,7 @@ function Detail() {
 
     return (
         <div style={{ margin: 'unset' }} className={cx('wrapper')}>
+            {!data && <h4 className={cx('loading')}>Đang tải dữ liệu...</h4>}
             {data &&
                 <>
                     <div className={cx('title')}>
@@ -62,6 +64,7 @@ function Detail() {
                 </>
             }
         </div>
+
     )
 }
 

@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import classNames from 'classnames/bind'
+
 import styles from './Slides.module.scss'
 import useFetch from '../../../../hooks/useFetch';
 import Slide from '../Slide';
@@ -33,7 +34,7 @@ function Slides({ api }) {
 
     const startAutoSlides = () => {
         clearInterval(idInterval.current)
-        // idInterval.current = setInterval(handleNext, 6000)
+        idInterval.current = setInterval(handleNext, 6000)
     }
 
     const stopAutoSlides = () => {
@@ -108,7 +109,10 @@ function Slides({ api }) {
                     className={cx('inner')}
                 >
                     {slides.slice(0, 10).map((slide, index) => (
-                        <Slide key={index} data={slide} />
+                        <Slide 
+                            key={index} 
+                            data={slide} 
+                        />
                     ))}
                 </div>
                 <div className={cx('actions')}>

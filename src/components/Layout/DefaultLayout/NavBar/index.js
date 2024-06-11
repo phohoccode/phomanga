@@ -1,15 +1,18 @@
-import { useEffect, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import classNames from 'classnames/bind'
 import { NavLink, useLocation, useNavigate } from 'react-router-dom'
+
 import styles from './NavBar.module.scss'
 import useFetch from '../../../../hooks/useFetch'
 import Category from '../../components/Category'
 import NavBarMobile from '../NavBarMobile'
 import logo from './logo.png'
+import Context from '../../../../Context'
 
 const cx = classNames.bind(styles)
 
 function NavBar() {
+    const { theme, setTheme } = useContext(Context)
     const [data] = useFetch('https://otruyenapi.com/v1/api/the-loai')
     const [valueSearch, setValueSearch] = useState('')
     const [showModal, setShowModal] = useState(false)
@@ -31,6 +34,10 @@ function NavBar() {
         if (e.key.startsWith('Enter') && value !== '') {
             navigate(`/search/${value}`)
         }
+    }
+
+    const handleSetTheme = () => {
+        setTheme(prevTheme => prevTheme === 'light' ? 'dark' : 'light')
     }
 
     return (
@@ -79,7 +86,9 @@ function NavBar() {
             </div>
             {!isMobile &&
                 <div className={cx('wrapper-right')}>
-                    <div className={cx('theme')}>
+                    <div
+                        title={theme === 'light' ? 'Chế độ sáng' : 'Chế độ tối'}
+                        onClick={handleSetTheme} className={cx('theme')}>
                         <i className="fa-solid fa-circle-half-stroke"></i>
                     </div>
                     <NavLink

@@ -8,7 +8,7 @@
   position: fixed;
   inset: 0;
   background-color: rgba(0, 0, 0, 0.3);
-  z-index: 99999;
+  z-index: 9998;
   display: flex;
   justify-content: flex-end;
   animation: fadeIn 0.5s ease;
@@ -52,6 +52,7 @@
 
         h4 {
           font-size: 3rem;
+          color: var(--black-color);
         }
 
         p {
@@ -120,9 +121,11 @@
 
             h5 {
               font-size: 2rem;
+              color: var(--black-color);
             }
 
             p {
+                color: var(--black-color);
                 font-size: 1.6rem;
             }
 

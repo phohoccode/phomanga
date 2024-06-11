@@ -1,10 +1,12 @@
-import classNames from 'classnames/bind'
-import styles from '../../components/Layout/components/Comics/Comics.module.scss'
-import { useParams } from 'react-router-dom'
 import { useEffect, useState } from 'react'
+import classNames from 'classnames/bind'
+import { useParams } from 'react-router-dom'
+
+import styles from '../../components/Layout/components/Comics/Comics.module.scss'
 import useFetch from '../../hooks/useFetch'
 import Comic from '../../components/Layout/components/Comic'
 import Pagination from '../../components/Layout/components/Pagination'
+import toast from 'react-hot-toast'
 
 const cx = classNames.bind(styles)
 
@@ -25,6 +27,7 @@ function Search() {
             totalItems > totalItemsPerPage ?
                 setTotalPage(Math.round(totalItems / totalItemsPerPage)) :
                 setTotalPage(1)
+            toast.success(`Đã tìm kiếm ${totalItems} truyện phù hợp!`)
         }
     }, [data])
 
@@ -32,12 +35,14 @@ function Search() {
         <div style={{ margin: 'unset' }} className={cx('wrapper')}>
             {data &&
                 <>
-                    <h4 className={cx('title')}>
-                        {result.length > 0 ?
-                            `Tìm kiếm được ${data?.data?.params?.pagination?.totalItems} truyện phù hợp cho từ khoá ''${params.keyword}''` :
-                            `Không tìm kiếm được truyện phù hợp!`
-                        }
-                    </h4>
+                    <div className={cx('title')}>
+                        <h4 style={{ textTransform: 'unset' }}>
+                            {result.length > 0 ?
+                                `Tìm kiếm được ${data?.data?.params?.pagination?.totalItems} truyện phù hợp cho từ khoá ''${params.keyword}''` :
+                                `Không tìm kiếm được truyện phù hợp!`
+                            }
+                        </h4>
+                    </div>
                     <div className={cx('list')}>
                         {result.map((comic, index) => (
                             <Comic key={index} data={comic} />

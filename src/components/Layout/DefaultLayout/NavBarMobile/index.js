@@ -1,12 +1,15 @@
-import classNames from 'classnames/bind'
-import styles from './NavBarMobile.module.scss'
-import { useRef, useState } from 'react'
 import { NavLink, useLocation } from 'react-router-dom'
+import { useContext, useRef, useState } from 'react'
+import classNames from 'classnames/bind'
+
+import styles from './NavBarMobile.module.scss'
 import Category from '../../components/Category'
+import Context from '../../../../Context'
 
 const cx = classNames.bind(styles)
 
 function NavBarMovie({ categorys, showModal, setShowModal, handleKeyDownSearch }) {
+    const { setTheme } = useContext(Context)
     const { pathname } = useLocation()
     const [valueSearch, setValueSearch] = useState('')
     const [showCategory, setShowCategory] = useState(false)
@@ -37,6 +40,11 @@ function NavBarMovie({ categorys, showModal, setShowModal, handleKeyDownSearch }
         }
     }
 
+    const handleSetTheme = () => {
+        setTheme(prevTheme => prevTheme === 'light' ? 'dark' : 'light')
+        handleCloseModal()
+    }
+
     return (
         <>
             {showModal &&
@@ -46,12 +54,21 @@ function NavBarMovie({ categorys, showModal, setShowModal, handleKeyDownSearch }
                     className={cx('wrapper')}>
                     <div
                         ref={modalRef}
-                        className={cx('modal')}>
-                        <button
-                            onClick={handleCloseModal}
-                            className={cx('modal-close')}>
-                            <i className="fa-solid fa-xmark"></i>
-                        </button>
+                        className={cx('modal')}
+                    >
+                        <div className={cx('actions')}>
+                            <button
+                                onClick={handleSetTheme}
+                                className={cx('theme')}
+                            >
+                                <i className="fa-solid fa-circle-half-stroke"></i>
+                            </button>
+                            <button
+                                onClick={handleCloseModal}
+                                className={cx('close')}>
+                                <i className="fa-solid fa-xmark"></i>
+                            </button>
+                        </div>
                         <div className={cx('container-search')}>
                             <input
                                 value={valueSearch}

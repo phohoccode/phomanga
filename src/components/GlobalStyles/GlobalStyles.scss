@@ -10,6 +10,7 @@
   --white-color: #fff;
   --black-color: #000;
   --red-color: #d90429;
+  --theme-dark-background: #282828;
   --border-radius: 0.75rem;
   --border-image: 2px solid #e7e7e7;
   --width-table: 102.3rem;
@@ -72,9 +73,30 @@ body {
   }
 }
 
-#root {
-    background-color: inherit;
-    color: inherit;
+.light, .dark {
+    transition: .3s;
+
+    @media (max-width: 768px) {
+        transition: unset;
+    }
+}
+
+.light {
+    background-color: var(--white-color);
+    color: var(--black-color);
+}
+
+.dark {
+    background-color: var(--theme-dark-background);
+    color: var(--white-color);
+}
+
+.text {
+    color: var(--black-color) !important;
+}
+
+.dark .text {
+    color: var(--white-color) !important;
 }
 
 a {
@@ -118,4 +140,8 @@ textarea {
     height: .1px;
     margin: 12px 0;
     width: 100%;
+}
+
+.loading {
+    font-size: 3rem;
 }

@@ -1,10 +1,5 @@
 @import "../../../GlobalStyles/mixin";
 
-@mixin flex-center() {
-  display: flex;
-  align-items: center;
-}
-
 .wrapper {
   display: flex;
   align-items: center;
@@ -18,7 +13,7 @@
   box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px -1px rgba(0, 0, 0, 0.1);
   background-color: inherit;
   color: inherit;
-  z-index: 9999;
+  z-index: 999;
 
   @media (max-width: 1023px) {
     padding: 0 var(--padding-table);
@@ -38,6 +33,7 @@
       padding: 16px;
       background-color: transparent;
       margin-left: -16px;
+      color: inherit;
     }
 
     .logo {
@@ -78,7 +74,8 @@
       gap: 12px;
 
       .item {
-        color: var(--black-color);
+        // color: var(--black-color);
+        color: inherit;
         font-weight: 600;
         cursor: pointer;
         position: relative;
@@ -167,6 +164,8 @@
         outline: none;
         margin-left: 12px;
         font-size: 1.6rem;
+        background-color: inherit;
+        color: inherit;
       }
 
       a {

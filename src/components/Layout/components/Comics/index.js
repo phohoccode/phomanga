@@ -1,10 +1,10 @@
-
+import { useEffect, useState } from 'react'
 import classNames from 'classnames/bind'
+import { Link } from 'react-router-dom'
+
 import styles from './Comics.module.scss'
 import useFetch from '../../../../hooks/useFetch'
-import { useEffect, useState } from 'react'
 import Comic from '../Comic'
-import { Link } from 'react-router-dom'
 
 const cx = classNames.bind(styles)
 

@@ -37,6 +37,7 @@
     text-align: center;
     width: calc(33.33333% - 8px);
     border-radius: var(--border-radius);
+    color: var(--black-color);
 
     &:hover {
       background-color: var(--primary-color);

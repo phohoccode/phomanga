@@ -95,12 +95,9 @@
 
       .categorys {
         display: flex;
+        flex-wrap: wrap;
         gap: 12px;
         margin-top: 12px;
-
-        @media (max-width: 1023px) {
-          flex-wrap: wrap;
-        }
 
         a {
           display: block;

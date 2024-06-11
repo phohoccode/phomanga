@@ -23,17 +23,27 @@
     padding: 16px;
     background-color: var(--white-color);
     animation: slideIn 0.5s ease;
+    position: relative;
 
-    .modal-close {
-      display: block;
-      margin: 0 -16px 0 auto;
-      font-size: 3rem;
-      background-color: transparent;
-      padding: 0 16px;
-      margin-bottom: 16px;
+    .actions {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+
+      .theme,
+      .close {
+        padding: 16px;
+        font-size: 2.6rem;
+        background-color: transparent;
+      }
     }
 
     .container-search {
+      margin-top: 64px;
       height: 40px;
       display: flex;
       align-items: center;
@@ -51,6 +61,7 @@
       }
 
       a {
+        color: var(--black-color);
         padding: 0 8px;
         font-size: 1.6rem;
         transition: 0.3s;
@@ -71,11 +82,12 @@
       flex-direction: column;
 
       .item {
-        
+        color: var(--black-color);
+
         a {
-            padding: 4px 0;
-            display: block;
-            width: 100%;
+          padding: 4px 0;
+          display: block;
+          width: 100%;
         }
 
         i {
