@@ -2,7 +2,6 @@ import Slides from "../../components/Layout/components/Slides"
 import Comics from "../../components/Layout/components/Comics"
 
 function Home() {
-
     return (
         <>
             <Slides api={'https://otruyenapi.com/v1/api/home'} />

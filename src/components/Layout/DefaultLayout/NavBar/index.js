@@ -1,6 +1,6 @@
 import { useContext, useEffect, useState } from 'react'
 import classNames from 'classnames/bind'
-import { NavLink, useLocation, useNavigate } from 'react-router-dom'
+import { Link, NavLink, useLocation, useNavigate } from 'react-router-dom'
 
 import styles from './NavBar.module.scss'
 import useFetch from '../../../../hooks/useFetch'
@@ -73,10 +73,10 @@ function NavBar() {
                             </NavLink>
                         </li>
                         <li className={cx('item')}>
-                            <NavLink>
+                            <div>
                                 Thể loại
                                 <i style={{ marginLeft: '6px' }} className="fa-solid fa-chevron-down"></i>
-                            </NavLink>
+                            </div>
                             {data?.data?.items &&
                                 <Category categorys={data?.data?.items} />
                             }

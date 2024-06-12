@@ -140,7 +140,7 @@ function Info() {
                             <i className="fa-solid fa-magnifying-glass"></i>
                             <input
                                 value={valueSearch}
-                                placeholder='Tìm chương...'
+                                placeholder='Tìm chương bằng số (Vd: 1,2,3..)'
                                 onChange={handleSearchChapter}
                             />
                         </div>

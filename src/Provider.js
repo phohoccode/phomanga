@@ -17,10 +17,6 @@ function Provider({ children }) {
     }
 
     useEffect(() => {
-        console.log(isOpenDiaLog);
-    }, [isOpenDiaLog])
-
-    useEffect(() => {
         storage.set('theme', theme)
         toast(`Chủ đề ${theme === 'light' ? 'sáng' : 'tối'}`, { duration: 1000 })
     }, [theme])

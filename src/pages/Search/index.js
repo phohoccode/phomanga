@@ -6,7 +6,6 @@ import styles from '../../components/Layout/components/Comics/Comics.module.scss
 import useFetch from '../../hooks/useFetch'
 import Comic from '../../components/Layout/components/Comic'
 import Pagination from '../../components/Layout/components/Pagination'
-import toast from 'react-hot-toast'
 
 const cx = classNames.bind(styles)
 
@@ -27,9 +26,12 @@ function Search() {
             totalItems > totalItemsPerPage ?
                 setTotalPage(Math.round(totalItems / totalItemsPerPage)) :
                 setTotalPage(1)
-            toast.success(`Đã tìm kiếm ${totalItems} truyện phù hợp!`)
         }
     }, [data])
+
+    useEffect(() => {
+        setCurrentPage(1)
+    }, [params.keyword])
 
     return (
         <div style={{ margin: 'unset' }} className={cx('wrapper')}>

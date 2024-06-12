@@ -27,7 +27,7 @@
   --width-comic-mobile: 50%;
   --width-chapter-desktops: calc(10% - 11px);
   --width-chapter-table: calc(16.66667% - 10px);
-  --width-chapter-mobile: calc(25% - 9px);
+  --width-chapter-mobile: calc(33.33333% - 8px);
   --pos-desktops: 64px;
   --pos-table: 24px;
   --pos-mobile: 16px;
@@ -37,6 +37,11 @@
   box-sizing: border-box;
   padding: 0;
   margin: 0;
+}
+
+::selection {
+    background-color: var(--primary-color);
+    color: var(--white-color);
 }
 
 ::-webkit-scrollbar {

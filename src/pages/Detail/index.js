@@ -17,14 +17,24 @@ function Detail() {
         `https://otruyenapi.com/v1/api/${params.describe}/${params.slug}?page=${currentPage}`)
     const [comics, setComics] = useState([])
     const [totalPage, setTotalPage] = useState(0)
-
+    const [width, setWidth] = useState(window.innerWidth)
+    
     useEffect(() => {
+        console.log('currenpage', currentPage);
         setCurrentPage(1)
     }, [params.slug])
 
     useEffect(() => {
         scrollToTop()
     }, [currentPage])
+
+    useEffect(() => {
+        const handleResize = () => {
+            setWidth(window.innerWidth)
+        }
+        window.addEventListener('resize', handleResize)
+        return () => window.removeEventListener('resize', handleResize)
+    }, [])
 
     useEffect(() => {
         if (data) {
@@ -58,7 +68,7 @@ function Detail() {
                     <Pagination
                         currentPage={currentPage}
                         totalPage={totalPage}
-                        itemsPerPage={window.innerWidth > 786 ? 10 : 4}
+                        itemsPerPage={width > 786 ? 10 : 4}
                         setCurrentPage={setCurrentPage}
                     />
                 </>

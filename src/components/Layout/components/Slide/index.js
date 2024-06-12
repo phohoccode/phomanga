@@ -10,6 +10,7 @@ function Slide({ data }) {
     const [chapterApi, setChapterApi] = useState('')
 
     useEffect(() => {
+        console.log(data);
         setChapterApi(data?.chaptersLatest?.[0]?.chapter_api_data.split('/').pop())
     }, [data])
 
@@ -25,7 +26,11 @@ function Slide({ data }) {
                     <img src={`https://otruyenapi.com/uploads/comics/${data?.thumb_url}`} />
                 </figure>
                 <div className={cx('info')}>
-                    <h4>Chapter {data?.chaptersLatest?.[0]?.chapter_name || '?'}</h4>
+                    <h4>
+                        {data?.chaptersLatest ? 
+                            `Chương ${data?.chaptersLatest?.[0]?.chapter_name}` : 
+                            'Truyện đang gặp lỗi!' }
+                    </h4>
                     <h2>{data?.name}</h2>
                     <ul className={cx('categorys')}>
                         {data?.category.map((category, index) => (
@@ -34,19 +39,20 @@ function Slide({ data }) {
                             </li>
                         ))}
                     </ul>
-                    <div className={cx('actions')}>
-                        <Link
-                            className={cx('read-now')} 
-                            to={`/read/${data?.slug}/${chapterApi || ''}`}
-                        >
-                            <i className="fa-regular fa-eye"></i>
-                            Đọc ngay
-                        </Link>
-                        <Link className={cx('detail')} to={`/info/${data?.slug}`}>
-                            <i className="fa-solid fa-circle-info"></i>
-                            Chi tiết
-                        </Link>
-                    </div>
+                    {data?.chaptersLatest &&
+                        <div className={cx('actions')}>
+                            <Link
+                                className={cx('read-now')}
+                                to={`/read/${data?.slug}/${chapterApi}`}
+                            >
+                                <i className="fa-regular fa-eye"></i>
+                                Đọc ngay
+                            </Link>
+                            <Link className={cx('detail')} to={`/info/${data?.slug}`}>
+                                <i className="fa-solid fa-circle-info"></i>
+                                Chi tiết
+                            </Link>
+                        </div>}
                 </div>
             </div>
         </div>

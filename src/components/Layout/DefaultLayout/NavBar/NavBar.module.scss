@@ -81,7 +81,7 @@
         position: relative;
         border-radius: var(--border-radius);
 
-        > a {
+        > a, > div {
           border-radius: var(--border-radius);
           display: inline-block;
           padding: 4px 8px;
