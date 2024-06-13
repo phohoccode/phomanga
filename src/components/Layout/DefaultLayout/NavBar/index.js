@@ -1,6 +1,6 @@
-import { useContext, useEffect, useState } from 'react'
+import { useContext, useState } from 'react'
 import classNames from 'classnames/bind'
-import { Link, NavLink, useLocation, useNavigate } from 'react-router-dom'
+import { NavLink, useLocation, useNavigate } from 'react-router-dom'
 
 import styles from './NavBar.module.scss'
 import useFetch from '../../../../hooks/useFetch'
@@ -12,23 +12,13 @@ import Context from '../../../../Context'
 const cx = classNames.bind(styles)
 
 function NavBar() {
-    const { theme, setTheme } = useContext(Context)
+    const navigate = useNavigate()
+    const { width, theme, setTheme } = useContext(Context)
     const [data] = useFetch('https://otruyenapi.com/v1/api/the-loai')
     const [valueSearch, setValueSearch] = useState('')
     const [showModal, setShowModal] = useState(false)
-    const [width, setWidth] = useState(window.innerWidth)
     const { pathname } = useLocation()
-    const navigate = useNavigate()
-
     const isMobile = width < 1024
-
-    useEffect(() => {
-        const handleResize = () => {
-            setWidth(window.innerWidth)
-        }
-        window.addEventListener('resize', handleResize)
-        return () => window.removeEventListener('resize', handleResize)
-    }, [])
 
     const handleKeyDownSearch = (e, value) => {
         if (e.key.startsWith('Enter') && value !== '') {
@@ -54,9 +44,9 @@ function NavBar() {
                 }
                 <div className={cx('logo')}>
                     <NavLink to='/'>
-                        <img src={logo} />
+                        <img src={logo} alt='logo'/>
                     </NavLink>
-                    <h4>Thế giới truyện tranh</h4>
+                    <h4>PHOMANGA</h4>
                 </div>
                 {!isMobile &&
                     <ul className={cx('list')}>

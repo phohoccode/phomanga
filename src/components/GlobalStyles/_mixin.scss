@@ -1,7 +1,7 @@
 @mixin borderBtn($color: var(--primary-color)) {
   border: 3px solid $color;
-  background-color: var(--white-color);
-  color: $color;
+  background-color: var(--white-color) !important;
+  color: $color !important;
   transition: 0.3s;
   outline: 3px solid transparent;
   outline-offset: 3px;
@@ -12,9 +12,9 @@
   }
 
   &:hover {
-    background-color: $color;
-    color: var(--white-color);
-    outline-color: $color;
+    background-color: $color !important;
+    color: var(--white-color) !important;
+    outline-color: $color !important;
 
     @media (max-width: 768px) {
       outline: unset;
@@ -29,16 +29,16 @@
   user-select: none;
   border-radius: var(--border-radius);
   box-shadow: var(--box-shadow);
-  color: var(--white-color);
-  background-color: $color;
+  color: var(--white-color) !important;
+  background-color: $color !important;
 
   @if $color == "var(--white-color)" {
-    color: var(--black-color);
-    background-color: $color;
+    color: var(--black-color) !important;
+    background-color: $color !important;
   }
 
   &:hover {
-    outline-color: $color;
+    outline-color: $color !important;
 
     @media (max-width: 768px) {
       outline: unset;

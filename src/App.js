@@ -1,9 +1,8 @@
-import { BrowserRouter as Router, Routes, Route, useParams } from 'react-router-dom'
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import DefaultLayout from './components/Layout/DefaultLayout'
 import publicRoutes from './routers'
 
 function App() {
-
     return (
         <Router>
             <Routes>

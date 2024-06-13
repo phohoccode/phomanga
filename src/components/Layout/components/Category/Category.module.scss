@@ -38,6 +38,7 @@
     width: calc(33.33333% - 8px);
     border-radius: var(--border-radius);
     color: var(--black-color);
+    user-select: none;
 
     &:hover {
       background-color: var(--primary-color);

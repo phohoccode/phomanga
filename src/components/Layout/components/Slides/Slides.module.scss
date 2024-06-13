@@ -6,7 +6,7 @@
   .wrapper-inner {
     width: 100%;
     overflow: hidden;
-    border-radius: var(--border-radius);
+    border-radius: var(--border-radius-img);
 
     .actions {
       display: flex;
@@ -21,20 +21,10 @@
 
       .left,
       .right {
-        padding: 8px 12px;
+        padding: 8px 14px;
         font-size: 2rem;
+        border-radius: 50% !important;
         @include outlineBtn(rgb(63, 63, 63));
-        i {
-          transition: 0.3s;
-        }
-      }
-
-      .left:hover i {
-        transform: translateX(-2px);
-      }
-
-      .right:hover i{
-        transform: translateX(2px);
       }
     }
 

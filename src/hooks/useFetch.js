@@ -1,8 +1,15 @@
 import { useState, useEffect } from 'react'
 import toast from 'react-hot-toast'
+import { useNavigate } from 'react-router-dom'
 
 function useFetch(url) {
+    const navigate = useNavigate()
     const [data, setData] = useState(null)
+
+    const handleFetchToError = () => {
+        navigate('/notfound')
+        toast.error('Đã xảy ra lỗi khi lấy dữ liệu!')
+    }
 
     useEffect(() => {
         fetch(url)
@@ -12,10 +19,16 @@ function useFetch(url) {
                 }
                 return response.json()
             })
-            .then(data => setData(data))
+            .then(data => {
+                if (data?.status === 'error') {
+                    handleFetchToError()
+                    return
+                }
+                setData(data)
+            })
             .catch(error => {
                 console.error(error)
-                toast.error('Đã xảy ra lỗi khi lấy dữ liệu!')
+                handleFetchToError()
             })
     }, [url])
 

@@ -57,7 +57,7 @@
     figure {
       width: 180px;
       height: 250px;
-      border-radius: var(--border-radius);
+      border-radius: var(--border-radius-img);
       overflow: hidden;
 
       @media (max-width: 768px) {
@@ -107,11 +107,12 @@
           display: block;
           font-size: 1.6rem;
           font-weight: 600;
-          padding: 2px 4px;
+          padding: 2px 8px;
           border-radius: var(--border-radius);
           border: 2px solid var(--white-color);
           background-color: transparent;
           transition: 0.3s;
+          user-select: none;
 
           &:hover {
             color: var(--primary-color);

@@ -6,6 +6,7 @@ import styles from './Comment.module.scss'
 import storage, { formatTime, handleSelectedFocus } from '../../../../utils'
 import Context from '../../../../Context'
 import DiaLog from '../DiaLog'
+import avartar from './avartar.png'
 
 const cx = classNames.bind(styles)
 
@@ -116,7 +117,7 @@ function Comment({ setIsShowMessage, slug, id }) {
                             <textarea
                                 value={valueComment}
                                 onChange={e => setValueComment(e.target.value)}
-                                placeholder='Nhập nội dung bình luận'>
+                                placeholder='Nhập nội dung bình luận...'>
                             </textarea>
                             <button
                                 className={cx('ok', { 'disabled': valueComment === '' })}
@@ -126,7 +127,7 @@ function Comment({ setIsShowMessage, slug, id }) {
                             {comments.map((comment, index) => (
                                 <li className={cx('item')} key={index}>
                                     <figure>
-                                        <img src='https://png.pngtree.com/png-clipart/20200224/original/pngtree-cartoon-color-simple-male-avatar-png-image_5230557.jpg' />
+                                        <img src={avartar} alt='avartar'/>
                                     </figure>
                                     <div className={cx('item-body')}>
                                         <div className={cx('item-content')}>

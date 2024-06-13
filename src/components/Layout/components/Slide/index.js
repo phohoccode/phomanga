@@ -10,8 +10,9 @@ function Slide({ data }) {
     const [chapterApi, setChapterApi] = useState('')
 
     useEffect(() => {
-        console.log(data);
-        setChapterApi(data?.chaptersLatest?.[0]?.chapter_api_data.split('/').pop())
+        if (data) {
+            setChapterApi(data?.chaptersLatest?.[0]?.chapter_api_data.split('/').pop())
+        }
     }, [data])
 
     return (
@@ -23,13 +24,16 @@ function Slide({ data }) {
         >
             <div className={cx('inner')}>
                 <figure>
-                    <img src={`https://otruyenapi.com/uploads/comics/${data?.thumb_url}`} />
+                    <img 
+                        src={`https://otruyenapi.com/uploads/comics/${data?.thumb_url}`} 
+                        alt={data?.chaptersLatest?.[0]?.chapter_name}/>
                 </figure>
                 <div className={cx('info')}>
                     <h4>
-                        {data?.chaptersLatest ? 
-                            `Chương ${data?.chaptersLatest?.[0]?.chapter_name}` : 
-                            'Truyện đang gặp lỗi!' }
+                        {data?.chaptersLatest ?
+                            `Chương ${data?.chaptersLatest?.[0]?.chapter_name}` :
+                            'Truyện đang gặp lỗi!'
+                        }
                     </h4>
                     <h2>{data?.name}</h2>
                     <ul className={cx('categorys')}>
@@ -52,7 +56,8 @@ function Slide({ data }) {
                                 <i className="fa-solid fa-circle-info"></i>
                                 Chi tiết
                             </Link>
-                        </div>}
+                        </div>
+                    }
                 </div>
             </div>
         </div>

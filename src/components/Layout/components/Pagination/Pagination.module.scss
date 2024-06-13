@@ -12,6 +12,7 @@
   }
 
   button {
+    border-radius: 8px !important;
     padding: 8px 16px;
     font-size: 2rem;
     @include outlineBtn(var(--primary-color));
@@ -33,6 +34,7 @@
     gap: 12px;
 
     li {
+      border-radius: 8px !important;
       @include borderBtn(var(--primary-color));
       padding: 8px 16px;
       height: 40px;
@@ -51,9 +53,9 @@
     }
 
     li.active {
-      color: var(--white-color);
-      background-color: var(--primary-color);
-      outline-color: var(--primary-color);
+      color: var(--white-color) !important;
+      background-color: var(--primary-color) !important;
+      outline-color: var(--primary-color) !important;
 
       @media (max-width: 768px) {
         outline: unset;

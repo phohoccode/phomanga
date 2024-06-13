@@ -5,6 +5,7 @@ import toast from "react-hot-toast"
 
 function Provider({ children }) {
     const [isOpenDiaLog, setIsOpenDiaLog] = useState(false)
+    const [width, setWidth] = useState(window.innerWidth)
     const [theme, setTheme] = useState(() => {
         return storage.get('theme', 'light')
     })
@@ -13,8 +14,17 @@ function Provider({ children }) {
         setIsOpenDiaLog,
         isOpenDiaLog,
         theme,
-        setTheme
+        setTheme,
+        width
     }
+
+    useEffect(() => {
+        const handleResize = () => {
+            setWidth(window.innerWidth)
+        }
+        window.addEventListener('resize', handleResize)
+        return () => window.removeEventListener('resize', handleResize)
+    }, [])
 
     useEffect(() => {
         storage.set('theme', theme)

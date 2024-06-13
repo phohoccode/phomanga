@@ -11,7 +11,8 @@
   --black-color: #000;
   --red-color: #d90429;
   --theme-dark-background: #282828;
-  --border-radius: 0.75rem;
+  --border-radius: 20px;
+  --border-radius-img: 16px;
   --border-image: 2px solid #e7e7e7;
   --width-table: 102.3rem;
   --width-mobile: 76.8rem;
@@ -98,10 +99,22 @@ body {
 
 .text {
     color: var(--black-color) !important;
+
+    p {
+        color: var(--black-color) !important;
+    }
+}
+
+.text-primary {
+    color: var(--primary-color) !important;
 }
 
 .dark .text {
     color: var(--white-color) !important;
+
+    p {
+        color: var(--white-color) !important;
+    }
 }
 
 a {
@@ -126,6 +139,7 @@ img {
   height: 100%;
   object-fit: cover;
   transition: 0.3s;
+  user-select: none;
 }
 
 figure {

@@ -17,7 +17,7 @@ function NavBarMovie({ categorys, showModal, setShowModal, handleKeyDownSearch }
     const modalRef = useRef()
 
     const handleCloseModal = () => {
-        if (modalRef.current && wrapperRef.current || showCategory) {
+        if ((modalRef.current && wrapperRef.current) || showCategory) {
             setShowCategory(false)
             modalRef.current.classList.add(cx('slideOut'));
             wrapperRef.current.classList.add(cx('fadeOut'));

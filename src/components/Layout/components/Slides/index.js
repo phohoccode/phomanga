@@ -2,8 +2,8 @@ import { useEffect, useRef, useState } from 'react'
 import classNames from 'classnames/bind'
 
 import styles from './Slides.module.scss'
-import useFetch from '../../../../hooks/useFetch';
-import Slide from '../Slide';
+import useFetch from '../../../../hooks/useFetch'
+import Slide from '../Slide'
 
 const cx = classNames.bind(styles)
 
@@ -28,14 +28,15 @@ function Slides({ api }) {
             `translateX(-${currentIndex * slideInnerRef.current.clientWidth}px)`
     }, [currentIndex])
 
-    useEffect(() => {
-        startAutoSlides()
-    }, [currentIndex])
-
     const startAutoSlides = () => {
         clearInterval(idInterval.current)
         idInterval.current = setInterval(handleNext, 6000)
     }
+
+    useEffect(() => {
+        startAutoSlides()
+    }, [currentIndex])
+
 
     const stopAutoSlides = () => {
         clearInterval(idInterval.current)
@@ -104,25 +105,25 @@ function Slides({ api }) {
                     onTouchStart={handleDragStart}
                     onTouchMove={handleDragMove}
                     onTouchEnd={handleDragEnd}
-                    style={{ cursor: isGrabbing.current ? 'grabbing' : 'grab' }}
                     ref={slideInnerRef}
                     className={cx('inner')}
                 >
                     {slides.slice(0, 10).map((slide, index) => (
-                        <Slide 
-                            key={index} 
-                            data={slide} 
+                        <Slide
+                            key={index}
+                            data={slide}
                         />
                     ))}
                 </div>
-                <div className={cx('actions')}>
-                    <button onClick={handlePrev} className={cx('left')}>
-                        <i className="fa-solid fa-chevron-left"></i>
-                    </button>
-                    <button onClick={handleNext} className={cx('right')}>
-                        <i className="fa-solid fa-chevron-right"></i>
-                    </button>
-                </div>
+                {data &&
+                    <div className={cx('actions')}>
+                        <button onClick={handlePrev} className={cx('left')}>
+                            <i className="fa-solid fa-chevron-left"></i>
+                        </button>
+                        <button onClick={handleNext} className={cx('right')}>
+                            <i className="fa-solid fa-chevron-right"></i>
+                        </button>
+                    </div>}
             </div>
             <ul className={cx('slick-dots')}>
                 {slides.slice(0, 10).map((_, index) => (
@@ -134,7 +135,7 @@ function Slides({ api }) {
                 ))}
             </ul>
         </div>
-    );
+    )
 }
 
-export default Slides;
+export default Slides

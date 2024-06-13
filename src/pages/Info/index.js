@@ -1,5 +1,5 @@
 import { Link, useParams } from 'react-router-dom'
-import { useContext, useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import classNames from 'classnames/bind'
 import toast from 'react-hot-toast'
 
@@ -35,7 +35,7 @@ function Info() {
                 return chapterIds
             })
         }
-    }, [data])
+    }, [data, params.slug])
 
     useEffect(() => {
         const comicStorage = storage.get('comic-storage', [])
@@ -104,28 +104,28 @@ function Info() {
                                 )}
                             </div>
 
-                            <ul className={cx('author')}>
-                                <span>Tác giả: </span>
+                            <ul className={cx('item')}>
+                                <b>Tác giả: </b>
                                 {author.map((author, index) => (
                                     <li className={cx('text')} key={index}>{author || 'Chưa cập nhật'}</li>
                                 ))}
                             </ul>
-                            <div className={cx('updated-at')}>
-                                <p>Ngày cập nhật:</p>
+                            <div className={cx('item')}>
+                                <b>Ngày cập nhật:</b>
                                 <span className={cx('text')}>{formatDate(item?.updatedAt)}</span>
                             </div>
-                            <ul className={cx('categorys')}>
-                                <span>Thể loại: </span>
+                            <ul className={cx('item')}>
+                                <b>Thể loại: </b>
                                 {category.map((category, index) => (
-                                    <li key={index}>
+                                    <li key={index} className={cx('category')}>
                                         <Link to={`/detail/the-loai/${category?.slug}`}>
                                             {category?.name}
                                         </Link>
                                     </li>
                                 ))}
                             </ul>
-                            <div className={cx('content')}>
-                                <span>Nội dung: </span>
+                            <div className={cx('item')}>
+                                <b>Nội dung: </b>
                                 <p
                                     className={cx('text')}
                                     dangerouslySetInnerHTML={{ __html: item?.content }}>

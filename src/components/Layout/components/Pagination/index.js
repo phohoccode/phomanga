@@ -40,7 +40,6 @@ function Pagination({ currentPage, totalPage, itemsPerPage, setCurrentPage }) {
     }, [currentPage, totalPage, itemsPerPage])
 
     useEffect(() => {
-
         toast(`Bạn đang ở trang ${currentPage}`, { duration: 1000 })
     }, [currentPage])
 

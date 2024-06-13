@@ -59,6 +59,7 @@ function Read() {
                     if (window.innerHeight + window.scrollY >= document.body.offsetHeight) {
                         clearInterval(idScrollRef.current)
                         setIsScroll(!isScroll)
+                        toast("Đã cuộn đến cuối trang!")
                     } else {
                         window.scrollBy({
                             top: window.innerHeight,

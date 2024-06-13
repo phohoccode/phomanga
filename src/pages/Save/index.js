@@ -22,7 +22,7 @@ function Save() {
     const handleDeleteAll = () => {
         setComics([])
         storage.set('comic-storage', [])
-        toast.success('Đã xoá tất cả truyện đã lưu!')
+        toast.success('Xoá tất cả thành công!')
     }
 
     return (
