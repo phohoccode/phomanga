@@ -45,3 +45,8 @@ export function handleSelectedFocus(ref) {
 export function scrollToTop() {
     window.scrollTo({ top: 0, behavior: 'smooth' })
 }
+
+export function isUrlWithValidDomainSuffix(url) {
+    const urlPattern = /^(http|https):\/\/[^\/]*\.(com|vn|org|net|edu|gov|mil|app|shop|blog|tech|online|io|co|ai|xyz)(\/.*)?$/i;
+    return urlPattern.test(url)
+}

@@ -135,6 +135,18 @@
                 font-size: 1.6rem;
             }
 
+            a {
+                color: var(--primary-color);
+                text-decoration: underline;
+                cursor: pointer;
+                font-weight: 600;
+
+                &:not(:last-child) {
+                    margin-right: 4px;
+                }
+                
+            }
+
             .item-actions {
               display: flex;
               justify-content: flex-end;

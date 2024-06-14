@@ -1,9 +1,13 @@
 import classNames from 'classnames/bind'
-import { useEffect, useRef, useState, useContext } from 'react'
+import { useEffect, useRef, useState, useContext, Fragment } from 'react'
 import toast from 'react-hot-toast'
 
 import styles from './Comment.module.scss'
-import storage, { formatTime, handleSelectedFocus } from '../../../../utils'
+import storage, {
+    isUrlWithValidDomainSuffix,
+    formatTime,
+    handleSelectedFocus
+} from '../../../../utils'
 import Context from '../../../../Context'
 import DiaLog from '../DiaLog'
 import avartar from './avartar.png'
@@ -127,14 +131,28 @@ function Comment({ setIsShowMessage, slug, id }) {
                             {comments.map((comment, index) => (
                                 <li className={cx('item')} key={index}>
                                     <figure>
-                                        <img src={avartar} alt='avartar'/>
+                                        <img src={avartar} alt='avartar' />
                                     </figure>
                                     <div className={cx('item-body')}>
                                         <div className={cx('item-content')}>
                                             {index !== indexEdit &&
                                                 <>
                                                     <h5>Độc giả</h5>
-                                                    <p>{comment?.value}</p>
+                                                    {<p>
+                                                        {comment?.value.split(' ').map((cmt, index) => (
+                                                            <Fragment key={index}>{
+                                                                !isUrlWithValidDomainSuffix(cmt) ? ` ${cmt} ` : (
+                                                                    <a
+                                                                        href={cmt}
+                                                                        target="_blank"
+                                                                        rel="noopener noreferrer"
+                                                                    >
+                                                                        {cmt}
+                                                                    </a>
+                                                                )
+                                                            }</Fragment>
+                                                        ))}
+                                                    </p>}
                                                 </>
                                             }
                                             {index === indexEdit &&
