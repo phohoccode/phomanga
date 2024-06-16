@@ -184,7 +184,7 @@
       }
 
       li.active {
-        background-color: rgba(16, 185, 129, 0.7);
+        background-color: rgba(16, 185, 129, 0.7) !important;
         position: relative;
         @include label("Đã đọc qua", -100%);
       }

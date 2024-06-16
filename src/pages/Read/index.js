@@ -1,16 +1,19 @@
 import classNames from 'classnames/bind'
 import { useNavigate, useParams } from 'react-router-dom'
-import { useEffect, useRef, useState } from 'react'
+import { useContext, useEffect, useRef, useState } from 'react'
 
 import styles from './Read.module.scss'
 import useFetch from '../../hooks/useFetch'
 import storage from '../../utils'
 import Comment from '../../components/Layout/components/Comment'
 import toast from 'react-hot-toast'
+import Context from '../../Context'
+import BreadCrumb from '../../components/Layout/components/BreadCrumb'
 
 const cx = classNames.bind(styles)
 
 function Read() {
+    const { setQuantityComicHistory, width } = useContext(Context)
     const navigate = useNavigate()
     const params = useParams()
     const [data] = useFetch(`https://otruyenapi.com/v1/api/truyen-tranh/${params.slug}`)
@@ -47,6 +50,7 @@ function Read() {
                 historyStorage[params.slug] =
                     [...(historyStorage[params.slug] || []), dataChapter]
                 storage.set('history-storage', historyStorage)
+                setQuantityComicHistory(Object.keys(historyStorage).length)
             }
             toast(`Bạn đang ở chương ${dataChapter?.data?.item?.chapter_name}`, { duration: 2000 })
         }
@@ -113,6 +117,7 @@ function Read() {
 
     return (
         <>
+            {data && width > 1023 && <BreadCrumb />}
             <div className={cx('wrapper')}>
                 {!data && !dataChapter &&
                     <h4 className={cx('loading')}>Đang tải dữ liệu...</h4>}

@@ -9,13 +9,18 @@ import stylesComics from '../../components/Layout/components/Comics/Comics.modul
 import stylesComic from '../../components/Layout/components/Comic/Comic.module.scss'
 import DiaLog from '../../components/Layout/components/DiaLog'
 import Context from '../../Context'
+import BreadCrumb from '../../components/Layout/components/BreadCrumb'
 
 const cx = classNames.bind(styles)
 const cxComics = classNames.bind(stylesComics)
 const cxComic = classNames.bind(stylesComic)
 
 function History() {
-    const { setIsOpenDiaLog, isOpenDiaLog } = useContext(Context)
+    const {
+        width,
+        setIsOpenDiaLog,
+        isOpenDiaLog,
+        setQuantityComicHistory } = useContext(Context)
     const [comics, setComics] = useState({})
     const [slugs, setSlugs] = useState([])
 
@@ -29,12 +34,14 @@ function History() {
     const handleDeleteAll = () => {
         setSlugs([])
         setComics({})
+        setQuantityComicHistory(0)
         storage.set('history-storage', {})
         toast.success('Xoá lịch sử thành công!')
     }
 
     return (
         <>
+            {width > 1023 && <BreadCrumb />}
             <div style={{ margin: 'unset' }} className={cxComics('wrapper')}>
                 <div className={cxComics('title')}>
                     <h4>

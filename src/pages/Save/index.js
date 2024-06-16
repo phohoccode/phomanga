@@ -7,11 +7,16 @@ import Comic from "../../components/Layout/components/Comic"
 import styles from '../../components/Layout/components/Comics/Comics.module.scss'
 import DiaLog from '../../components/Layout/components/DiaLog'
 import Context from '../../Context'
+import BreadCrumb from "../../components/Layout/components/BreadCrumb"
 
 const cx = classNames.bind(styles)
 
 function Save() {
-    const { setIsOpenDiaLog, isOpenDiaLog } = useContext(Context)
+    const {
+        width,
+        setIsOpenDiaLog,
+        isOpenDiaLog,
+        setQuantityComic } = useContext(Context)
     const [comics, setComics] = useState([])
 
     useEffect(() => {
@@ -21,18 +26,20 @@ function Save() {
 
     const handleDeleteAll = () => {
         setComics([])
+        setQuantityComic(0)
         storage.set('comic-storage', [])
         toast.success('Xoá tất cả thành công!')
     }
 
     return (
         <>
+            {width > 1023 && <BreadCrumb />}
             <div style={{ margin: 'unset' }} className={cx('wrapper')}>
                 <div className={cx('title')}>
                     <h4>
                         {comics.length > 0 ?
                             `Kho lưu trữ (${comics.length})` :
-                            'Kho lưu trữ trống'}
+                            'Kho lưu trữ trống!'}
                     </h4>
                     {comics.length > 0 &&
                         <button onClick={() => setIsOpenDiaLog(true)}>Xoá tất cả</button>

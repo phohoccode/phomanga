@@ -13,7 +13,12 @@ const cx = classNames.bind(styles)
 
 function NavBar() {
     const navigate = useNavigate()
-    const { width, theme, setTheme } = useContext(Context)
+    const {
+        width,
+        theme,
+        setTheme,
+        quantityComic,
+        quantityComicHistory } = useContext(Context)
     const [data] = useFetch('https://otruyenapi.com/v1/api/the-loai')
     const [valueSearch, setValueSearch] = useState('')
     const [showModal, setShowModal] = useState(false)
@@ -44,7 +49,7 @@ function NavBar() {
                 }
                 <div className={cx('logo')}>
                     <NavLink to='/'>
-                        <img src={logo} alt='logo'/>
+                        <img src={logo} alt='logo' />
                     </NavLink>
                     <h4>PHOMANGA</h4>
                 </div>
@@ -83,15 +88,23 @@ function NavBar() {
                     </div>
                     <NavLink
                         to='/history'
-                        className={cx('history', { 'active': pathname === '/history' })}
+                        className={cx({ 'active': pathname === '/history' })}
                     >
-                        <i className="fa-solid fa-clock-rotate-left"></i>
+                        <div className={cx('history')}>
+                            <i className="fa-solid fa-clock-rotate-left"></i>
+                        </div>
+                        {quantityComicHistory > 0 &&
+                            <span className={cx('quantity')}>{quantityComicHistory}</span>}
                     </NavLink>
                     <NavLink
                         to='/save'
-                        className={cx('save', { 'active': pathname === '/save' })}
+                        className={cx({ 'active': pathname === '/save' })}
                     >
-                        <i className="fa-regular fa-bookmark"></i>
+                        <div className={cx('save')}>
+                            <i className="fa-regular fa-bookmark"></i>
+                        </div>
+                        {quantityComic > 0 &&
+                            <span className={cx('quantity')}>{quantityComic}</span>}
                     </NavLink>
                     <div className={cx('container-search')}>
                         <input

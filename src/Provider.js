@@ -6,16 +6,27 @@ import toast from "react-hot-toast"
 function Provider({ children }) {
     const [isOpenDiaLog, setIsOpenDiaLog] = useState(false)
     const [width, setWidth] = useState(window.innerWidth)
+    const [quantityComic, setQuantityComic] = useState(() => {
+        return storage.get('comic-storage', []).length
+    })
+    const [quantityComicHistory, setQuantityComicHistory] = useState(() => {
+        const historyStorage = storage.get('history-storage', {})
+        return Object.keys(historyStorage).length
+    })
     const [theme, setTheme] = useState(() => {
         return storage.get('theme', 'light')
     })
 
     const value = {
-        setIsOpenDiaLog,
         isOpenDiaLog,
+        width,
         theme,
+        quantityComic,
+        quantityComicHistory,
+        setIsOpenDiaLog,
         setTheme,
-        width
+        setQuantityComic,
+        setQuantityComicHistory
     }
 
     useEffect(() => {

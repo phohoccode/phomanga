@@ -29,7 +29,7 @@
     align-items: center;
 
     @media (max-width: 1399px) {
-        gap: 16px;
+      gap: 16px;
     }
 
     .bars {
@@ -53,7 +53,7 @@
         overflow: hidden;
 
         @media (max-width: 1023px) {
-            display: none;
+          display: none;
         }
       }
 
@@ -88,7 +88,8 @@
         position: relative;
         border-radius: var(--border-radius);
 
-        > a, > div {
+        > a,
+        > div {
           border-radius: var(--border-radius);
           display: inline-block;
           padding: 4px 12px;
@@ -127,6 +128,11 @@
     display: flex;
     align-items: center;
 
+    a {
+        display: block;
+        position: relative;
+    }
+    
     .history,
     .save,
     .theme {
@@ -151,8 +157,8 @@
       @include label("Truyện đã lưu", 100%);
     }
 
-    .history.active,
-    .save.active {
+    a.active,
+    a.active {
       color: var(--primary-color);
     }
 

@@ -8,6 +8,7 @@ import Comic from '../../components/Layout/components/Comic'
 import Pagination from '../../components/Layout/components/Pagination'
 import { scrollToTop } from '../../utils'
 import Context from '../../Context'
+import BreadCrumb from '../../components/Layout/components/BreadCrumb'
 
 const cx = classNames.bind(styles)
 
@@ -39,35 +40,37 @@ function Detail() {
             totalItems > totalItemsPerPage ?
                 setTotalPage(Math.round(totalItems / totalItemsPerPage)) :
                 setTotalPage(1)
-        } 
+        }
     }, [data])
 
     return (
-        <div style={{ margin: 'unset' }} className={cx('wrapper')}>
-            {!data && <h4 className={cx('loading')}>Đang tải dữ liệu...</h4>}
-            {data?.status === 'success' &&
-                <>
-                    <div className={cx('title')}>
-                        <h4>{data?.data?.breadCrumb?.[0]?.name}</h4>
-                        <span>{data?.data?.breadCrumb?.[1]?.name}</span>
-                    </div>
-                    <div className={cx('list')}>
-                        {comics.map((comic, index) => (
-                            <Comic key={index} data={comic} />
-                        ))
-                        }
-                    </div>
+        <>
+            {data && width > 1023 && <BreadCrumb />}
+            <div style={{ margin: 'unset' }} className={cx('wrapper')}>
+                {!data && <h4 className={cx('loading')}>Đang tải dữ liệu...</h4>}
+                {data?.status === 'success' &&
+                    <>
+                        <div className={cx('title')}>
+                            <h4>{data?.data?.breadCrumb?.[0]?.name}</h4>
+                            <span>{data?.data?.breadCrumb?.[1]?.name}</span>
+                        </div>
+                        <div className={cx('list')}>
+                            {comics.map((comic, index) => (
+                                <Comic key={index} data={comic} />
+                            ))
+                            }
+                        </div>
 
-                    <Pagination
-                        currentPage={currentPage}
-                        totalPage={totalPage}
-                        itemsPerPage={width > 786 ? 10 : 4}
-                        setCurrentPage={setCurrentPage}
-                    />
-                </>
-            }
-        </div>
-
+                        <Pagination
+                            currentPage={currentPage}
+                            totalPage={totalPage}
+                            itemsPerPage={width > 786 ? 10 : 4}
+                            setCurrentPage={setCurrentPage}
+                        />
+                    </>
+                }
+            </div>
+        </>
     )
 }
 

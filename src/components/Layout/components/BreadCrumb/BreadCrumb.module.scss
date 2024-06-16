@@ -1,0 +1,25 @@
+.wrapper {
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: center;
+  margin-bottom: 24px;
+  background-color: rgba(16, 185, 129, 1);
+  padding: 0 16px;
+  border-radius: 8px;
+
+  li {
+    color: var(--white-color);
+    font-size: 2rem;
+    font-weight: 600;
+
+    a {
+      :hover {
+        text-decoration: underline;
+      }
+    }
+
+    i {
+      margin: 8px;
+    }
+  }
+}
