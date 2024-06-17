@@ -1,4 +1,4 @@
-import { useEffect, useState, useContext } from "react"
+import { useEffect, useState, useContext, Fragment } from "react"
 import classNames from 'classnames/bind'
 import toast from "react-hot-toast"
 
@@ -7,13 +7,11 @@ import Comic from "../../components/Layout/components/Comic"
 import styles from '../../components/Layout/components/Comics/Comics.module.scss'
 import DiaLog from '../../components/Layout/components/DiaLog'
 import Context from '../../Context'
-import BreadCrumb from "../../components/Layout/components/BreadCrumb"
 
 const cx = classNames.bind(styles)
 
 function Save() {
     const {
-        width,
         setIsOpenDiaLog,
         isOpenDiaLog,
         setQuantityComic } = useContext(Context)
@@ -32,8 +30,7 @@ function Save() {
     }
 
     return (
-        <>
-            {width > 1023 && <BreadCrumb />}
+        <Fragment>
             <div style={{ margin: 'unset' }} className={cx('wrapper')}>
                 <div className={cx('title')}>
                     <h4>
@@ -42,7 +39,11 @@ function Save() {
                             'Kho lưu trữ trống!'}
                     </h4>
                     {comics.length > 0 &&
-                        <button onClick={() => setIsOpenDiaLog(true)}>Xoá tất cả</button>
+                        <button
+                            className={cx('delete-all')}
+                            onClick={() => setIsOpenDiaLog(true)}>
+                            Xoá tất cả
+                        </button>
                     }
                 </div>
                 <div className={cx('list')}>
@@ -57,7 +58,7 @@ function Save() {
                     text='Tất cả truyện trong kho lưu trữ sẽ bị xoá vĩnh viễn!'
                 />
             }
-        </>
+        </Fragment>
     )
 }
 

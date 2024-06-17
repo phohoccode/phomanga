@@ -75,8 +75,9 @@ function NavBarMovie({ categorys, showModal, setShowModal, handleKeyDownSearch }
                                 placeholder='Tìm kiếm...'
                                 onChange={e => setValueSearch(e.target.value)}
                                 onKeyDown={(e) => handleSearch(e, valueSearch)}
-                            />
+                                />
                             <NavLink
+                                style={{ pointerEvents: valueSearch !== '' ? 'auto' : 'none' }}
                                 onClick={handleCloseModal}
                                 to={`/search/${valueSearch}`}>
                                 <i className="fa-solid fa-magnifying-glass"></i>

@@ -16,7 +16,7 @@
   transition: 0.3s;
   overscroll-behavior-y: none;
 
-  @media (max-width: 768px) {
+  @media (max-width: 1023px) {
     position: unset;
     width: 100%;
     display: block;
@@ -45,7 +45,7 @@
       color: var(--white-color);
       border-radius: var(--border-radius);
     }
-    @media (max-width: 768px) {
+    @media (max-width: 1023px) {
       width: 100%;
       text-align: left;
 
@@ -67,7 +67,7 @@
     color: var(--white-color);
     background-color: var(--primary-color);
 
-    @media (max-width: 768px) {
+    @media (max-width: 1023px) {
       color: var(--primary-color);
       font-weight: 600;
       background-color: unset;

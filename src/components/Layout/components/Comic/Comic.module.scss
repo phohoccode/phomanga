@@ -1,8 +1,12 @@
+@import "../../../GlobalStyles/mixin";
+
 .wrapper {
   width: var(--width-comic-desktops);
   flex-shrink: 0;
   padding: 0 8px;
   transition: 0.3s;
+  position: relative;
+  overflow: hidden;
 
   @media (max-width: 1023px) {
     width: var(--width-comic-table);
@@ -13,7 +17,7 @@
   }
 
   &:hover {
-    transform: scale(1.1);
+    transform: scale(1.06);
   }
 
   &:hover .info h4 {

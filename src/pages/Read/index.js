@@ -1,6 +1,6 @@
 import classNames from 'classnames/bind'
 import { useNavigate, useParams } from 'react-router-dom'
-import { useContext, useEffect, useRef, useState } from 'react'
+import { useContext, useEffect, useRef, useState, Fragment } from 'react'
 
 import styles from './Read.module.scss'
 import useFetch from '../../hooks/useFetch'
@@ -8,7 +8,6 @@ import storage from '../../utils'
 import Comment from '../../components/Layout/components/Comment'
 import toast from 'react-hot-toast'
 import Context from '../../Context'
-import BreadCrumb from '../../components/Layout/components/BreadCrumb'
 
 const cx = classNames.bind(styles)
 
@@ -115,14 +114,23 @@ function Read() {
         setIsShowMessage(!isShowMessage)
     }
 
+    const handleScroll = () => {
+        const newIsScroll = !isScroll
+        if (newIsScroll) {
+            toast('Đã bật chế độ tự động cuộn!', { duration: 1000 })
+        } else {
+            toast('Đã tắt chế độ tự động cuộn!', { duration: 1000 })
+        }
+        setIsScroll(newIsScroll)
+    }
+
     return (
-        <>
-            {data && width > 1023 && <BreadCrumb />}
+        <Fragment>
             <div className={cx('wrapper')}>
                 {!data && !dataChapter &&
                     <h4 className={cx('loading')}>Đang tải dữ liệu...</h4>}
                 {data && dataChapter &&
-                    <>
+                    <Fragment>
                         <div className={cx('title')}>
                             <h4>
                                 {`${data?.data?.item?.name} - Chương ${dataChapter?.data?.item?.chapter_name}`}
@@ -153,7 +161,7 @@ function Read() {
                                 <i className="fa-solid fa-angle-right"></i>
                             </button>
                         </div>
-                    </>
+                    </Fragment>
                 }
                 <ul className={cx('images')}>
                     {images.map((image, index) => (
@@ -169,7 +177,7 @@ function Read() {
                     </button>
                     <button
                         className={cx('auto-scroll', { 'active': isScroll })}
-                        onClick={() => setIsScroll(!isScroll)}>
+                        onClick={handleScroll}>
                         <i className="fa-solid fa-arrow-down"></i>
                         {!isScroll ? (<span>Tự động cuộn</span>) : (<span>Đang cuộn</span>)}
                     </button>
@@ -182,7 +190,7 @@ function Read() {
                     setIsShowMessage={setIsShowMessage}
                 />
             }
-        </>
+        </Fragment>
     )
 }
 

@@ -32,6 +32,10 @@
   --pos-desktops: 64px;
   --pos-table: 24px;
   --pos-mobile: 16px;
+
+  @media (max-width: 768px) {
+    --border-radius: 8px;
+  }
 }
 
 * {
@@ -40,9 +44,13 @@
   margin: 0;
 }
 
+::placeholder {
+    font-weight: 600;
+}
+
 ::selection {
-    background-color: var(--primary-color);
-    color: var(--white-color);
+  background-color: var(--primary-color);
+  color: var(--white-color);
 }
 
 ::-webkit-scrollbar {
@@ -79,42 +87,43 @@ body {
   }
 }
 
-.light, .dark {
-    transition: .3s;
+.light,
+.dark {
+  transition: 0.3s;
 
-    @media (max-width: 768px) {
-        transition: unset;
-    }
+  @media (max-width: 768px) {
+    transition: unset;
+  }
 }
 
 .light {
-    background-color: var(--white-color);
-    color: var(--black-color);
+  background-color: var(--white-color);
+  color: var(--black-color);
 }
 
 .dark {
-    background-color: var(--theme-dark-background);
-    color: var(--white-color);
+  background-color: var(--theme-dark-background);
+  color: var(--white-color);
 }
 
 .text {
-    color: var(--black-color) !important;
+  color: var(--black-color) !important;
 
-    p {
-        color: var(--black-color) !important;
-    }
+  p {
+    color: var(--black-color) !important;
+  }
 }
 
 .text-primary {
-    color: var(--primary-color) !important;
+  color: var(--primary-color) !important;
 }
 
 .dark .text {
-    color: var(--white-color) !important;
+  color: var(--white-color) !important;
 
-    p {
-        color: var(--white-color) !important;
-    }
+  p {
+    color: var(--white-color) !important;
+  }
 }
 
 a {
@@ -146,39 +155,42 @@ figure {
   border: var(--border-image);
 }
 
+input, textarea {
+    font-family: var(--font-family);
+}
+
 textarea {
   font-size: 1.8rem;
   line-height: 1.6;
-  font-family: var(--font-family);
   outline: none;
   resize: none;
 }
 
 .seperate {
-    background-color: #dfdfdf;
-    height: .1px;
-    margin: 12px 0;
-    width: 100%;
+  background-color: #dfdfdf;
+  height: 0.1px;
+  margin: 12px 0;
+  width: 100%;
 }
 
 .loading {
-    font-size: 3rem;
+  font-size: 3rem;
 }
 
 .quantity {
-    min-width: 22px;
-    max-width: 22px;
-    position: absolute;
-    right: 2px;
-    top: 12px;
-    background-color: var(--primary-color);
-    padding: 0px 4px;
-    border-radius: 16px;
-    color: var(--white-color);
-    font-size: 1rem;
-    height: 16px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    pointer-events: none;
+  min-width: 22px;
+  max-width: 22px;
+  position: absolute;
+  right: 2px;
+  top: 12px;
+  background-color: var(--primary-color);
+  padding: 0px 4px;
+  border-radius: 16px;
+  color: var(--white-color);
+  font-size: 1rem;
+  height: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
 }

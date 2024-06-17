@@ -61,7 +61,9 @@ function NavBar() {
                                 Trang chủ
                             </NavLink>
                         </li>
-                        <li className={cx('item', { 'active': pathname === '/detail/danh-sach/truyen-moi' })}>
+                        <li 
+                            className={cx('item', 
+                                { 'active': pathname === '/detail/danh-sach/truyen-moi' })}>
                             <NavLink to='/detail/danh-sach/truyen-moi'>
                                 <i className="fa-solid fa-rotate"></i>
                                 Mới cập nhật
@@ -113,7 +115,9 @@ function NavBar() {
                             onChange={e => setValueSearch(e.target.value)}
                             onKeyDown={(e) => handleKeyDownSearch(e, valueSearch)}
                         />
-                        <NavLink to={`/search/${valueSearch}`}>
+                        <NavLink
+                            style={{pointerEvents: valueSearch !== '' ? 'auto' : 'none'}} 
+                            to={`/search/${valueSearch}`}>
                             <i className="fa-solid fa-magnifying-glass"></i>
                         </NavLink>
                     </div>

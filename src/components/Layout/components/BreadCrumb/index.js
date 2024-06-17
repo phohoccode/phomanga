@@ -22,7 +22,8 @@ function BreadCrumb() {
             </li>
             {breadCrumb.map((breadCrumb, index) => (
                 <li key={index}>
-                    <i className="fa-solid fa-angle-right"></i>
+                    {pathname !== '/' && 
+                    <i className="fa-solid fa-angle-right"></i>}
                     <span>{breadCrumb.replace(/-/g, ' ')}</span>
                 </li>
             ))}

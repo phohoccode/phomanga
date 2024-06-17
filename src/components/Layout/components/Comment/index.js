@@ -99,7 +99,7 @@ function Comment({ setIsShowMessage, slug, id }) {
     }
 
     return (
-        <>
+        <Fragment>
             <div
                 ref={wrapperRef}
                 className={cx('wrapper')}
@@ -136,7 +136,7 @@ function Comment({ setIsShowMessage, slug, id }) {
                                     <div className={cx('item-body')}>
                                         <div className={cx('item-content')}>
                                             {index !== indexEdit &&
-                                                <>
+                                                <Fragment>
                                                     <h5>Độc giả</h5>
                                                     {<p>
                                                         {comment?.value.split(' ').map((cmt, index) => (
@@ -153,7 +153,7 @@ function Comment({ setIsShowMessage, slug, id }) {
                                                             }</Fragment>
                                                         ))}
                                                     </p>}
-                                                </>
+                                                </Fragment>
                                             }
                                             {index === indexEdit &&
                                                 <textarea
@@ -167,7 +167,7 @@ function Comment({ setIsShowMessage, slug, id }) {
                                         <div className={cx('seperate')}></div>
                                         <div className={cx('item-actions')}>
                                             {index !== indexEdit &&
-                                                <>
+                                                <Fragment>
                                                     <span
                                                         onClick={() => handleOpenDiaLog(index)}
                                                         className={cx('delete')}>Xoá</span>
@@ -176,10 +176,10 @@ function Comment({ setIsShowMessage, slug, id }) {
                                                         onClick={() => handleEditComment(index)}
                                                         className={cx('edit')}>Chỉnh sửa</span>
                                                     <span> · </span>
-                                                </>
+                                                </Fragment>
                                             }
                                             {index === indexEdit &&
-                                                <>
+                                                <Fragment>
                                                     <span
                                                         onClick={() => setIndexEdit(-1)}
                                                         className={cx('cancel')}>Huỷ</span>
@@ -188,7 +188,7 @@ function Comment({ setIsShowMessage, slug, id }) {
                                                         onClick={handleSaveEditComment}
                                                         className={cx('save')}>Lưu</span>
                                                     <span> · </span>
-                                                </>
+                                                </Fragment>
                                             }
                                             <span className={cx('time')}>
                                                 {formatTime(comment?.time)}
@@ -207,7 +207,7 @@ function Comment({ setIsShowMessage, slug, id }) {
                     text='Bạn chắc chắn muốn xoá bình luận này?'
                 />
             }
-        </>
+        </Fragment>
     )
 }
 

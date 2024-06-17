@@ -13,9 +13,8 @@
   background-color: rgba(0, 0, 0, 0.6);
   position: relative;
 
-  @media (max-width: 768px) {
+  @media (max-width: 1023px) {
     height: 500px;
-
   }
 
   &::before {

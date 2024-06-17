@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom'
 import classNames from 'classnames/bind'
 import toast from 'react-hot-toast'
-import { useEffect, useState, useContext } from 'react'
+import { useEffect, useState, useContext, Fragment } from 'react'
 
 import styles from './History.module.scss'
 import storage from '../../utils'
@@ -9,7 +9,6 @@ import stylesComics from '../../components/Layout/components/Comics/Comics.modul
 import stylesComic from '../../components/Layout/components/Comic/Comic.module.scss'
 import DiaLog from '../../components/Layout/components/DiaLog'
 import Context from '../../Context'
-import BreadCrumb from '../../components/Layout/components/BreadCrumb'
 
 const cx = classNames.bind(styles)
 const cxComics = classNames.bind(stylesComics)
@@ -17,7 +16,6 @@ const cxComic = classNames.bind(stylesComic)
 
 function History() {
     const {
-        width,
         setIsOpenDiaLog,
         isOpenDiaLog,
         setQuantityComicHistory } = useContext(Context)
@@ -40,17 +38,18 @@ function History() {
     }
 
     return (
-        <>
-            {width > 1023 && <BreadCrumb />}
+        <Fragment>
             <div style={{ margin: 'unset' }} className={cxComics('wrapper')}>
                 <div className={cxComics('title')}>
                     <h4>
                         {slugs.length > 0 ?
                             `Lịch sử đã xem (${slugs.length})` :
-                            'Lịch sử xem trống'}
+                            'Lịch sử xem trống!'}
                     </h4>
                     {slugs.length > 0 &&
-                        <button onClick={() => setIsOpenDiaLog(true)}>Xoá tất cả</button>
+                        <button
+                            className={cxComics('delete-all')}
+                            onClick={() => setIsOpenDiaLog(true)}>Xoá tất cả</button>
                     }
                 </div>
                 {slugs.map(slug => (
@@ -82,7 +81,7 @@ function History() {
                     text={'Lịch sử hiện tại sẽ bị xoá vĩnh viễn!'}
                 />
             }
-        </>
+        </Fragment>
     );
 }
 

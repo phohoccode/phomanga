@@ -23,22 +23,29 @@
         font-weight: 600;
     }
 
-    .see-more, button {
-      @include borderBtn(var(--primary-color));
-      padding: 8px 16px;
-      height: 40px;
-      font-weight: 600;
-      font-size: 1.8rem;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+    button, a {
+        padding: 8px 16px;
+        height: 40px;
+        font-weight: 600;
+        font-size: 1.8rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    
+        @media (max-width: 768px) {
+          font-size: 1.6rem;
+          padding: 4px 8px;
+          margin-left: 12px;
+          flex-shrink: 0;
+        }
+    }
 
-      @media (max-width: 768px) {
-        font-size: 1.6rem;
-        padding: 4px 8px;
-        margin-left: 12px;
-        flex-shrink: 0;
-      }
+    .see-more {
+      @include borderBtn(var(--primary-color));
+    }
+
+    .delete-all {
+        @include outlineBtn(var(--red-color))
     }
   }
 

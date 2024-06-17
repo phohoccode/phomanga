@@ -40,6 +40,12 @@
             .close {
                 background-color: transparent;
                 font-size: 3rem;
+                opacity: .7;
+                transition: .3;
+
+                &:hover {
+                    opacity: 1;
+                }
             }
         }
 
