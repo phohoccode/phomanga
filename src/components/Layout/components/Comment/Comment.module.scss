@@ -27,6 +27,10 @@
     overscroll-behavior-y: none;
     animation: slideIn 0.5s ease;
 
+    @media (max-width: 1023px) {
+        width: 70%;
+    }
+
     @media (max-width: 768px) {
       width: 100%;
       border-radius: unset;

@@ -45,11 +45,12 @@ function Read() {
             const isExistComic = historyStorage[params.slug]?.some(
                 comic => comic?.data?.item?._id === params.id) || false
 
-            if (!isExistComic && dataChapter?.status.startsWith('success')) {
+            if (!isExistComic) {
                 historyStorage[params.slug] =
                     [...(historyStorage[params.slug] || []), dataChapter]
                 storage.set('history-storage', historyStorage)
-                setQuantityComicHistory(Object.keys(historyStorage).length)
+                width > 1023 && 
+                    setQuantityComicHistory(Object.keys(historyStorage).length)
             }
             toast(`Bạn đang ở chương ${dataChapter?.data?.item?.chapter_name}`, { duration: 2000 })
         }

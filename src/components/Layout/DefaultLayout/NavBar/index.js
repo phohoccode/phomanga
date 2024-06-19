@@ -44,7 +44,7 @@ function NavBar() {
                         className={cx('bars')}
                         onClick={() => setShowModal(!showModal)}
                     >
-                        <i className="fa-solid fa-bars"></i>
+                        <i className="fa-solid fa-bars-staggered"></i>
                     </button>
                 }
                 <div className={cx('logo')}>

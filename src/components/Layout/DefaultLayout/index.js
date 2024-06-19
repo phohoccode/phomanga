@@ -49,14 +49,6 @@ function DefaultLayout({ children }) {
                             background: '#363636',
                             color: '#fff',
                         },
-
-                        success: {
-                            duration: 2000,
-                            theme: {
-                                primary: 'green',
-                                secondary: 'black',
-                            },
-                        },
                     }}
                 />
             </div>

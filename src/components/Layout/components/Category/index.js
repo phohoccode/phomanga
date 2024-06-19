@@ -10,7 +10,7 @@ function Category({ categorys, showCategory, handleCloseModal }) {
 
     return (
         <ul
-            style={showCategory ? { height: '50vh' } : {}}
+            style={showCategory ? { height: '60vh' } : {}}
             className={cx('wrapper')}>
             {categorys.map((category, index) => (
                 <li

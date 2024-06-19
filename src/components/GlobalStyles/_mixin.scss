@@ -8,16 +8,13 @@
   border-radius: var(--border-radius);
   user-select: none;
 
-  @if $color != "var(--primary-color)" {
-  }
-
   &:hover {
     background-color: $color !important;
     color: var(--white-color) !important;
     outline-color: $color !important;
 
     @media (max-width: 768px) {
-      outline: unset;
+      outline: unset !important;
     }
   }
 }
@@ -51,7 +48,7 @@
   pointer-events: none;
 }
 
-@mixin label($content, $top) {
+@mixin label($content, $top, $left: 0) {
   &:hover ::after {
     opacity: 1;
   }
@@ -63,7 +60,7 @@
     position: absolute;
     top: $top;
     white-space: nowrap;
-    left: 0;
+    left: $left;
     background-color: #3f3f3f;
     border-radius: var(--border-radius);
     color: var(--white-color);
@@ -73,8 +70,8 @@
     font-weight: 400;
     box-shadow: var(--box-shadow);
     font-family: var(--font-family);
-    
-    @media (max-width: 768px) {
+
+    @media (max-width: 1023px) {
       display: none;
     }
   }

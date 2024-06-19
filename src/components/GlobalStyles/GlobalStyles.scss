@@ -14,8 +14,6 @@
   --border-radius: 20px;
   --border-radius-img: 8px;
   --border-image: 2px solid #e7e7e7;
-  --width-table: 102.3rem;
-  --width-mobile: 76.8rem;
   --box-shadow-nav: 0 1px 3px 0 rgba(0, 0, 0, 0.1),
     0 1px 2px -1px rgba(0, 0, 0, 0.1);
   --box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
@@ -82,7 +80,7 @@ body {
   background-color: var(--white-color);
   color: var(--black-color);
 
-  @media (max-width: 768px) {
+  @media (max-width: 1023) {
     -webkit-tap-highlight-color: transparent;
   }
 }

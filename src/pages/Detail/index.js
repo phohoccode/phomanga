@@ -29,8 +29,7 @@ function Detail() {
     }, [currentPage])
 
     useEffect(() => {
-        if (data?.status === 'success') {
-            console.log(data);
+        if (data) {
             const totalItems =
                 data?.data?.params?.pagination?.totalItems
             const totalItemsPerPage =
@@ -54,8 +53,7 @@ function Detail() {
                     <div className={cx('list')}>
                         {comics.map((comic, index) => (
                             <Comic key={index} data={comic} />
-                        ))
-                        }
+                        ))}
                     </div>
                     
                     <Pagination

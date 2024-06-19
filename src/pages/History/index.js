@@ -82,7 +82,7 @@ function History() {
                 />
             }
         </Fragment>
-    );
+    )
 }
 
 export default History;

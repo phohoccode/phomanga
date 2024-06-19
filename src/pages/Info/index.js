@@ -12,22 +12,23 @@ import Context from '../../Context'
 const cx = classNames.bind(styles)
 
 function Info() {
-    const { setQuantityComic } = useContext(Context)
+    const { setQuantityComic, width } = useContext(Context)
     const params = useParams()
     const [data] = useFetch(`https://otruyenapi.com/v1/api/truyen-tranh/${params.slug}`)
     const [item, setItem] = useState([])
     const [author, setAuthor] = useState([])
     const [category, setCategory] = useState([])
     const [chapters, setChapters] = useState([])
-    const [valueSearch, setValueSearch] = useState('')
-    const [isSave, setIsSave] = useState(false)
     const [idStorage, setIdStorage] = useState([])
+    const [valueSearch, setValueSearch] = useState('')
     const [idRecently, setIdRecently] = useState('')
+    const [isSave, setIsSave] = useState(false)
+    const [isSort, setIsSort] = useState(false)
 
     useEffect(() => {
         if (data) {
             const historyStorage = storage.get('history-storage', {})
-            const chapters = data?.data?.item?.chapters?.[0]?.server_data.reverse() || []
+            const chapters = data?.data?.item?.chapters?.[0]?.server_data || []
             setItem(data?.data?.item || [])
             setAuthor(data?.data?.item?.author || [])
             setCategory(data?.data?.item?.category || [])
@@ -39,8 +40,8 @@ function Info() {
                 return chapterIds
             })
             setIdRecently(() => {
-                if (historyStorage[params.slug]) {
-                    const comic = historyStorage[params.slug]
+                const comic = historyStorage[params.slug]
+                if (comic) {
                     return comic[comic.length - 1]?.data?.item?._id
                 }
                 return chapters[chapters.length - 1]?.chapter_api_data.split('/').pop()
@@ -50,13 +51,15 @@ function Info() {
 
     useEffect(() => {
         const comicStorage = storage.get('comic-storage', [])
-        const isSave = comicStorage.some(comic => comic?.slug === params.slug)
+        const isSave = comicStorage.some(
+            comic => comic?.slug === params.slug)
         setIsSave(isSave)
     }, [params.slug])
 
     const handleSearchChapter = (e) => {
         setValueSearch(e.target.value)
-        const dataChapter = data?.data?.item?.chapters?.[0]?.server_data || []
+        const dataChapter = 
+            data?.data?.item?.chapters?.[0]?.server_data || []
         const filterChapters =
             dataChapter.filter(
                 chapter =>
@@ -72,17 +75,29 @@ function Info() {
         const newComicStorage = [...comicStorage, data?.data?.item]
         storage.set('comic-storage', newComicStorage)
         setIsSave(!isSave)
-        setQuantityComic(newComicStorage.length)
+        width > 1023 && setQuantityComic(newComicStorage.length)
         toast.success('Lưu truyện thành công!')
     }
 
     const handleDeleteComic = () => {
         const comicStorage = storage.get('comic-storage', [])
-        const newComic = comicStorage.filter(comic => comic?.slug !== params.slug)
+        const newComic = comicStorage.filter(
+            comic => comic?.slug !== params.slug)
         storage.set('comic-storage', newComic)
-        setQuantityComic(newComic.length)
+        width > 1023 && setQuantityComic(newComic.length)
         setIsSave(!isSave)
         toast.success('Xoá truyện thành công!')
+    }
+
+    const handleSortComic = () => {
+        const chapters = 
+            data?.data?.item?.chapters?.[0]?.server_data || []
+        setIsSort(!isSort)
+        setChapters(chapters.reverse())
+        setValueSearch('')
+        isSort ? 
+            toast('Chương được sắp xếp tăng dần', { duration: 2000 }) : 
+            toast('Chương được sắp xếp giảm dần', { duration: 2000 })
     }
 
     return (
@@ -153,7 +168,20 @@ function Info() {
                     </div>
 
                     <div className={cx('chapter-wrapper')}>
-                        <h4>Danh sách chương</h4>
+                        <div className={cx('title')}>
+                            <h4>Danh sách chương</h4>
+                            <button
+                                title={!isSort ? 'Tăng dần' : 'Giảm dần'}
+                                onClick={handleSortComic}
+                                className={cx('btn-sort')}
+                            >
+                                {isSort ? (
+                                    <i className="fa-solid fa-arrow-down-9-1"></i>
+                                ) : (
+                                    <i className="fa-solid fa-arrow-up-1-9"></i>
+                                )}
+                            </button>
+                        </div>
                         <div className={cx('search-chapter')}>
                             <i className="fa-solid fa-magnifying-glass"></i>
                             <input
@@ -170,7 +198,9 @@ function Info() {
                                             to={`/read/${params.slug}/${chapters[chapters.length - 1]
                                                 ?.chapter_api_data
                                                 .split('/').pop()}`}
-                                        >Đọc từ đầu</Link>
+                                        >
+                                            Đọc từ đầu
+                                        </Link>
                                     </li>
                                     {chapters.map((chapter, index) => (
                                         <li

@@ -1,5 +1,5 @@
 import { NavLink, useLocation } from 'react-router-dom'
-import { useContext, useRef, useState } from 'react'
+import { useContext, useRef, useState, Fragment } from 'react'
 import classNames from 'classnames/bind'
 
 import styles from './NavBarMobile.module.scss'
@@ -19,17 +19,17 @@ function NavBarMovie({ categorys, showModal, setShowModal, handleKeyDownSearch }
     const handleCloseModal = () => {
         if ((modalRef.current && wrapperRef.current) || showCategory) {
             setShowCategory(false)
-            modalRef.current.classList.add(cx('slideOut'));
-            wrapperRef.current.classList.add(cx('fadeOut'));
+            modalRef.current.classList.add(cx('slideOut'))
+            wrapperRef.current.classList.add(cx('fadeOut'))
             setTimeout(() => {
-                setShowModal(false);
+                setShowModal(false)
             }, 400)
         }
     }
 
     const handleWrapperClick = (event) => {
         if (modalRef.current && !modalRef.current.contains(event.target)) {
-            handleCloseModal();
+            handleCloseModal()
         }
     };
 
@@ -46,7 +46,7 @@ function NavBarMovie({ categorys, showModal, setShowModal, handleKeyDownSearch }
     }
 
     return (
-        <>
+        <Fragment>
             {showModal &&
                 <div
                     onClick={handleWrapperClick}
@@ -93,7 +93,8 @@ function NavBarMovie({ categorys, showModal, setShowModal, handleKeyDownSearch }
                             </li>
                             <li
                                 onClick={handleCloseModal}
-                                className={cx('item', { 'active': pathname === '/detail/danh-sach/truyen-moi' })}>
+                                className={cx('item', { 
+                                    'active': pathname === '/detail/danh-sach/truyen-moi' })}>
                                 <NavLink to='/detail/danh-sach/truyen-moi'>
                                     Mới cập nhật
                                 </NavLink>
@@ -127,7 +128,7 @@ function NavBarMovie({ categorys, showModal, setShowModal, handleKeyDownSearch }
                         </ul>
                     </div>
                 </div>}
-        </>
+        </Fragment>
     )
 }
 
