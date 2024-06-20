@@ -19,15 +19,7 @@ function Detail() {
         `https://otruyenapi.com/v1/api/${params.describe}/${params.slug}?page=${currentPage}`)
     const [comics, setComics] = useState([])
     const [totalPage, setTotalPage] = useState(0)
-
-    useEffect(() => {
-        setCurrentPage(1)
-    }, [params.slug])
-
-    useEffect(() => {
-        scrollToTop()
-    }, [currentPage])
-
+    
     useEffect(() => {
         if (data) {
             const totalItems =
@@ -40,6 +32,14 @@ function Detail() {
                 setTotalPage(1)
         }
     }, [data])
+
+    useEffect(() => {
+        setCurrentPage(1)
+    }, [params.slug, params.describe])
+
+    useEffect(() => {
+        scrollToTop()
+    }, [currentPage])
 
     return (
         <div style={{ margin: 'unset' }} className={cx('wrapper')}>
@@ -55,7 +55,7 @@ function Detail() {
                             <Comic key={index} data={comic} />
                         ))}
                     </div>
-                    
+
                     <Pagination
                         currentPage={currentPage}
                         totalPage={totalPage}

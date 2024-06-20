@@ -3,13 +3,11 @@ import classNames from 'classnames/bind'
 import toast from 'react-hot-toast'
 
 import styles from './Pagination.module.scss'
-import { useParams } from "react-router-dom"
 import { scrollToTop } from "../../../../utils"
 
 const cx = classNames.bind(styles)
 
 function Pagination({ currentPage, totalPage, itemsPerPage, setCurrentPage }) {
-    const params = useParams()
     const [pageNumbers, setPageNumbers] = useState([])
     const start = useRef(0)
     const end = useRef(0)
@@ -42,10 +40,6 @@ function Pagination({ currentPage, totalPage, itemsPerPage, setCurrentPage }) {
     useEffect(() => {
         toast(`Bạn đang ở trang ${currentPage}`, { duration: 1000 })
     }, [currentPage])
-
-    useEffect(() => {
-        setCurrentPage(1)
-    }, [params.slug])
 
     const handlePrev = () => {
         if (currentPage > 1) {

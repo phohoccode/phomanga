@@ -49,7 +49,7 @@ function Read() {
                 historyStorage[params.slug] =
                     [...(historyStorage[params.slug] || []), dataChapter]
                 storage.set('history-storage', historyStorage)
-                width > 1023 && 
+                width > 1023 &&
                     setQuantityComicHistory(Object.keys(historyStorage).length)
             }
             toast(`Bạn đang ở chương ${dataChapter?.data?.item?.chapter_name}`, { duration: 2000 })
@@ -65,10 +65,7 @@ function Read() {
                         setIsScroll(!isScroll)
                         toast("Đã cuộn đến cuối trang!")
                     } else {
-                        window.scrollBy({
-                            top: window.innerHeight,
-                            behavior: 'smooth'
-                        })
+                        window.scrollBy({ top: window.innerHeight, behavior: 'smooth' })
                     }
                 }, 6000)
             } else {
@@ -79,16 +76,17 @@ function Read() {
         return () => clearInterval(idScrollRef.current)
     }, [isScroll])
 
-    useEffect(() => {
-        const handleKeyDown = (event) => {
-            if (event.key.startsWith('ArrowLeft')) {
-                handlePrevChapter()
-            } else if (event.key.startsWith('ArrowRight')) {
-                handleNextChapter()
-            }
+    const handleUseKeyChangeChapter = (event) => {
+        if (event.key === 'ArrowLeft') {
+            handlePrevChapter()
+        } else if (event.key === 'ArrowRight') {
+            handleNextChapter()
         }
-        window.addEventListener('keydown', handleKeyDown)
-        return () => window.removeEventListener('keydown', handleKeyDown)
+    }
+    
+    useEffect(() => {
+        window.addEventListener('keydown', handleUseKeyChangeChapter)
+        return () => window.removeEventListener('keydown', handleUseKeyChangeChapter)
     }, [currentIndex])
 
     const handleChangeChapter = (index) => {
@@ -117,11 +115,9 @@ function Read() {
 
     const handleScroll = () => {
         const newIsScroll = !isScroll
-        if (newIsScroll) {
-            toast('Đã bật chế độ tự động cuộn!', { duration: 1000 })
-        } else {
+        newIsScroll ?
+            toast('Đã bật chế độ tự động cuộn!', { duration: 1000 }) :
             toast('Đã tắt chế độ tự động cuộn!', { duration: 1000 })
-        }
         setIsScroll(newIsScroll)
     }
 

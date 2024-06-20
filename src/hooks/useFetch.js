@@ -12,26 +12,25 @@ function useFetch(url) {
     }
 
     useEffect(() => {
-        fetch(url)
-            .then(response => {
+        const fetchData = async () => {
+            try {
+                const response = await fetch(url)
                 if (!response.ok) {
                     throw new Error('Network response was not ok')
                 }
-                return response.json()
-            })
-            .then(data => {
+                const data = await response.json()
                 if (data?.status === 'error') {
                     handleFetchToError()
                     return
                 }
                 setData(data)
-            })
-            .catch(error => {
+            } catch (error) {
                 console.error(error)
                 handleFetchToError()
-            })
+            }
+        }
+        fetchData()
     }, [url])
-
     return [data]
 }
 

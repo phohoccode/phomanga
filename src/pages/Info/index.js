@@ -1,5 +1,5 @@
 import { Link, useParams } from 'react-router-dom'
-import { useContext, useEffect, useState, Fragment } from 'react'
+import { useContext, useEffect, useState, Fragment, useRef } from 'react'
 import classNames from 'classnames/bind'
 import toast from 'react-hot-toast'
 
@@ -25,27 +25,33 @@ function Info() {
     const [isSave, setIsSave] = useState(false)
     const [isSort, setIsSort] = useState(false)
 
+    const handleSetIdRecently = (chapters, comic) => {
+        if (!comic && !isSort) {
+            return chapters[0]?.chapter_api_data.split('/').pop()
+        } else if (!comic && isSort) {
+            return chapters[chapters.length - 1]?.chapter_api_data.split('/').pop()
+        } else {
+            return comic[comic.length - 1]?.data?.item?._id
+        }
+    }
+
+    const handleSetIdStorage = (comic) => {
+        const chapterIds = comic?.map(
+            chapter => chapter?.data?.item?._id) || []
+        return chapterIds
+    }
+
     useEffect(() => {
         if (data) {
             const historyStorage = storage.get('history-storage', {})
+            const comic = historyStorage[params.slug]
             const chapters = data?.data?.item?.chapters?.[0]?.server_data || []
             setItem(data?.data?.item || [])
             setAuthor(data?.data?.item?.author || [])
             setCategory(data?.data?.item?.category || [])
             setChapters(chapters)
-            setIdStorage(() => {
-                const chapterIds =
-                    historyStorage[params.slug]?.map(
-                        chapter => chapter?.data?.item?._id) || []
-                return chapterIds
-            })
-            setIdRecently(() => {
-                const comic = historyStorage[params.slug]
-                if (comic) {
-                    return comic[comic.length - 1]?.data?.item?._id
-                }
-                return chapters[chapters.length - 1]?.chapter_api_data.split('/').pop()
-            })
+            setIdStorage(handleSetIdStorage(comic))
+            setIdRecently(handleSetIdRecently(chapters, comic))
         }
     }, [data, params.slug])
 
@@ -58,7 +64,7 @@ function Info() {
 
     const handleSearchChapter = (e) => {
         setValueSearch(e.target.value)
-        const dataChapter = 
+        const dataChapter =
             data?.data?.item?.chapters?.[0]?.server_data || []
         const filterChapters =
             dataChapter.filter(
@@ -90,13 +96,13 @@ function Info() {
     }
 
     const handleSortComic = () => {
-        const chapters = 
+        const chapters =
             data?.data?.item?.chapters?.[0]?.server_data || []
         setIsSort(!isSort)
         setChapters(chapters.reverse())
         setValueSearch('')
-        isSort ? 
-            toast('Chương được sắp xếp tăng dần', { duration: 2000 }) : 
+        isSort ?
+            toast('Chương được sắp xếp tăng dần', { duration: 2000 }) :
             toast('Chương được sắp xếp giảm dần', { duration: 2000 })
     }
 
@@ -140,7 +146,9 @@ function Info() {
                             <ul className={cx('item')}>
                                 <b>Tác giả: </b>
                                 {author.map((author, index) => (
-                                    <li className={cx('text')} key={index}>{author || 'Chưa cập nhật'}</li>
+                                    <li className={cx('text')} key={index}>
+                                        {author || 'Chưa cập nhật'}
+                                    </li>
                                 ))}
                             </ul>
                             <div className={cx('item')}>
@@ -193,15 +201,23 @@ function Info() {
                         <ul className={cx('chapters')}>
                             {chapters.length > 0 ?
                                 <Fragment>
-                                    <li>
-                                        <Link
-                                            to={`/read/${params.slug}/${chapters[chapters.length - 1]
-                                                ?.chapter_api_data
-                                                .split('/').pop()}`}
-                                        >
-                                            Đọc từ đầu
-                                        </Link>
-                                    </li>
+                                    {isSort ? (
+                                        <li>
+                                            <Link
+                                                to={`/read/${params.slug}/${chapters[chapters.length - 1]?.chapter_api_data
+                                                    .split('/').pop()}`}>
+                                                Đọc từ đầu
+                                            </Link>
+                                        </li>
+                                    ) : (
+                                        <li>
+                                            <Link
+                                                to={`/read/${params.slug}/${chapters[chapters.length - 1]?.chapter_api_data
+                                                    .split('/').pop()}`}>
+                                                Chương mới
+                                            </Link>
+                                        </li>
+                                    )}
                                     {chapters.map((chapter, index) => (
                                         <li
                                             className={cx({
@@ -212,14 +228,14 @@ function Info() {
                                             <Link
                                                 to={`/read/${params.slug}/${chapter
                                                     ?.chapter_api_data
-                                                    .split('/').pop()}`}
-                                            >
+                                                    .split('/').pop()}`}>
                                                 Chương {chapter?.chapter_name}
                                             </Link>
                                         </li>
                                     ))}
-                                </Fragment> :
-                                <span>Không có dữ liệu!</span>
+                                </Fragment> : (
+                                    <span>Không có dữ liệu!</span>
+                                )
                             }
                         </ul>
                     </div>

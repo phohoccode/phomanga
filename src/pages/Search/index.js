@@ -12,7 +12,8 @@ const cx = classNames.bind(styles)
 function Search() {
     const params = useParams()
     const [currentPage, setCurrentPage] = useState(1)
-    const [data] = useFetch(`https://otruyenapi.com/v1/api/tim-kiem?keyword=${params.keyword}&page=${currentPage}`)
+    const [data] = useFetch(
+        `https://otruyenapi.com/v1/api/tim-kiem?keyword=${params.keyword}&page=${currentPage}`)
     const [result, setResult] = useState([])
     const [totalPage, setTotalPage] = useState(0)
 

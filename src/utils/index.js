@@ -47,6 +47,8 @@ export function scrollToTop() {
 }
 
 export function isUrlWithValidDomainSuffix(url) {
-    const urlPattern = /^(http|https):\/\/[^\/]*\.(com|vn|org|net|edu|gov|mil|app|shop|blog|tech|online|io|co|ai|xyz)(\/.*)?$/i;
+    const urlPattern = 
+        /^(http|https):\/\/[^\/]*\.(com|vn|org|net|edu|gov|mil|app|shop|blog|tech|online|io|co|ai|xyz)(\/.*)?$/i;
     return urlPattern.test(url)
 }
+

@@ -43,7 +43,7 @@
 }
 
 ::placeholder {
-    font-weight: 600;
+  font-weight: 600;
 }
 
 ::selection {
@@ -153,8 +153,10 @@ figure {
   border: var(--border-image);
 }
 
-input, textarea {
-    font-family: var(--font-family);
+input,
+textarea {
+  font-family: var(--font-family);
+  font-weight: 600;
 }
 
 textarea {

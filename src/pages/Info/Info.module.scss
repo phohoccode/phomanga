@@ -27,6 +27,7 @@
       display: flex;
       flex-direction: column;
       gap: 4px;
+      flex: 1;
       padding-left: 32px;
 
       @media (max-width: 768px) {
@@ -59,7 +60,7 @@
           font-size: 1.8rem;
 
           i {
-            margin-right: 8px;
+            margin: 2px 8px 0 0;
           }
         }
 
@@ -137,7 +138,7 @@
         font-size: 1.8rem;
         padding: 8px 16px;
         @include outlineBtn(var(--primary-color));
-        @include label('Sắp xếp chương', -100%, -100%);
+        @include label("Sắp xếp chương", -100%, -100%);
       }
     }
 
@@ -194,6 +195,9 @@
           display: block;
           font-size: 1.6rem;
           padding: 8px;
+          overflow: hidden;
+          white-space: nowrap;
+          text-overflow: ellipsis;
 
           @media (max-width: 768px) {
             font-size: 1.4rem;
