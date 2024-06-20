@@ -80,7 +80,7 @@ body {
   background-color: var(--white-color);
   color: var(--black-color);
 
-  @media (max-width: 1023) {
+  @media (max-width: 1023px) {
     -webkit-tap-highlight-color: transparent;
   }
 }
