@@ -52,3 +52,10 @@ export function isUrlWithValidDomainSuffix(url) {
     return urlPattern.test(url)
 }
 
+export function setScrollDocument(isShow) {
+    isShow ?
+    document.body.style.overflowY = 'hidden' :
+    document.body.style.overflowY = 'auto'
+}
+
+

@@ -42,8 +42,10 @@ function Search() {
                     <div className={cx('title')}>
                         <h4 style={{ textTransform: 'unset' }}>
                             {result.length > 0 ?
-                                `Tìm kiếm được ${data?.data?.params?.pagination?.totalItems} truyện phù hợp cho từ khoá ''${params.keyword}''` :
-                                `Không tìm kiếm được truyện phù hợp!`
+                                `Tìm kiếm được 
+                                    ${data?.data?.params?.pagination?.totalItems} 
+                                    truyện phù hợp cho từ khoá ''${params.keyword}''` :
+                                `Không tìm kiếm được truyện phù hợp cho từ khoá ''${params.keyword}''`
                             }
                         </h4>
                     </div>

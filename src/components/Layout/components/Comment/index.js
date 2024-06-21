@@ -32,9 +32,12 @@ function Comment({ setIsShowMessage, slug, id }) {
         handleSelectedFocus(commentEditRef.current)
     }, [indexEdit])
 
+    useEffect(() => {
+
+    }, [setIsShowMessage])
+
     const handleCloseModal = () => {
         if (modalRef.current && wrapperRef.current) {
-            document.body.style.overflowY = 'auto'
             modalRef.current.classList.add(cx('slideOut'))
             wrapperRef.current.classList.add(cx('fadeOut'))
             setTimeout(() => {
@@ -171,11 +174,11 @@ function Comment({ setIsShowMessage, slug, id }) {
                                                     <span
                                                         onClick={() => handleOpenDiaLog(index)}
                                                         className={cx('delete')}>Xoá</span>
-                                                    <span> · </span>
+                                                    <span className={cx('dot')}> · </span>
                                                     <span
                                                         onClick={() => handleEditComment(index)}
                                                         className={cx('edit')}>Chỉnh sửa</span>
-                                                    <span> · </span>
+                                                    <span className={cx('dot')}> · </span>
                                                 </Fragment>
                                             }
                                             {index === indexEdit &&
@@ -183,11 +186,11 @@ function Comment({ setIsShowMessage, slug, id }) {
                                                     <span
                                                         onClick={() => setIndexEdit(-1)}
                                                         className={cx('cancel')}>Huỷ</span>
-                                                    <span> · </span>
+                                                    <span className={cx('dot')}> · </span>
                                                     <span
                                                         onClick={handleSaveEditComment}
                                                         className={cx('save')}>Lưu</span>
-                                                    <span> · </span>
+                                                    <span className={cx('dot')}> · </span>
                                                 </Fragment>
                                             }
                                             <span className={cx('time')}>

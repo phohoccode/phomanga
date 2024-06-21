@@ -177,7 +177,10 @@ function Info() {
 
                     <div className={cx('chapter-wrapper')}>
                         <div className={cx('title')}>
-                            <h4>Danh sách chương</h4>
+                            <h4>
+                            <i className="fa-regular fa-rectangle-list"></i>
+                                Danh sách chương
+                            </h4>
                             <button
                                 title={!isSort ? 'Tăng dần' : 'Giảm dần'}
                                 onClick={handleSortComic}
@@ -210,7 +213,7 @@ function Info() {
                                             </Link>
                                         </li>
                                     ) : (
-                                        <li>
+                                        <li className={cx('new-chapter')}>
                                             <Link
                                                 to={`/read/${params.slug}/${chapters[chapters.length - 1]?.chapter_api_data
                                                     .split('/').pop()}`}>

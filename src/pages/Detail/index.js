@@ -19,7 +19,7 @@ function Detail() {
         `https://otruyenapi.com/v1/api/${params.describe}/${params.slug}?page=${currentPage}`)
     const [comics, setComics] = useState([])
     const [totalPage, setTotalPage] = useState(0)
-    
+
     useEffect(() => {
         if (data) {
             const totalItems =
@@ -47,7 +47,10 @@ function Detail() {
             {data?.status === 'success' &&
                 <Fragment>
                     <div className={cx('title')}>
-                        <h4>{data?.data?.breadCrumb?.[0]?.name}</h4>
+                        <h4>
+                            <i className="fa-solid fa-book-open"></i>
+                            {data?.data?.breadCrumb?.[0]?.name}
+                        </h4>
                         <span>{data?.data?.breadCrumb?.[1]?.name}</span>
                     </div>
                     <div className={cx('list')}>

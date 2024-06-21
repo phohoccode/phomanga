@@ -13,6 +13,15 @@
       font-size: 3rem;
       margin-right: 24px;
 
+      i {
+        margin-right: 8px;
+        font-size: 2.8rem;
+
+        @media (max-width: 768px) {
+            font-size: 1.6rem;
+        }
+      }
+
       @media (max-width: 768px) {
         font-size: 1.8rem;
       }
@@ -46,6 +55,7 @@
       }
 
       li.active {
+        cursor: default;
         color: var(--white-color) !important;
         outline-color: var(--primary-color) !important;
         background-color: var(--primary-color) !important;

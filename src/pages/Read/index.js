@@ -4,7 +4,7 @@ import { useContext, useEffect, useRef, useState, Fragment } from 'react'
 
 import styles from './Read.module.scss'
 import useFetch from '../../hooks/useFetch'
-import storage from '../../utils'
+import storage, { setScrollDocument } from '../../utils'
 import Comment from '../../components/Layout/components/Comment'
 import toast from 'react-hot-toast'
 import Context from '../../Context'
@@ -24,6 +24,10 @@ function Read() {
     const [isScroll, setIsScroll] = useState(false)
     const [isShowMessage, setIsShowMessage] = useState(false)
     const idScrollRef = useRef()
+
+    useEffect(() => {
+        setScrollDocument(isShowMessage)
+    }, [isShowMessage])
 
     useEffect(() => {
         if (data) {
@@ -109,7 +113,6 @@ function Read() {
     }
 
     const handleOpenModal = () => {
-        document.body.style.overflowY = 'hidden'
         setIsShowMessage(!isShowMessage)
     }
 

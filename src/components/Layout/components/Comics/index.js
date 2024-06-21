@@ -23,6 +23,7 @@ function Comics({ api }) {
             {data &&
                 <div className={cx('title')}>
                     <h4>
+                        <i className="fa-solid fa-book-open"></i>
                         {data?.data?.titlePage}
                     </h4>
                     <Link

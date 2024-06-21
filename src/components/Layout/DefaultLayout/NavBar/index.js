@@ -1,4 +1,4 @@
-import { useContext, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import classNames from 'classnames/bind'
 import { NavLink, useLocation, useNavigate } from 'react-router-dom'
 
@@ -8,6 +8,7 @@ import Category from '../../components/Category'
 import NavBarMobile from '../NavBarMobile'
 import logo from './logo.png'
 import Context from '../../../../Context'
+import { setScrollDocument } from '../../../../utils'
 
 const cx = classNames.bind(styles)
 
@@ -24,6 +25,10 @@ function NavBar() {
     const [showModal, setShowModal] = useState(false)
     const { pathname } = useLocation()
     const isMobile = width < 1024
+
+    useEffect(() => {
+        setScrollDocument(showModal)
+    }, [showModal])
 
     const handleKeyDownSearch = (e, value) => {
         if (e.key.startsWith('Enter') && value !== '') {
@@ -61,8 +66,8 @@ function NavBar() {
                                 Trang chủ
                             </NavLink>
                         </li>
-                        <li 
-                            className={cx('item', 
+                        <li
+                            className={cx('item',
                                 { 'active': pathname === '/detail/danh-sach/truyen-moi' })}>
                             <NavLink to='/detail/danh-sach/truyen-moi'>
                                 <i className="fa-solid fa-rotate"></i>
@@ -116,7 +121,7 @@ function NavBar() {
                             onKeyDown={(e) => handleKeyDownSearch(e, valueSearch)}
                         />
                         <NavLink
-                            style={{pointerEvents: valueSearch !== '' ? 'auto' : 'none'}} 
+                            style={{ pointerEvents: valueSearch !== '' ? 'auto' : 'none' }}
                             to={`/search/${valueSearch}`}>
                             <i className="fa-solid fa-magnifying-glass"></i>
                         </NavLink>

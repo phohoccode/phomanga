@@ -28,7 +28,7 @@
     animation: slideIn 0.5s ease;
 
     @media (max-width: 1023px) {
-        width: 70%;
+      width: 70%;
     }
 
     @media (max-width: 768px) {
@@ -46,8 +46,8 @@
       background-color: transparent;
       margin-left: auto;
       padding: 16px;
-      transition: .3s;
-      opacity: .6;
+      transition: 0.3s;
+      opacity: 0.6;
 
       &:hover {
         opacity: 1;
@@ -98,7 +98,7 @@
         }
 
         .ok.disabled {
-            @include disabledBtn();
+          @include disabledBtn();
         }
       }
 
@@ -129,26 +129,28 @@
             background-color: #f2f3f5;
             border-radius: 10px;
 
-            h5 {
-              font-size: 2rem;
-              color: var(--black-color);
-            }
+            .item-content {
+              h5 {
+                font-size: 2rem;
+                color: var(--black-color);
+              }
 
-            p {
+              p {
                 color: var(--black-color);
                 font-size: 1.6rem;
-            }
+                word-break: break-word;
+              }
 
-            a {
+              a {
                 color: var(--primary-color);
                 text-decoration: underline;
                 cursor: pointer;
                 font-weight: 600;
 
                 &:not(:last-child) {
-                    margin-right: 4px;
+                  margin-right: 4px;
                 }
-                
+              }
             }
 
             .item-actions {
@@ -175,8 +177,13 @@
                 }
               }
 
+              .dot {
+                color: var(--black-color);
+              }
+
               .time {
                 color: #969696;
+                font-size: 1.6rem;
 
                 @media (max-width: 768px) {
                   font-size: 1.4rem;

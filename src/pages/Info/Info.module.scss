@@ -131,6 +131,18 @@
       justify-content: space-between;
       h4 {
         font-size: 3rem;
+
+        i {
+            font-size: 2.8rem;
+            margin-right: 8px;
+
+            @media (max-width: 768px) {
+                font-size: 2rem;
+            }
+        }
+        @media (max-width: 768px) {
+            font-size: 2rem;
+        }
       }
 
       .btn-sort {
@@ -180,6 +192,7 @@
       }
 
       li {
+        position: relative;
         width: var(--width-chapter-desktops);
         @include outlineBtn(var(--primary-color));
 
@@ -195,9 +208,6 @@
           display: block;
           font-size: 1.6rem;
           padding: 8px;
-          overflow: hidden;
-          white-space: nowrap;
-          text-overflow: ellipsis;
 
           @media (max-width: 768px) {
             font-size: 1.4rem;
@@ -209,8 +219,11 @@
 
       li.active {
         background-color: rgba(16, 185, 129, 0.7) !important;
-        position: relative;
         @include label("Đã đọc qua", -100%);
+      }
+
+      li.new-chapter {
+        @include label('Chương mới nhất hiện tại', -100%);
       }
     }
   }

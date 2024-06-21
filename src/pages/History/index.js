@@ -4,7 +4,7 @@ import toast from 'react-hot-toast'
 import { useEffect, useState, useContext, Fragment } from 'react'
 
 import styles from './History.module.scss'
-import storage from '../../utils'
+import storage, { setScrollDocument } from '../../utils'
 import stylesComics from '../../components/Layout/components/Comics/Comics.module.scss'
 import stylesComic from '../../components/Layout/components/Comic/Comic.module.scss'
 import DiaLog from '../../components/Layout/components/DiaLog'
@@ -29,6 +29,10 @@ function History() {
         setSlugs(slugs)
     }, [])
 
+    useEffect(() => {
+        setScrollDocument(isOpenDiaLog)
+    }, [isOpenDiaLog])
+
     const handleDeleteAll = () => {
         setSlugs([])
         setComics({})
@@ -42,6 +46,7 @@ function History() {
             <div style={{ margin: 'unset' }} className={cxComics('wrapper')}>
                 <div className={cxComics('title')}>
                     <h4>
+                        <i className="fa-solid fa-clock-rotate-left"></i>
                         {slugs.length > 0 ?
                             `Lịch sử đã xem (${slugs.length})` :
                             'Lịch sử xem trống!'}

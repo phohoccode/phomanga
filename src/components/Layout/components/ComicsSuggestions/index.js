@@ -25,11 +25,14 @@ function ComicsSuggestions({ data }) {
     return (
         <div className={cx('wrapper')}>
             <div className={cx('title')}>
-                <h4>Gợi ý truyện</h4>
+                <h4>
+                    <i className="fa-solid fa-wand-magic-sparkles"></i>
+                    Gợi ý truyện
+                </h4>
                 <ul className={cx('categorys')}>
                     {categorys.map((category, index) => (
                         <li
-                            className={cx({'active': index === currentIndex})}
+                            className={cx({ 'active': index === currentIndex })}
                             onClick={() => handleSetApi(category?.slug, index)}
                             key={index}>{category?.name}</li>
                     ))}

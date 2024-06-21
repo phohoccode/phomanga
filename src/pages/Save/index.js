@@ -2,7 +2,7 @@ import { useEffect, useState, useContext, Fragment } from "react"
 import classNames from 'classnames/bind'
 import toast from "react-hot-toast"
 
-import storage from '../../utils'
+import storage, { setScrollDocument } from '../../utils'
 import Comic from "../../components/Layout/components/Comic"
 import styles from '../../components/Layout/components/Comics/Comics.module.scss'
 import DiaLog from '../../components/Layout/components/DiaLog'
@@ -22,6 +22,16 @@ function Save() {
         setComics(comicStorage)
     }, [])
 
+    useEffect(() => {
+        setScrollDocument(isOpenDiaLog)
+    }, [isOpenDiaLog])
+
+    useEffect(() => {
+        isOpenDiaLog ?
+            document.body.style.overflowY = 'hidden' :
+            document.body.style.overflowY = 'auto'
+    }, [isOpenDiaLog])
+
     const handleDeleteAll = () => {
         setComics([])
         setQuantityComic(0)
@@ -34,6 +44,7 @@ function Save() {
             <div style={{ margin: 'unset' }} className={cx('wrapper')}>
                 <div className={cx('title')}>
                     <h4>
+                        <i className="fa-regular fa-bookmark"></i>
                         {comics.length > 0 ?
                             `Kho lưu trữ (${comics.length})` :
                             'Kho lưu trữ trống!'}

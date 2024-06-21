@@ -149,12 +149,16 @@
       }
     }
 
+    .theme {
+        @include label("Tuỳ chỉnh giao diện", 100%);
+    }
+
     .history {
       @include label("Lịch sử đã xem", 100%);
     }
 
     .save {
-      @include label("Truyện đã lưu", 100%);
+      @include label("Kho lưu trữ", 100%);
     }
 
     a.active,
