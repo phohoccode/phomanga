@@ -1,82 +1,127 @@
-@import '../../../GlobalStyles/mixin';
+@import "../../../GlobalStyles/mixin";
 
 .wrapper {
-    position: fixed;
-    inset: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 99999;
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 99999;
+  animation: fadeIn 0.3s ease;
 
-    .overplay {
-        background-color: rgba(0, 0, 0, .3);
-        bottom: 0;
-        left: 0;
-        position: absolute;
-        right: 0;
-        top: 0;
+  .overplay {
+    background-color: rgba(0, 0, 0, 0.3);
+    bottom: 0;
+    left: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+  }
+
+  .main.fadeOut {
+    animation: slideOut 0.3s ease;
+  }
+
+  .main {
+    animation: slideIn 0.3s ease;
+    background-color: #fff;
+    border-radius: 10px;
+    max-width: 80vw;
+    position: absolute;
+    width: 600px;
+    z-index: 1;
+
+    .header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 16px;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+
+      h4 {
+        color: var(--black-color);
+        font-size: 2.4rem;
+      }
+
+      .close {
+        background-color: transparent;
+        font-size: 3rem;
+        opacity: 0.7;
+        transition: 0.3;
+
+        &:hover {
+          opacity: 1;
+        }
+      }
     }
 
-    .main {
-        background-color: #fff;
-        border-radius: 10px;
-        max-width: 80vw;
-        position: absolute;
-        width: 600px;
-        z-index: 1;
+    .body {
+      padding: 16px;
 
-        .header {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 16px;
-            border-bottom: 1px solid rgba(0, 0, 0, .1);
+      p {
+        font-weight: 600;
+        color: var(--black-color);
+        margin-bottom: 24px;
+      }
 
-            h4 {
-                color: var(--black-color);
-                font-size: 2.4rem;
-            }
+      .action {
+        display: flex;
+        justify-content: flex-end;
+        gap: 12px;
 
-            .close {
-                background-color: transparent;
-                font-size: 3rem;
-                opacity: .7;
-                transition: .3;
-
-                &:hover {
-                    opacity: 1;
-                }
-            }
+        button {
+          font-size: 1.6rem;
+          padding: 8px 16px;
         }
 
-        .body {
-            padding: 16px;
-
-            p {
-                font-weight: 600;
-                color: var(--black-color);
-                margin-bottom: 24px;
-            }
-
-            .action {
-                display: flex;
-                justify-content: flex-end;
-                gap: 12px;
-
-
-                button {
-                    font-size: 1.6rem;
-                    padding: 8px 16px;
-                }
-
-                .cancel {
-                    @include borderBtn(var(--primary-color))
-                }
-
-                .ok {
-                    @include outlineBtn(var(--primary-color))
-                }
-            }
+        .cancel {
+          @include borderBtn(var(--primary-color));
         }
+
+        .ok {
+          @include outlineBtn(var(--primary-color));
+        }
+      }
     }
+  }
 }
+
+@keyframes slideIn {
+  0% {
+    opacity: 0;
+    scale: 0;
+  }
+  100% {
+    opacity: 1;
+    scale: 1;
+  }
+}
+
+@keyframes slideOut {
+  0% {
+    opacity: 1;
+    scale: 1;
+  }
+  100% {
+    opacity: 0;
+    scale: 0;
+  }
+}
+
+@keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+  
+  @keyframes fadeOut {
+    from {
+      opacity: 1;
+    }
+    to {
+      opacity: 0;
+    }
+  }
