@@ -24,7 +24,7 @@
         padding: 8px 14px;
         font-size: 2rem;
         border-radius: 50% !important;
-        @include outlineBtn(rgb(63, 63, 63));
+        @include outlineBtn(hsl(0, 0%, 25%));
       }
     }
 

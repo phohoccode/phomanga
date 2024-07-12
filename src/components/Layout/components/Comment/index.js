@@ -32,10 +32,6 @@ function Comment({ setIsShowMessage, slug, id }) {
         handleSelectedFocus(commentEditRef.current)
     }, [indexEdit])
 
-    useEffect(() => {
-
-    }, [setIsShowMessage])
-
     const handleCloseModal = () => {
         if (modalRef.current && wrapperRef.current) {
             modalRef.current.classList.add(cx('slideOut'))

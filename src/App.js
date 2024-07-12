@@ -7,7 +7,6 @@ import Context from './Context'
 
 function App() {
     const { width } = useContext(Context)
-
     return (
         <Router>
             <Routes>
